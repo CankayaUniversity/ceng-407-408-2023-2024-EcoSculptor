@@ -7,4 +7,6 @@
 
 ## [Software Requirements Specification Document](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Software-Requirements-Specification-Document)
 
+## [Game Design Document](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Game-Design-Document)
+
 ## [Project Web Page](https://ozgundogan2000.wixsite.com/ecosculptor)
