@@ -10,3 +10,5 @@
 ## [Game Design Document](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Game-Design-Document)
 
 ## [Project Web Page](https://ozgundogan2000.wixsite.com/ecosculptor)
+
+## [Project Report PDF](https://docs.google.com/document/d/15AAXekN7d-HGihxgvrzkj0fSGI1joXdq/edit?usp=sharing&ouid=100811212275861059062&rtpof=true&sd=true)
