@@ -1,7 +1,7 @@
 # ceng-407-408-2023-2024-EcoSculptor
 ## EcoSculptor
 
-## EcoSculptor Workplan ![image](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/assets/63861431/9b1273e4-0d73-491d-9d87-aaadfa4a3151)
+## EcoSculptor Workplan ![image](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/assets/63861431/e350cade-bd92-48e7-954a-2450bc7bf912)
 
 ## [Literature Review](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Literature-Review)
 
