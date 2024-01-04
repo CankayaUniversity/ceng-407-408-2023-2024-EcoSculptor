@@ -11,4 +11,4 @@
 
 ## [Project Web Page](https://ozgundogan2000.wixsite.com/ecosculptor)
 
-## [Project Report PDF](https://docs.google.com/document/d/15AAXekN7d-HGihxgvrzkj0fSGI1joXdq/edit?usp=sharing&ouid=100811212275861059062&rtpof=true&sd=true](https://drive.google.com/file/d/14kLW3BM6FG9R_-VtGyh9rs8_p7TAa7U0/view?usp=sharing)https://drive.google.com/file/d/14kLW3BM6FG9R_-VtGyh9rs8_p7TAa7U0/view?usp=sharing)
+## [Project Report PDF](https://drive.google.com/file/d/14kLW3BM6FG9R_-VtGyh9rs8_p7TAa7U0/view?usp=sharing)
