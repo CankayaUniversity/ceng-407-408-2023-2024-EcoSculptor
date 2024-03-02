@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
 
     private void DetectMouseClick()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Input.mousePosition;
             PointerClick?.Invoke(mousePos);

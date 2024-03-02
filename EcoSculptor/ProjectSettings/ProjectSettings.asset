@@ -887,11 +887,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 9c32aa73-af96-4f1b-b9b7-dd4851c13003
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: EcoSculptor
+  organizationId: ozgunndogan
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

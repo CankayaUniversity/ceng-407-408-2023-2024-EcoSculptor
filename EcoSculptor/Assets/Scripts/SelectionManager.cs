@@ -1,27 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private HexGrid hexGrid;
 
+    protected Hex _selectedHex;
+    
     public LayerMask selectionMask;
-    public HexGrid hexGrid;
-    private void Awake()
+
+    protected Hex SelectedHex
+    {
+        get => _selectedHex;
+        set => _selectedHex = value;
+    }
+
+    protected virtual void Awake()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
     }
 
-    public void HandleClick(Vector3 mousePosition)
+    public virtual void HandleClick(Vector3 mousePosition)
     {
         GameObject result;
         if (FindTarget(mousePosition, out result))
         {
-            var selectedHex = result.GetComponent<Hex>();
-
-            List<Vector3Int> neighbours = hexGrid.GetNeighboursFor(selectedHex.HexCoords);
+            if (_selectedHex)
+            {
+                _selectedHex.Outline.enabled = false;
+            }
+            _selectedHex = result.GetComponent<Hex>();
+            _selectedHex.Outline.enabled = true;
+            
+            //List<Vector3Int> neighbours = hexGrid.GetNeighboursFor(selectedHex.HexCoords);
         }
     }
 
@@ -30,7 +43,7 @@ public class SelectionManager : MonoBehaviour
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out hit, selectionMask))
+        if (Physics.Raycast(ray, out hit, 100, selectionMask))
         {
             result = hit.collider.gameObject;
             return true; 
