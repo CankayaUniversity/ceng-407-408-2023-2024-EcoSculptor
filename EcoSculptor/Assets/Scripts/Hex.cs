@@ -36,4 +36,5 @@ public class Hex : MonoBehaviour
     {
         _hexCoordinates = GetComponent<HexCoordinates>();
     }
+    
 }
