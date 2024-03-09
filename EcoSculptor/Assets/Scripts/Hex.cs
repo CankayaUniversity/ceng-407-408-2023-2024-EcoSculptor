@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [SelectionBase]
@@ -36,5 +37,4 @@ public class Hex : MonoBehaviour
     {
         _hexCoordinates = GetComponent<HexCoordinates>();
     }
-    
 }

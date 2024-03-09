@@ -15,4 +15,12 @@ public class TileChanger : SelectionManager
         Destroy(SelectedHex.TileMesh);
         SelectedHex.TileMesh = Instantiate(tilePrefab, SelectedHex.TileMeshPrent);
     }
+
+    /*private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayerInput.Instance.PointerHover.AddListener(HandleClick());
+        }
+    }*/
 }

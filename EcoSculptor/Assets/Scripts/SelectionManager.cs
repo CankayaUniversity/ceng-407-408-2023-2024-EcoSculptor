@@ -33,7 +33,6 @@ public class SelectionManager : MonoBehaviour
             }
             _selectedHex = result.GetComponent<Hex>();
             _selectedHex.Outline.enabled = true;
-            
             //List<Vector3Int> neighbours = hexGrid.GetNeighboursFor(selectedHex.HexCoords);
         }
     }
