@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class PlayerInput : MonoBehaviour
@@ -9,24 +10,13 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent<Vector3> PointerHover;
     public UnityEvent<Vector3> PointerClick;
 
-    public static PlayerInput Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
-    }
-
     private void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
+            if(EventSystem.current.IsPointerOverGameObject()) return;
+
             Vector3 mousePos = Input.mousePosition;
             PointerClick?.Invoke(mousePos);
         }

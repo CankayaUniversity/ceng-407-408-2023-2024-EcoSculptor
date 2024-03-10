@@ -2,25 +2,23 @@
 
 public class TileChanger : SelectionManager
 {
-    [SerializeField] private GameObject tilePrefab;
+    private GameObject _tilePrefab;
 
-    public override void HandleClick(Vector3 mousePosition)
+    public GameObject TilePrefab
     {
-        base.HandleClick(mousePosition);
+        get => _tilePrefab;
+        set => _tilePrefab = value;
+    }
+
+    public override void Outliner(Vector3 mousePosition)
+    {
+        base.Outliner(mousePosition);
         ChangeTile();
     }
 
     private void ChangeTile()
     {
         Destroy(SelectedHex.TileMesh);
-        SelectedHex.TileMesh = Instantiate(tilePrefab, SelectedHex.TileMeshPrent);
+        SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshPrent);
     }
-
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            PlayerInput.Instance.PointerHover.AddListener(HandleClick());
-        }
-    }*/
 }

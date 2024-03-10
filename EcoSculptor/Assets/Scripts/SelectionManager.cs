@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -22,18 +21,22 @@ public class SelectionManager : MonoBehaviour
             mainCamera = Camera.main;
     }
 
-    public virtual void HandleClick(Vector3 mousePosition)
+    public virtual void Outliner(Vector3 mousePosition)
     {
         GameObject result;
         if (FindTarget(mousePosition, out result))
         {
-            if (_selectedHex)
-            {
+            if(_selectedHex)
                 _selectedHex.Outline.enabled = false;
-            }
+            
             _selectedHex = result.GetComponent<Hex>();
             _selectedHex.Outline.enabled = true;
-            //List<Vector3Int> neighbours = hexGrid.GetNeighboursFor(selectedHex.HexCoords);
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                var rotation = new Vector3(0, 60, 0);
+                _selectedHex.transform.Rotate(rotation);
+            }
         }
     }
 
