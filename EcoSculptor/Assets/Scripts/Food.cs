@@ -22,7 +22,16 @@ public class Food : MonoBehaviour
 
     // The flower's material
     private Material foodMaterial;
+    
 
+    public Vector3 FlowerUpVector
+    {
+        get
+        {
+            return foodCollider.transform.up;
+        }
+    }
+    
     /// <summary>
     /// The center position of the nectar collider
     /// </summary>

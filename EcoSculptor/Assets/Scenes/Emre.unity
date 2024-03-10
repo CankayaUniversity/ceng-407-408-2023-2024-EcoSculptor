@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 164899481}
   m_Layer: 0
   m_Name: FoodCollider
-  m_TagString: Untagged
+  m_TagString: nectar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 887718166}
   m_Layer: 0
   m_Name: MapBoundaries
-  m_TagString: Untagged
+  m_TagString: boundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 1013053444}
   m_Layer: 0
   m_Name: FoodCollider
-  m_TagString: Untagged
+  m_TagString: nectar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 1591568957}
   m_Layer: 0
   m_Name: FoodCollider
-  m_TagString: Untagged
+  m_TagString: nectar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 1950746927}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: flower_plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1145,6 +1145,7 @@ GameObject:
   - component: {fileID: 2105507298}
   - component: {fileID: 2105507297}
   - component: {fileID: 2105507296}
+  - component: {fileID: 2105507300}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1233,3 +1234,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105507300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105507295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e24af25c5186c747b61523258ae571d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
