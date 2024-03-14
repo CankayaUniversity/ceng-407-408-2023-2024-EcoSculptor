@@ -4,42 +4,69 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Vector3 _cameraPosition;
 
     [Header("Camera Settings")] 
-    public float cameraSpeed = 10f;
+    [SerializeField] private float cameraSpeed = 10f;
+    [SerializeField] private float rotateSpeed = 100f;
     
+    private Vector3 _cameraPosition;
+
     
-    
-    void Start()
+    private void Start()
     {
         _cameraPosition = transform.position;
     }
 
-    void Update()
+    private void FixedUpdate()
+    {
+        MoveCamera();
+        RotateCamera();
+    }
+    private void RotateCamera()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.eulerAngles -= new Vector3(0, rotateSpeed * Time.fixedDeltaTime, 0);
+
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.eulerAngles += new Vector3(0, rotateSpeed * Time.fixedDeltaTime, 0);
+
+        }
+    }
+
+    private void MoveCamera()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            _cameraPosition.z += cameraSpeed * Time.deltaTime;
+            _cameraPosition.z += cameraSpeed * Time.fixedDeltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            _cameraPosition.z -= cameraSpeed * Time.deltaTime;
+            _cameraPosition.z -= cameraSpeed * Time.fixedDeltaTime;
 
         }
         if (Input.GetKey(KeyCode.A))
         {
-            _cameraPosition.x -= cameraSpeed * Time.deltaTime;
+            _cameraPosition.x -= cameraSpeed * Time.fixedDeltaTime;
 
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _cameraPosition.x += cameraSpeed * Time.deltaTime;
+            _cameraPosition.x += cameraSpeed * Time.fixedDeltaTime;
 
         }
 
         transform.position = _cameraPosition;
+    }
 
+    public void ChangeCameraPosition(Vector3 cameraPos)
+    {
+        transform.position = cameraPos;
 
     }
+    
+
+    
 }
