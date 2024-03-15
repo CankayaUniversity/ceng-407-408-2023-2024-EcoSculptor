@@ -117,7 +117,7 @@ public class Prey_Animals : Agent
         Vector3 rotationVector = transform.rotation.eulerAngles;
 
         // Calculate pitch and yaw rotation
-        float yawChange = actions.ContinuousActions[4];
+        float yawChange = actions.ContinuousActions[3];
 
         // Calculate smooth rotation changes
         smoothYawChange = Mathf.MoveTowards(smoothYawChange, yawChange, 2f * Time.fixedDeltaTime);
@@ -187,8 +187,8 @@ public class Prey_Animals : Agent
     /// Move the agent to a safe random position (i.e. does not collide with anything)
     /// If in front of flower, also point the beak at the flower
     /// </summary>
-    /// <param name="inFrontOfFlower">Whether to choose a spot in front of a flower</param>
-    private void MoveToSafeRandomPosition(bool inFrontOfFlower)
+    /// <param name="inFrontOfFood">Whether to choose a spot in front of a flower</param>
+    private void MoveToSafeRandomPosition(bool inFrontOfFood)
     {
         bool safePositionFound = false;
         int attemptsRemaining = 100; // Prevent an infinite loop
@@ -199,24 +199,21 @@ public class Prey_Animals : Agent
         while (!safePositionFound && attemptsRemaining > 0)
         {
             attemptsRemaining--;
-            if (inFrontOfFlower)
+            if (inFrontOfFood)
             {
                 // Pick a random flower
-                Food randomFlower = flowerArea.Foods[UnityEngine.Random.Range(0, flowerArea.Foods.Count)];
+                Food randomFood = flowerArea.Foods[UnityEngine.Random.Range(0, flowerArea.Foods.Count)];
 
                 // Position 10 to 20 cm in front of the flower
-                float distanceFromFlower = UnityEngine.Random.Range(.1f, .2f);
-                potentialPosition = randomFlower.transform.position + randomFlower.FlowerUpVector * distanceFromFlower;
+                float distanceFromFlower = UnityEngine.Random.Range(1.5f, 4.0f);
+                potentialPosition = randomFood.transform.position + randomFood.FlowerUpVector * distanceFromFlower;
 
                 // Point beak at flower (bird's head is center of transform)
-                Vector3 toFlower = randomFlower.FlowerCenterPosition - potentialPosition;
+                Vector3 toFlower = randomFood.FlowerCenterPosition - potentialPosition;
                 potentialRotation = Quaternion.LookRotation(toFlower, Vector3.up);
             }
             else
             {
-                // Pick a random height from the ground
-                float height = UnityEngine.Random.Range(1.2f, 2.5f);
-
                 // Pick a random radius from the center of the area
                 float radius = UnityEngine.Random.Range(2f, 7f);
 
@@ -224,16 +221,16 @@ public class Prey_Animals : Agent
                 Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
 
                 // Combine height, radius, and direction to pick a potential position
-                potentialPosition = flowerArea.transform.position + Vector3.up * height + direction * Vector3.forward * radius;
-
+                potentialPosition = flowerArea.transform.position + direction * Vector3.forward * radius;
+                
                 // Choose and set random starting pitch and yaw
-                float pitch = UnityEngine.Random.Range(-60f, 60f);
                 float yaw = UnityEngine.Random.Range(-180f, 180f);
-                potentialRotation = Quaternion.Euler(pitch, yaw, 0f);
+                potentialRotation = Quaternion.Euler(0f, yaw, 0f);
             }
 
+            float capsuleHeight = 4f;
             // Check to see if the agent will collide with anything
-            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.05f);
+            Collider[] colliders = Physics.OverlapCapsule(potentialPosition - Vector3.up * capsuleHeight, potentialPosition + Vector3.up * capsuleHeight,1.5f);
 
             // Safe position has been found if no colliders are overlapped
             safePositionFound = colliders.Length == 0;
