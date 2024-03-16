@@ -36,7 +36,7 @@ public class Prey_Animals : Agent
     private float smoothYawChange = 0f;
 
     // Maximum distance from the beak tip to accept nectar collision
-    private const float BeakTipRadius = 0.008f;
+    private const float BeakTipRadius = 1f;
 
     // Whether the agent is frozen (intentionally not flying)
     private bool frozen = false;
@@ -85,7 +85,7 @@ public class Prey_Animals : Agent
         }
 
         // Move the agent to a new random position
-        MoveToSafeRandomPosition(inFrontOfFlower);
+        //MoveToSafeRandomPosition(inFrontOfFlower);
 
         // Recalculate the nearest flower now that the agent has moved
         UpdateNearestFlower();
@@ -162,6 +162,58 @@ public class Prey_Animals : Agent
 
         // 10 total observations
     }
+    
+    /// <summary>
+    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters,
+    /// this function will be called. Its return values will be fed into
+    /// <see cref="OnActionReceived(float[])"/> instead of using the neural network
+    /// </summary>
+    /// <param name="actionsOut">And output action array</param>
+    public override void Heuristic(in ActionBuffers actionBuffersOut)
+    {
+        // Create placeholders for all movement/turning
+        Vector3 forward = Vector3.zero;
+        Vector3 left = Vector3.zero;
+        Vector3 up = Vector3.zero;
+        float pitch = 0f;
+        float yaw = 0f;
+
+        // Convert keyboard inputs to movement and turning
+        // All values should be between -1 and +1
+
+        // Forward/backward
+        if (Input.GetKey(KeyCode.W)) forward = transform.forward;
+        else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+        else forward = Vector3.zero;
+
+        // Left/right
+        if (Input.GetKey(KeyCode.A)) left = -transform.right;
+        else if (Input.GetKey(KeyCode.D)) left = transform.right;
+
+        // Up/down
+        if (Input.GetKey(KeyCode.E)) up = transform.up;
+        else if (Input.GetKey(KeyCode.C)) up = -transform.up;
+
+        // Pitch up/down
+        if (Input.GetKey(KeyCode.UpArrow)) pitch = 1f;
+        else if (Input.GetKey(KeyCode.DownArrow)) pitch = -1f;
+
+        // Turn left/right
+        if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
+        else if (Input.GetKey(KeyCode.RightArrow)) yaw = 1f;
+
+        // Combine the movement vectors and normalize
+        Vector3 combined = (forward + left + up).normalized;
+
+        // Set the values into the ActionBuffersOut
+        actionBuffersOut.ContinuousActions.Array[0] = combined.x;
+        actionBuffersOut.ContinuousActions.Array[1] = combined.y;
+        actionBuffersOut.ContinuousActions.Array[2] = combined.z;
+        actionBuffersOut.ContinuousActions.Array[3] = pitch;
+        actionBuffersOut.ContinuousActions.Array[4] = yaw;
+    }
+
+
 
     /// <summary>
     /// Prevent the agent from moving and taking actions
@@ -188,7 +240,7 @@ public class Prey_Animals : Agent
     /// If in front of flower, also point the beak at the flower
     /// </summary>
     /// <param name="inFrontOfFood">Whether to choose a spot in front of a flower</param>
-    private void MoveToSafeRandomPosition(bool inFrontOfFood)
+    /*private void MoveToSafeRandomPosition(bool inFrontOfFood)
     {
         bool safePositionFound = false;
         int attemptsRemaining = 100; // Prevent an infinite loop
@@ -241,7 +293,7 @@ public class Prey_Animals : Agent
         // Set the position and rotation
         transform.position = potentialPosition;
         transform.rotation = potentialRotation;
-    }
+    }*/
 
     /// <summary>
     /// Update the nearest flower to the agent
@@ -305,7 +357,7 @@ public class Prey_Animals : Agent
             {
                 // Look up the flower for this nectar collider
                 Food flower = flowerArea.GetFood(collider);
-
+                Debug.Log("eating");
                 // Attempt to take .01 nectar
                 // Note: this is per fixed timestep, meaning it happens every .02 seconds, or 50x per second
                 float nectarReceived = flower.Feed(.01f);
