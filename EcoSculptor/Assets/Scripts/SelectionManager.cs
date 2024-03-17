@@ -21,7 +21,7 @@ public class SelectionManager : MonoBehaviour
             mainCamera = Camera.main;
     }
 
-    public virtual void Outliner(Vector3 mousePosition)
+    public virtual void GetHexAndOutline(Vector3 mousePosition)
     {
         GameObject result;
         if (FindTarget(mousePosition, out result))

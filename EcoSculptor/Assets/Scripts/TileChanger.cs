@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TileChanger : SelectionManager
 {
-    private GameObject _tilePrefab;
+    [SerializeField] private Image buttonImage;
 
+    private GameObject _tilePrefab;
+    
     public GameObject TilePrefab
     {
         get => _tilePrefab;
         set => _tilePrefab = value;
     }
 
-    public override void Outliner(Vector3 mousePosition)
+    public override void GetHexAndOutline(Vector3 mousePosition)
     {
-        base.Outliner(mousePosition);
+        base.GetHexAndOutline(mousePosition);
         ChangeTile();
     }
 
