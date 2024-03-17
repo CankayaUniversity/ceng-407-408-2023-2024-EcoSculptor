@@ -9,7 +9,7 @@ public class FoodArea : MonoBehaviour
 {
     // The diameter of the area where the agent and flowers can be
     // used for observing relative distance from agent to flower
-    public const float AreaDiameter = 4f;
+    public const float AreaDiameter = 16f;
 
     // The list of all flower plants in this flower area (flower plants have multiple flowers)
     private List<GameObject> foodClusters;
@@ -50,7 +50,19 @@ public class FoodArea : MonoBehaviour
     /// <returns>The matching flower</returns>
     public Food GetFood(Collider collider)
     {
-        return foodDictionary[collider];
+        //return foodDictionary[collider];
+        
+        if (foodDictionary.ContainsKey(collider))
+        {
+            Food food = foodDictionary[collider];
+            Debug.Log("Found food for collider: " + food.name); // Log the found food's name
+            return food; // Return the found food
+        }
+        else
+        {
+            Debug.LogWarning("No food found for collider: " + collider.name); // Log a warning if no food is found
+            return null; // Return null if no food is found
+        }
     }
 
     /// <summary>
@@ -82,12 +94,10 @@ public class FoodArea : MonoBehaviour
         for (int i = 0; i < parent.childCount; i++)
         {
             Transform child = parent.GetChild(i);
-
             if (child.CompareTag("flower_plant"))
             {
                 // Found a flower plant, add it to the flowerPlants list
                 foodClusters.Add(child.gameObject);
-
                 // Look for flowers within the flower plant
                 FindChildFoods(child);
             }
@@ -102,7 +112,6 @@ public class FoodArea : MonoBehaviour
 
                     // Add the nectar collider to the lookup dictionary
                     foodDictionary.Add(food.foodCollider, food);
-
                     // Note: there are no flowers that are children of other flowers
                 }
                 else

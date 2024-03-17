@@ -16,6 +16,9 @@ public class Prey_Animals : Agent
 
     [Tooltip("Speed to rotate around the up axis")]
     public float yawSpeed = 100f;
+    
+    [Tooltip("Speed to pitch up or down")]
+    public float pitchSpeed = 100f;
 
     [Tooltip("Transform at the tip of the beak")]
     public Transform beakTip;
@@ -34,9 +37,10 @@ public class Prey_Animals : Agent
 
     // Allows for smoother yaw changes
     private float smoothYawChange = 0f;
+    
 
     // Maximum distance from the beak tip to accept nectar collision
-    private const float BeakTipRadius = 1f;
+    private const float BeakTipRadius = 3f;
 
     // Whether the agent is frozen (intentionally not flying)
     private bool frozen = false;
@@ -121,6 +125,7 @@ public class Prey_Animals : Agent
 
         // Calculate smooth rotation changes
         smoothYawChange = Mathf.MoveTowards(smoothYawChange, yawChange, 2f * Time.fixedDeltaTime);
+        
         float yaw = rotationVector.y + smoothYawChange * Time.fixedDeltaTime * yawSpeed;
 
         // Apply the new rotation
@@ -175,7 +180,6 @@ public class Prey_Animals : Agent
         Vector3 forward = Vector3.zero;
         Vector3 left = Vector3.zero;
         Vector3 up = Vector3.zero;
-        float pitch = 0f;
         float yaw = 0f;
 
         // Convert keyboard inputs to movement and turning
@@ -194,10 +198,6 @@ public class Prey_Animals : Agent
         if (Input.GetKey(KeyCode.E)) up = transform.up;
         else if (Input.GetKey(KeyCode.C)) up = -transform.up;
 
-        // Pitch up/down
-        if (Input.GetKey(KeyCode.UpArrow)) pitch = 1f;
-        else if (Input.GetKey(KeyCode.DownArrow)) pitch = -1f;
-
         // Turn left/right
         if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
         else if (Input.GetKey(KeyCode.RightArrow)) yaw = 1f;
@@ -209,8 +209,7 @@ public class Prey_Animals : Agent
         actionBuffersOut.ContinuousActions.Array[0] = combined.x;
         actionBuffersOut.ContinuousActions.Array[1] = combined.y;
         actionBuffersOut.ContinuousActions.Array[2] = combined.z;
-        actionBuffersOut.ContinuousActions.Array[3] = pitch;
-        actionBuffersOut.ContinuousActions.Array[4] = yaw;
+        actionBuffersOut.ContinuousActions.Array[3] = yaw;
     }
 
 

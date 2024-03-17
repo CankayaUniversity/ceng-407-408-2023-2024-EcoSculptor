@@ -114,5 +114,6 @@ public class Food : MonoBehaviour
         
         // Find flower and nectar colliders
         foodCollider = transform.Find("FoodCollider").GetComponent<Collider>();
+
     }
 }
