@@ -6,8 +6,8 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float cameraSpeed = 10f;
     [SerializeField] private float rotateSpeed = 40f;
-    [SerializeField] private float thresholdX = 960;
-    [SerializeField] private float thresholdY = 500;
+    [SerializeField] private float thresholdX = 960f;
+    [SerializeField] private float thresholdY = 535f;
     private int _width;
     private int _height;
     private bool _rightClicked;
