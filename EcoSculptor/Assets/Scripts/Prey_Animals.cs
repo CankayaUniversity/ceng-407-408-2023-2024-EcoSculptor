@@ -89,7 +89,7 @@ public class Prey_Animals : Agent
         }
 
         // Move the agent to a new random position
-        //MoveToSafeRandomPosition(inFrontOfFlower);
+        MoveToSafeRandomPosition(inFrontOfFlower);
 
         // Recalculate the nearest flower now that the agent has moved
         UpdateNearestFlower();
@@ -239,7 +239,7 @@ public class Prey_Animals : Agent
     /// If in front of flower, also point the beak at the flower
     /// </summary>
     /// <param name="inFrontOfFood">Whether to choose a spot in front of a flower</param>
-    /*private void MoveToSafeRandomPosition(bool inFrontOfFood)
+    private void MoveToSafeRandomPosition(bool inFrontOfFood)
     {
         bool safePositionFound = false;
         int attemptsRemaining = 100; // Prevent an infinite loop
@@ -292,7 +292,7 @@ public class Prey_Animals : Agent
         // Set the position and rotation
         transform.position = potentialPosition;
         transform.rotation = potentialRotation;
-    }*/
+    }
 
     /// <summary>
     /// Update the nearest flower to the agent
@@ -356,7 +356,7 @@ public class Prey_Animals : Agent
             {
                 // Look up the flower for this nectar collider
                 Food flower = flowerArea.GetFood(collider);
-                Debug.Log("eating");
+                //Debug.Log("eating");
                 // Attempt to take .01 nectar
                 // Note: this is per fixed timestep, meaning it happens every .02 seconds, or 50x per second
                 float nectarReceived = flower.Feed(.01f);
