@@ -14,7 +14,7 @@ using UnityEngine.Serialization;
 public class Prey_Animals : Agent
 {
     [Tooltip("Force to apply when moving")]
-    public static float moveForce = 2f;
+    public static float moveForce = 5f;
 
     [Tooltip("Speed to rotate around the up axis")]
     public float yawSpeed = 100f;
@@ -42,7 +42,7 @@ public class Prey_Animals : Agent
     
 
     // Maximum distance from the beak tip to accept nectar collision
-    private const float BeakTipRadius = 0.6f;
+    private const float BeakTipRadius = 0.8f;
 
     // Whether the agent is frozen (intentionally not flying)
     private bool frozen = false;
@@ -88,7 +88,7 @@ public class Prey_Animals : Agent
         if (trainingMode)
         {
             // Spawn in front of flower 50% of the time during training
-            inFrontOfFlower = UnityEngine.Random.value > .5f;
+            inFrontOfFlower = UnityEngine.Random.value > .85f;
         }
 
         // Move the agent to a new random position
@@ -257,12 +257,11 @@ public class Prey_Animals : Agent
             {
                 // Pick a random flower
                 Food randomFood = flowerArea.Foods[UnityEngine.Random.Range(0, flowerArea.Foods.Count)];
-                var pos2 = randomFood.transform.position;
-                pos2.y = 0;
+                
                 // Position 10 to 20 cm in front of the flower
                 float distanceFromFlower = UnityEngine.Random.Range(2f, 4f);
-                potentialPosition = pos2 + randomFood.FlowerUpVector * distanceFromFlower;
-                potentialPosition.y = 0;
+                potentialPosition = randomFood.transform.position + randomFood.FlowerUpVector * distanceFromFlower;
+                
                 // Point beak at flower (bird's head is center of transform)
                 Vector3 toFlower = randomFood.FlowerCenterPosition - potentialPosition;
                 potentialRotation = Quaternion.LookRotation(toFlower, Vector3.up);
@@ -276,10 +275,8 @@ public class Prey_Animals : Agent
                 Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
 
                 // Combine height, radius, and direction to pick a potential position
-                var pos = flowerArea.transform.position;
-                pos.y = 0;
-                potentialPosition = pos + direction * Vector3.forward * radius;
-                potentialPosition.y = 0;
+                potentialPosition = flowerArea.transform.position + direction * Vector3.forward * radius;
+                
                 // Choose and set random starting pitch and yaw
                 float yaw = UnityEngine.Random.Range(-180f, 180f);
                 potentialRotation = Quaternion.Euler(0f, yaw, 0f);
@@ -294,6 +291,7 @@ public class Prey_Animals : Agent
         Debug.Assert(safePositionFound, "Could not find a safe position to spawn");
         
         // Set the position and rotation
+        potentialPosition.y = 0;
         transform.position = potentialPosition;
         transform.rotation = potentialRotation;
     }

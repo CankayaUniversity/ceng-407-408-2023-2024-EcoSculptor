@@ -30,10 +30,10 @@ public class FoodArea : MonoBehaviour
         // Rotate each flower plant around the Y axis and subtly around X and Z
         foreach (GameObject foodCluster in foodClusters)
         {
-            float xRotation = UnityEngine.Random.Range(-5f, 5f);
-            float yRotation = UnityEngine.Random.Range(-180f, 180f);
-            float zRotation = UnityEngine.Random.Range(-5f, 5f);
-            foodCluster.transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
+            //float xRotation = UnityEngine.Random.Range(-5f, 5f);
+            //float yRotation = UnityEngine.Random.Range(-180f, 180f);
+            //float zRotation = UnityEngine.Random.Range(-5f, 5f);
+            foodCluster.transform.localRotation = Quaternion.Euler(1, 1, 1);
         }
 
         // Reset each flower

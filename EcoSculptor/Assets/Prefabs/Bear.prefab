@@ -2290,7 +2290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8726387956863358554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 1.7}
+  m_LocalPosition: {x: 0, y: 0.4, z: 1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2366,7 +2366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8726387956991699640}
-  - component: {fileID: 8726387956991699639}
+  - component: {fileID: 2244488893037998781}
   m_Layer: 0
   m_Name: BearCollider
   m_TagString: Untagged
@@ -2389,8 +2389,8 @@ Transform:
   m_Father: {fileID: 4737651130148632107}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8726387956991699639
-BoxCollider:
+--- !u!136 &2244488893037998781
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2399,9 +2399,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1.5, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.81318367
+  m_Height: 2.8
+  m_Direction: 2
+  m_Center: {x: 0.0036483407, y: -0.049666405, z: 0}
 --- !u!1 &8726387957641512518
 GameObject:
   m_ObjectHideFlags: 0
