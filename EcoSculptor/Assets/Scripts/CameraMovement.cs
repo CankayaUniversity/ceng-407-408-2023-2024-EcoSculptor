@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,12 +9,11 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float rotateSpeed = 40f;
     [SerializeField] private float thresholdX = 960f;
     [SerializeField] private float thresholdY = 535f;
+    [SerializeField] private float sensitivity = 200f; 
     private int _width;
     private int _height;
-    private bool _rightClicked;
-    private float _xRotation;
-    private Vector3 _cameraPosition;
-    private Vector3 _oldMousePosition;
+    private Vector2 _mouseTurn;
+    private Camera _mainCamera;
 
     private void Start()
     {
@@ -22,100 +22,58 @@ public class CameraMovement : MonoBehaviour
 
         thresholdX = thresholdX * _width / 1920;
         thresholdY = thresholdY * _height / 1080;
-        _cameraPosition = transform.position;
+        _mainCamera = Camera.main;
+
     }
     
     private void LateUpdate()
     {
-        MoveCameraOnMouse();
-        RotateCameraOnMouse();
+        if(!transform) return;
         MoveCamera();
         RotateCamera();
-    }
-    
-    private void RotateCamera()
-    {
-        if(!transform) return;
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.eulerAngles -= new Vector3(0, rotateSpeed * Time.deltaTime, 0);
-
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            transform.eulerAngles += new Vector3(0, rotateSpeed * Time.deltaTime, 0);
-
-        }
+        RotateCameraOnMouse();
     }
     
     private void MoveCamera()
     {
-        if(!transform) return;
-        if (Input.GetKey(KeyCode.W))
-        {
-            _cameraPosition.z += cameraSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _cameraPosition.z -= cameraSpeed * Time.deltaTime;
-
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _cameraPosition.x -= cameraSpeed * Time.deltaTime;
-
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _cameraPosition.x += cameraSpeed * Time.deltaTime;
-
-        }
-        transform.position = _cameraPosition;
-    }
-
-    private void MoveCameraOnMouse()
-    {
-        if(!transform) return;
+        var camTransform = transform;
+        var forward = camTransform.forward;
+        var right = camTransform.right;
         var mousePos = Input.mousePosition;
-        if (mousePos.x >= (_width / 2f) + thresholdX)
-        {
-            _cameraPosition.x += cameraSpeed * Time.deltaTime;
-        }
-        if (mousePos.x <= (_width / 2f) - thresholdX)
-        {
-            _cameraPosition.x -= cameraSpeed * Time.deltaTime;
-        }
-        if (mousePos.y >= (_height / 2f) + thresholdY)
-        {
-            _cameraPosition.z += cameraSpeed * Time.deltaTime;
-        }
-        if(mousePos.y <= (_height / 2f) - thresholdY)
-        {
-            _cameraPosition.z -= cameraSpeed * Time.deltaTime;
-        }
-        transform.position = _cameraPosition;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+    
+        if ((Input.GetKey(KeyCode.W) || mousePos.y >= (_height / 2f) + thresholdY) && transform.position.z < 30) { transform.position +=  forward * (cameraSpeed * Time.deltaTime); }
+        
+        if ((Input.GetKey(KeyCode.S) || mousePos.y <= (_height / 2f) - thresholdY) && transform.position.z > -70) { transform.position -= forward * (cameraSpeed * Time.deltaTime); }
+        
+        if ((Input.GetKey(KeyCode.A) || mousePos.x <= (_width / 2f) - thresholdX) && transform.position.x > -50) { transform.position -= right * (cameraSpeed * Time.deltaTime); }
+        
+        if ((Input.GetKey(KeyCode.D) || mousePos.x >= (_width / 2f) + thresholdX) && transform.position.x < 50) { transform.position += right * (cameraSpeed * Time.deltaTime); }
+    }
+    
+    private void RotateCamera()
+    {
+        if (Input.GetKey(KeyCode.Q)) { transform.eulerAngles -= new Vector3(0, rotateSpeed * Time.deltaTime, 0); }
+        
+        if (Input.GetKey(KeyCode.E)) { transform.eulerAngles += new Vector3(0, rotateSpeed * Time.deltaTime, 0); }
+
+        // if (transform.eulerAngles.y is <= 360 and >= 0) return;
+        // var camTransform = transform;
+        // camTransform.eulerAngles = new Vector3(0, camTransform.eulerAngles.y % 360, 0);
+
     }
 
     private void RotateCameraOnMouse()
     {
-        if( Input.GetMouseButtonDown(1))
-        {
-            _oldMousePosition = Input.mousePosition;
-            return;
-        }
-
-
         if (!Input.GetMouseButton(1)) return;
-        var currentMousePosition = Input.mousePosition;                
-                               
-        if ( currentMousePosition.x < _oldMousePosition.x)
-        {
-            transform.eulerAngles -= new Vector3(0, rotateSpeed * Time.deltaTime, 0);
-        }
+        var rotation = transform.rotation;
+        _mouseTurn.x = rotation.eulerAngles.y;
+        _mouseTurn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(rotation.eulerAngles.x, _mouseTurn.x, rotation.eulerAngles.z);
 
-        if (currentMousePosition.x > _oldMousePosition.x)
-        {
-            transform.eulerAngles += new Vector3(0, rotateSpeed * Time.deltaTime, 0);
-        }
     }
 }
