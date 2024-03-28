@@ -255,10 +255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSpeed: 10
-  rotateSpeed: 40
+  rotateSpeed: 60
   thresholdX: 960
   thresholdY: 535
-  sensitivity: 200
+  sensitivity: 300
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
