@@ -4,7 +4,7 @@ using UnityEngine;
 [SelectionBase]
 public class Hex : MonoBehaviour
 {
-    [Header("Component Elements")]
+    [Header("Component Elements")] 
     [SerializeField] private Outline outline;
     [SerializeField] private Transform tileMeshPrent;
     [SerializeField] private GameObject tileMesh;
@@ -36,5 +36,10 @@ public class Hex : MonoBehaviour
     private void Awake()
     {
         _hexCoordinates = GetComponent<HexCoordinates>();
+    }
+
+    private void OnEnable()
+    {
+        TileManager.Instance.RegisterTile(tileMesh.gameObject.tag);
     }
 }

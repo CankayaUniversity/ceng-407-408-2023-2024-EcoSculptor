@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Grass
+  - Water
+  - River
+  - Sand
+  - Dirt
+  - Stone
   layers:
   - Default
   - TransparentFX

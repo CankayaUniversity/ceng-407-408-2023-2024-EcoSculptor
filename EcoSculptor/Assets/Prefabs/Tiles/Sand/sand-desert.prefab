@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5128939727976429487}
   m_Layer: 0
   m_Name: sand-desert
-  m_TagString: Untagged
+  m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
