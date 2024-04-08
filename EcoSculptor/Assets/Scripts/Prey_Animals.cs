@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEditor.Searcher;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// A hummingbird Machine Learning Agent
@@ -12,7 +14,7 @@ using UnityEngine;
 public class Prey_Animals : Agent
 {
     [Tooltip("Force to apply when moving")]
-    public float moveForce = 2f;
+    public static float moveForce = 5f;
 
     [Tooltip("Speed to rotate around the up axis")]
     public float yawSpeed = 100f;
@@ -20,8 +22,8 @@ public class Prey_Animals : Agent
     [Tooltip("Speed to pitch up or down")]
     public float pitchSpeed = 100f;
 
-    [Tooltip("Transform at the tip of the beak")]
-    public Transform beakTip;
+    [FormerlySerializedAs("beakTip")] [Tooltip("Transform at the tip of the beak")]
+    public Transform mouth;
 
     [Tooltip("Whether this is training mode or gameplay mode")]
     public bool trainingMode;
@@ -40,7 +42,7 @@ public class Prey_Animals : Agent
     
 
     // Maximum distance from the beak tip to accept nectar collision
-    private const float BeakTipRadius = 3f;
+    private const float BeakTipRadius = 0.8f;
 
     // Whether the agent is frozen (intentionally not flying)
     private bool frozen = false;
@@ -65,6 +67,7 @@ public class Prey_Animals : Agent
     /// <summary>
     /// Reset the agent when an episode begins
     /// </summary>
+    
     public override void OnEpisodeBegin()
     {
         if (trainingMode)
@@ -85,11 +88,11 @@ public class Prey_Animals : Agent
         if (trainingMode)
         {
             // Spawn in front of flower 50% of the time during training
-            inFrontOfFlower = UnityEngine.Random.value > .5f;
+            inFrontOfFlower = UnityEngine.Random.value > .85f;
         }
 
         // Move the agent to a new random position
-        //MoveToSafeRandomPosition(inFrontOfFlower);
+        MoveToSafeRandomPosition(inFrontOfFlower);
 
         // Recalculate the nearest flower now that the agent has moved
         UpdateNearestFlower();
@@ -112,7 +115,7 @@ public class Prey_Animals : Agent
         if (frozen) return;
 
         // Calculate movement vector
-        Vector3 move = new Vector3(actions.ContinuousActions[0], actions.ContinuousActions[1], actions.ContinuousActions[2]);
+        Vector3 move = new Vector3(actions.ContinuousActions[0], 0f, actions.ContinuousActions[1]);
 
         // Add force in the direction of the move vector
         rigidbody.AddForce(move * moveForce);
@@ -121,7 +124,7 @@ public class Prey_Animals : Agent
         Vector3 rotationVector = transform.rotation.eulerAngles;
 
         // Calculate pitch and yaw rotation
-        float yawChange = actions.ContinuousActions[3];
+        float yawChange = actions.ContinuousActions[2];
 
         // Calculate smooth rotation changes
         smoothYawChange = Mathf.MoveTowards(smoothYawChange, yawChange, 2f * Time.fixedDeltaTime);
@@ -149,7 +152,7 @@ public class Prey_Animals : Agent
         sensor.AddObservation(transform.localRotation.normalized);
 
         // Get a vector from the beak tip to the nearest flower
-        Vector3 toFlower = nearestFlower.FlowerCenterPosition - beakTip.position;
+        Vector3 toFlower = nearestFlower.FlowerCenterPosition - mouth.position;
 
         // Observe a normalized vector pointing to the nearest flower (3 observations)
         sensor.AddObservation(toFlower.normalized);
@@ -160,7 +163,7 @@ public class Prey_Animals : Agent
 
         // Observe a dot product that indicates whether the beak is pointing toward the flower (1 observation)
         // (+1 means that the beak is pointing directly at the flower, -1 means directly away)
-        sensor.AddObservation(Vector3.Dot(beakTip.forward.normalized, -nearestFlower.FlowerUpVector.normalized));
+        sensor.AddObservation(Vector3.Dot(mouth.forward.normalized, -nearestFlower.FlowerUpVector.normalized));
 
         // Observe the relative distance from the beak tip to the flower (1 observation)
         sensor.AddObservation(toFlower.magnitude / FoodArea.AreaDiameter);
@@ -176,10 +179,10 @@ public class Prey_Animals : Agent
     /// <param name="actionsOut">And output action array</param>
     public override void Heuristic(in ActionBuffers actionBuffersOut)
     {
+        
         // Create placeholders for all movement/turning
         Vector3 forward = Vector3.zero;
         Vector3 left = Vector3.zero;
-        Vector3 up = Vector3.zero;
         float yaw = 0f;
 
         // Convert keyboard inputs to movement and turning
@@ -195,21 +198,21 @@ public class Prey_Animals : Agent
         else if (Input.GetKey(KeyCode.D)) left = transform.right;
 
         // Up/down
-        if (Input.GetKey(KeyCode.E)) up = transform.up;
-        else if (Input.GetKey(KeyCode.C)) up = -transform.up;
+        //if (Input.GetKey(KeyCode.E)) up = transform.up;
+        //else if (Input.GetKey(KeyCode.C)) up = -transform.up;
 
         // Turn left/right
         if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
         else if (Input.GetKey(KeyCode.RightArrow)) yaw = 1f;
 
         // Combine the movement vectors and normalize
-        Vector3 combined = (forward + left + up).normalized;
+        Vector3 combined = (forward + left).normalized;
 
         // Set the values into the ActionBuffersOut
         actionBuffersOut.ContinuousActions.Array[0] = combined.x;
-        actionBuffersOut.ContinuousActions.Array[1] = combined.y;
-        actionBuffersOut.ContinuousActions.Array[2] = combined.z;
-        actionBuffersOut.ContinuousActions.Array[3] = yaw;
+        //actionBuffersOut.ContinuousActions.Array[3] = combined.y;
+        actionBuffersOut.ContinuousActions.Array[1] = combined.z;
+        actionBuffersOut.ContinuousActions.Array[2] = yaw;
     }
 
 
@@ -239,7 +242,7 @@ public class Prey_Animals : Agent
     /// If in front of flower, also point the beak at the flower
     /// </summary>
     /// <param name="inFrontOfFood">Whether to choose a spot in front of a flower</param>
-    /*private void MoveToSafeRandomPosition(bool inFrontOfFood)
+    private void MoveToSafeRandomPosition(bool inFrontOfFood)
     {
         bool safePositionFound = false;
         int attemptsRemaining = 100; // Prevent an infinite loop
@@ -254,11 +257,11 @@ public class Prey_Animals : Agent
             {
                 // Pick a random flower
                 Food randomFood = flowerArea.Foods[UnityEngine.Random.Range(0, flowerArea.Foods.Count)];
-
+                
                 // Position 10 to 20 cm in front of the flower
-                float distanceFromFlower = UnityEngine.Random.Range(1.5f, 4.0f);
+                float distanceFromFlower = UnityEngine.Random.Range(2f, 4f);
                 potentialPosition = randomFood.transform.position + randomFood.FlowerUpVector * distanceFromFlower;
-
+                
                 // Point beak at flower (bird's head is center of transform)
                 Vector3 toFlower = randomFood.FlowerCenterPosition - potentialPosition;
                 potentialRotation = Quaternion.LookRotation(toFlower, Vector3.up);
@@ -266,7 +269,7 @@ public class Prey_Animals : Agent
             else
             {
                 // Pick a random radius from the center of the area
-                float radius = UnityEngine.Random.Range(2f, 7f);
+                float radius = UnityEngine.Random.Range(1f, 10f);
 
                 // Pick a random direction rotated around the y axis
                 Quaternion direction = Quaternion.Euler(0f, UnityEngine.Random.Range(-180f, 180f), 0f);
@@ -278,21 +281,20 @@ public class Prey_Animals : Agent
                 float yaw = UnityEngine.Random.Range(-180f, 180f);
                 potentialRotation = Quaternion.Euler(0f, yaw, 0f);
             }
-
-            float capsuleHeight = 4f;
             // Check to see if the agent will collide with anything
-            Collider[] colliders = Physics.OverlapCapsule(potentialPosition - Vector3.up * capsuleHeight, potentialPosition + Vector3.up * capsuleHeight,1.5f);
+            Collider[] colliders = Physics.OverlapSphere(potentialPosition, 0.5f);
 
             // Safe position has been found if no colliders are overlapped
             safePositionFound = colliders.Length == 0;
         }
-
+        
         Debug.Assert(safePositionFound, "Could not find a safe position to spawn");
-
+        
         // Set the position and rotation
+        potentialPosition.y = 0;
         transform.position = potentialPosition;
         transform.rotation = potentialRotation;
-    }*/
+    }
 
     /// <summary>
     /// Update the nearest flower to the agent
@@ -309,8 +311,8 @@ public class Prey_Animals : Agent
             else if (flower.HasNectar)
             {
                 // Calculate distance to this flower and distance to the current nearest flower
-                float distanceToFlower = Vector3.Distance(flower.transform.position, beakTip.position);
-                float distanceToCurrentNearestFlower = Vector3.Distance(nearestFlower.transform.position, beakTip.position);
+                float distanceToFlower = Vector3.Distance(flower.transform.position, mouth.position);
+                float distanceToCurrentNearestFlower = Vector3.Distance(nearestFlower.transform.position, mouth.position);
 
                 // If current nearest flower is empty OR this flower is closer, update the nearest flower
                 if (!nearestFlower.HasNectar || distanceToFlower < distanceToCurrentNearestFlower)
@@ -348,15 +350,15 @@ public class Prey_Animals : Agent
         // Check if agent is colliding with nectar
         if (collider.CompareTag("nectar"))
         {
-            Vector3 closestPointToBeakTip = collider.ClosestPoint(beakTip.position);
+            Vector3 closestPointToBeakTip = collider.ClosestPoint(mouth.position);
 
             // Check if the closest collision point is close to the beak tip
             // Note: a collision with anything but the beak tip should not count
-            if (Vector3.Distance(beakTip.position, closestPointToBeakTip) < BeakTipRadius)
+            if (Vector3.Distance(mouth.position, closestPointToBeakTip) < BeakTipRadius)
             {
                 // Look up the flower for this nectar collider
                 Food flower = flowerArea.GetFood(collider);
-                Debug.Log("eating");
+                //Debug.Log("eating");
                 // Attempt to take .01 nectar
                 // Note: this is per fixed timestep, meaning it happens every .02 seconds, or 50x per second
                 float nectarReceived = flower.Feed(.01f);
@@ -396,11 +398,12 @@ public class Prey_Animals : Agent
     /// <summary>
     /// Called every frame
     /// </summary>
+
     private void Update()
     {
         // Draw a line from the beak tip to the nearest flower
         if (nearestFlower != null)
-            Debug.DrawLine(beakTip.position, nearestFlower.FlowerCenterPosition, Color.green);
+            Debug.DrawLine(mouth.position, nearestFlower.FlowerCenterPosition, Color.green);
     }
 
     /// <summary>
