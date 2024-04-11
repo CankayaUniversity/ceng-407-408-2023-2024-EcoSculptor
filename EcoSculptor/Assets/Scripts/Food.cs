@@ -106,7 +106,7 @@ public class Food : MonoBehaviour
     /// <summary>
     /// Called when the flower wakes up
     /// </summary>
-    private void Awake()
+    /*private void Awake()
     {
         // Find the flower's mesh renderer and get the main material
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
@@ -115,5 +115,5 @@ public class Food : MonoBehaviour
         // Find flower and nectar colliders
         foodCollider = transform.Find("FoodCollider").GetComponent<Collider>();
 
-    }
+    }*/
 }

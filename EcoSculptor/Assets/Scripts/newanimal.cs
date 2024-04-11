@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class newanimal : Agent
 {
@@ -18,9 +20,20 @@ public class newanimal : Agent
 
     [SerializeField] private Transform enviromentLocation;
 
+    private Material envMaterial;
+    public GameObject env;
+    
+    //time keeping variables
+    [SerializeField] private int timeForEpisode;
+    private float timeLeft;
+    
+    //Enemy Agent
+    public HunterAnimal classObject;
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        envMaterial = env.GetComponent<Renderer>().material;
     }
 
     public override void OnEpisodeBegin()
@@ -28,7 +41,13 @@ public class newanimal : Agent
         transform.localPosition = new Vector3(Random.Range(-9f, 9f), 0f, Random.Range(-9f, 9f));
         
         CreateFood();
-        //target.localPosition = new Vector3(Random.Range(-9f, 9f), 0f, Random.Range(-9f, 9f));
+        
+        EpisodeTimerNew();
+    }
+
+    private void Update()
+    {
+        CheckRemainingTime();
     }
 
     private void CreateFood()
@@ -45,8 +64,6 @@ public class newanimal : Agent
             Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 0.2f, Random.Range(-9f, 9f));
             newFood.transform.localPosition = foodLocation;
             spawnedFoodList.Add(newFood);
-            Debug.Log("spawned");
-            
         }
     }
 
@@ -84,22 +101,45 @@ public class newanimal : Agent
     {
         if (other.gameObject.tag == "nectar")
         {
-            Debug.Log("hit");
             spawnedFoodList.Remove(other.gameObject);
             Destroy(other.gameObject);
             AddReward(10f);
             if (spawnedFoodList.Count==0)
             {
+                envMaterial.color = Color.green;
                 RemoveFood(spawnedFoodList);
                 AddReward(5f);
+                classObject.AddReward(-5f);
+                classObject.EndEpisode();
                 EndEpisode();
             }
         }
         if (other.gameObject.tag == "boundary")
         {
+            envMaterial.color = Color.red;
             RemoveFood(spawnedFoodList);
             AddReward(-15f);
+            classObject.EndEpisode();
             EndEpisode();
         }
     }
+
+    private void EpisodeTimerNew()
+    {
+        timeLeft = Time.time + timeForEpisode;
+    }
+
+    private void CheckRemainingTime()
+    {
+        if (Time.time >= timeLeft)
+        {
+            envMaterial.color = Color.blue;
+            AddReward(-15f);
+            classObject.AddReward(-15f);
+            RemoveFood(spawnedFoodList);
+            classObject.EndEpisode();
+            EndEpisode();
+        }
+    }
+    
 }

@@ -7,6 +7,8 @@ TagManager:
   - flower_plant
   - nectar
   - boundary
+  - Hunter
+  - Agent
   layers:
   - Default
   - TransparentFX
