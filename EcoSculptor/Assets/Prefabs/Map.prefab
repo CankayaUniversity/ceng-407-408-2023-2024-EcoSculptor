@@ -392,8 +392,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: eba6091f267000643a0ff83994625c7a,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 79369540722575187, guid: edbea2da6c664ed4599759489564a46c,
         type: 3}
       propertyPath: m_BehaviorType
@@ -477,7 +476,7 @@ PrefabInstance:
     - target: {fileID: 4970580949865845101, guid: edbea2da6c664ed4599759489564a46c,
         type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 4970580949865845101, guid: edbea2da6c664ed4599759489564a46c,
         type: 3}
@@ -556,8 +555,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 2b15924bb58481144a6d90dab19ea41c,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 79369540722575187, guid: 0bf3a4748d254c54c82e4130c8cd3966,
         type: 3}
       propertyPath: m_BehaviorName
