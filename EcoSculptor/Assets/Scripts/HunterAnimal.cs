@@ -14,7 +14,7 @@ public class HunterAnimal : Agent
     public GameObject env;
 
     public GameObject prey;
-    public newanimal classObject;
+    public NewAnimal classObject;
     
     public override void Initialize()
     {

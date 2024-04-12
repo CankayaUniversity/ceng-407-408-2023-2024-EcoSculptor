@@ -7,7 +7,7 @@ using Unity.MLAgents.Sensors;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class newanimal : Agent
+public class NewAnimal : Agent
 {
     [SerializeField] private Transform target;
     public int foodCount;
