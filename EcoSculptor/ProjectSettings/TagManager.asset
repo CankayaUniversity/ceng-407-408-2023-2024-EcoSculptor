@@ -10,6 +10,10 @@ TagManager:
   - Sand
   - Dirt
   - Stone
+  - nectar
+  - boundary
+  - Hunter
+  - Agent
   layers:
   - Default
   - TransparentFX

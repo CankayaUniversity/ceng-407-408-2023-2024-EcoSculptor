@@ -1,0 +1,69 @@
+{
+    "Hunter Animal": {
+        "checkpoints": [
+            {
+                "steps": 499989,
+                "file_path": "results\\MultiTraining1\\Hunter Animal\\Hunter Animal-499989.onnx",
+                "reward": 6.88,
+                "creation_time": 1712854967.7967038,
+                "auxillary_file_paths": [
+                    "results\\MultiTraining1\\Hunter Animal\\Hunter Animal-499989.pt"
+                ]
+            },
+            {
+                "steps": 959560,
+                "file_path": "results\\MultiTraining1\\Hunter Animal\\Hunter Animal-959560.onnx",
+                "reward": 5.0,
+                "creation_time": 1712855417.213291,
+                "auxillary_file_paths": [
+                    "results\\MultiTraining1\\Hunter Animal\\Hunter Animal-959560.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 959560,
+            "file_path": "results\\MultiTraining1\\Hunter Animal.onnx",
+            "reward": 5.0,
+            "creation_time": 1712855417.213291,
+            "auxillary_file_paths": [
+                "results\\MultiTraining1\\Hunter Animal\\Hunter Animal-959560.pt"
+            ]
+        }
+    },
+    "Newanimal": {
+        "checkpoints": [
+            {
+                "steps": 499989,
+                "file_path": "results\\MultiTraining1\\Newanimal\\Newanimal-499989.onnx",
+                "reward": 3.96,
+                "creation_time": 1712854967.8367448,
+                "auxillary_file_paths": [
+                    "results\\MultiTraining1\\Newanimal\\Newanimal-499989.pt"
+                ]
+            },
+            {
+                "steps": 959560,
+                "file_path": "results\\MultiTraining1\\Newanimal\\Newanimal-959560.onnx",
+                "reward": 6.426229508196721,
+                "creation_time": 1712855417.2423294,
+                "auxillary_file_paths": [
+                    "results\\MultiTraining1\\Newanimal\\Newanimal-959560.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 959560,
+            "file_path": "results\\MultiTraining1\\Newanimal.onnx",
+            "reward": 6.426229508196721,
+            "creation_time": 1712855417.2423294,
+            "auxillary_file_paths": [
+                "results\\MultiTraining1\\Newanimal\\Newanimal-959560.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

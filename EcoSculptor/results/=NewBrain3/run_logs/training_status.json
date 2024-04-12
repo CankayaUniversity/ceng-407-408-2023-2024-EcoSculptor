@@ -1,0 +1,29 @@
+{
+    "Newanimal": {
+        "checkpoints": [
+            {
+                "steps": 343261,
+                "file_path": "results\\=NewBrain3\\Newanimal\\Newanimal-343261.onnx",
+                "reward": 1.875,
+                "creation_time": 1712589541.7031143,
+                "auxillary_file_paths": [
+                    "results\\=NewBrain3\\Newanimal\\Newanimal-343261.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 343261,
+            "file_path": "results\\=NewBrain3\\Newanimal.onnx",
+            "reward": 1.875,
+            "creation_time": 1712589541.7031143,
+            "auxillary_file_paths": [
+                "results\\=NewBrain3\\Newanimal\\Newanimal-343261.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}
