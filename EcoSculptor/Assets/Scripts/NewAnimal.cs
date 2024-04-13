@@ -20,8 +20,6 @@ public class NewAnimal : Agent
 
     [SerializeField] private Transform enviromentLocation;
 
-    private Material envMaterial;
-    public GameObject env;
     
     //time keeping variables
     [SerializeField] private int timeForEpisode;
@@ -33,7 +31,6 @@ public class NewAnimal : Agent
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        envMaterial = env.GetComponent<Renderer>().material;
     }
 
     public override void OnEpisodeBegin()
@@ -61,7 +58,7 @@ public class NewAnimal : Agent
             GameObject newFood = Instantiate(food);
             newFood.transform.parent = enviromentLocation;
             
-            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 0.2f, Random.Range(-9f, 9f));
+            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 1f, Random.Range(-9f, 9f));
             newFood.transform.localPosition = foodLocation;
             spawnedFoodList.Add(newFood);
         }
@@ -106,7 +103,6 @@ public class NewAnimal : Agent
             AddReward(10f);
             if (spawnedFoodList.Count==0)
             {
-                envMaterial.color = Color.green;
                 RemoveFood(spawnedFoodList);
                 AddReward(5f);
                 classObject.AddReward(-5f);
@@ -116,7 +112,6 @@ public class NewAnimal : Agent
         }
         if (other.gameObject.tag == "boundary")
         {
-            envMaterial.color = Color.red;
             RemoveFood(spawnedFoodList);
             AddReward(-15f);
             classObject.EndEpisode();
@@ -133,7 +128,6 @@ public class NewAnimal : Agent
     {
         if (Time.time >= timeLeft)
         {
-            envMaterial.color = Color.blue;
             AddReward(-15f);
             classObject.AddReward(-15f);
             RemoveFood(spawnedFoodList);

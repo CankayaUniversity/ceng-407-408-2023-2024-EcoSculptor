@@ -9,9 +9,6 @@ public class HunterAnimal : Agent
 {
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
-    
-    private Material envMaterial;
-    public GameObject env;
 
     public GameObject prey;
     public NewAnimal classObject;
@@ -19,7 +16,6 @@ public class HunterAnimal : Agent
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        envMaterial = env.GetComponent<Renderer>().material;
     }
 
     public override void OnEpisodeBegin()
@@ -56,13 +52,11 @@ public class HunterAnimal : Agent
         {
             AddReward(10f);
             classObject.AddReward(-13f);
-            envMaterial.color = Color.yellow;
             classObject.EndEpisode();
             EndEpisode();
         }
         if (other.gameObject.tag == "boundary")
         {
-            envMaterial.color = Color.red;
             AddReward(-15f);
             classObject.EndEpisode();
             EndEpisode();

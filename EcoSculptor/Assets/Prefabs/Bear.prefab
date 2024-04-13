@@ -749,7 +749,6 @@ MonoBehaviour:
   spawnedFoodList: []
   moveSpeed: 8
   enviromentLocation: {fileID: 0}
-  env: {fileID: 0}
   timeForEpisode: 45
   classObject: {fileID: 0}
 --- !u!114 &3032496295578482334
@@ -1490,7 +1489,7 @@ GameObject:
   - component: {fileID: 819883723522756238}
   m_Layer: 0
   m_Name: BearCollider
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
