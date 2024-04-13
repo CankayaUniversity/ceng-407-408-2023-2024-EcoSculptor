@@ -58,7 +58,7 @@ public class NewAnimal : Agent
             GameObject newFood = Instantiate(food);
             newFood.transform.parent = enviromentLocation;
             
-            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 1f, Random.Range(-9f, 9f));
+            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 0.4f, Random.Range(-9f, 9f));
             newFood.transform.localPosition = foodLocation;
             spawnedFoodList.Add(newFood);
         }
@@ -98,8 +98,8 @@ public class NewAnimal : Agent
     {
         if (other.gameObject.tag == "nectar")
         {
-            spawnedFoodList.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            spawnedFoodList.Remove(other.gameObject.transform.parent.gameObject);
+            Destroy(other.gameObject.transform.parent.gameObject);
             AddReward(10f);
             if (spawnedFoodList.Count==0)
             {
