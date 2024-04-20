@@ -10,6 +10,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float thresholdX = 960f;
     [SerializeField] private float thresholdY = 535f;
     [SerializeField] private float sensitivity = 200f; 
+    [SerializeField] private float controlZUp = 30f;
+    [SerializeField] private float controlZDown = -70f;
+    [SerializeField] private float controlXLeft = -50f;
+    [SerializeField] private float controlXRight = 50f;
     private int _width;
     private int _height;
     private Vector2 _mouseTurn;
@@ -46,13 +50,13 @@ public class CameraMovement : MonoBehaviour
         forward.Normalize();
         right.Normalize();
     
-        if ((Input.GetKey(KeyCode.W) || mousePos.y >= (_height / 2f) + thresholdY) && transform.position.z < 30) { transform.position +=  forward * (cameraSpeed * Time.deltaTime); }
+        if ((Input.GetKey(KeyCode.W) || mousePos.y >= (_height / 2f) + thresholdY) && transform.position.z < controlZUp) { transform.position +=  forward * (cameraSpeed * Time.deltaTime); }
         
-        if ((Input.GetKey(KeyCode.S) || mousePos.y <= (_height / 2f) - thresholdY) && transform.position.z > -70) { transform.position -= forward * (cameraSpeed * Time.deltaTime); }
+        if ((Input.GetKey(KeyCode.S) || mousePos.y <= (_height / 2f) - thresholdY) && transform.position.z > controlZDown) { transform.position -= forward * (cameraSpeed * Time.deltaTime); }
         
-        if ((Input.GetKey(KeyCode.A) || mousePos.x <= (_width / 2f) - thresholdX) && transform.position.x > -50) { transform.position -= right * (cameraSpeed * Time.deltaTime); }
+        if ((Input.GetKey(KeyCode.A) || mousePos.x <= (_width / 2f) - thresholdX) && transform.position.x > controlXLeft) { transform.position -= right * (cameraSpeed * Time.deltaTime); }
         
-        if ((Input.GetKey(KeyCode.D) || mousePos.x >= (_width / 2f) + thresholdX) && transform.position.x < 50) { transform.position += right * (cameraSpeed * Time.deltaTime); }
+        if ((Input.GetKey(KeyCode.D) || mousePos.x >= (_width / 2f) + thresholdX) && transform.position.x < controlXRight) { transform.position += right * (cameraSpeed * Time.deltaTime);} 
     }
     
     private void RotateCamera()
