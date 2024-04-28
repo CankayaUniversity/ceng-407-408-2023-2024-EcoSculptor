@@ -26,6 +26,8 @@ public class TileChanger : SelectionManager
 
     private void ChangeTile()
     {
+        if(!_tilePrefab) return;
+        
         var oldTile = SelectedHex.TileMesh;
         Destroy(SelectedHex.TileMesh);
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshPrent);
