@@ -9,16 +9,24 @@ public class PlayerInput : MonoBehaviour
 {
     public UnityEvent<Vector3> PointerHover;
     public UnityEvent<Vector3> PointerClick;
+    public UnityEvent<Vector3> pointerRightClick;
 
     private void Update()
     {
-        
         if (Input.GetMouseButtonDown(0))
         {
             if(EventSystem.current.IsPointerOverGameObject()) return;
 
             Vector3 mousePos = Input.mousePosition;
             PointerClick?.Invoke(mousePos);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if(EventSystem.current.IsPointerOverGameObject()) return;
+            
+            Vector3 mousePos = Input.mousePosition;
+            pointerRightClick?.Invoke(mousePos);
         }
     }
 
