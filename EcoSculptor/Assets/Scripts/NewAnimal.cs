@@ -17,6 +17,7 @@ public class NewAnimal : Agent
     
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
+    public Collider changer;
 
     [SerializeField] private Transform enviromentLocation;
 
@@ -55,13 +56,59 @@ public class NewAnimal : Agent
         }
         for (int i = 0; i < foodCount; i++)
         {
-            GameObject newFood = Instantiate(food);
-            newFood.transform.parent = enviromentLocation;
+            int counter = 0;
+            bool distanceGood;
+            bool alreadyDecr= false;
             
-            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), 0.4f, Random.Range(-9f, 9f));
+            GameObject newFood = Instantiate(food, enviromentLocation, true);
+
+            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), -0.5f, Random.Range(-9f, 9f));
+
+            if (spawnedFoodList.Count != 0)
+            {
+                for (int k = 0; k < spawnedFoodList.Count; k++)
+                {
+                    if (counter < 10)
+                    {
+                        distanceGood = CheckOverLap(foodLocation, spawnedFoodList[k].transform.localPosition, 5f);
+                        if (distanceGood == false)
+                        {
+                            foodLocation= new Vector3(Random.Range(-9f, 9f), -0.5f, Random.Range(-9f, 9f));
+                            k--;
+                            alreadyDecr = true;
+                        }
+                        
+                        distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
+                        if (distanceGood == false)
+                        {
+                            foodLocation= new Vector3(Random.Range(-9f, 9f), -0.5f, Random.Range(-9f, 9f));
+                            if (alreadyDecr == false)
+                            {
+                                k--;
+                            }
+                        }
+                        counter++;
+                    }
+                    else
+                    {
+                        k = spawnedFoodList.Count;
+                    }
+                }
+            }
             newFood.transform.localPosition = foodLocation;
             spawnedFoodList.Add(newFood);
         }
+    }
+
+    private bool CheckOverLap(Vector3 objectOverLapping,Vector3 alreadyExistingObject, float minDistance)
+    {
+        float distanceBetweenObjects = Vector3.Distance(objectOverLapping, alreadyExistingObject);
+        if (minDistance <= distanceBetweenObjects)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void RemoveFood(List<GameObject> toBeDeletedGameObject)
@@ -96,10 +143,11 @@ public class NewAnimal : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "nectar")
+        if (other.gameObject.CompareTag("nectar"))
         {
-            spawnedFoodList.Remove(other.gameObject.transform.parent.gameObject);
-            Destroy(other.gameObject.transform.parent.gameObject);
+            var parent = other.transform.parent;
+            spawnedFoodList.Remove(parent.gameObject);
+            Destroy(parent.gameObject);
             AddReward(10f);
             if (spawnedFoodList.Count==0)
             {
@@ -110,7 +158,7 @@ public class NewAnimal : Agent
                 EndEpisode();
             }
         }
-        if (other.gameObject.tag == "boundary")
+        if (other.gameObject.CompareTag("boundary"))
         {
             RemoveFood(spawnedFoodList);
             AddReward(-15f);
