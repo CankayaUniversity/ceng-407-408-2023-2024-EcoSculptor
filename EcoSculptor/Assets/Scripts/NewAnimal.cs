@@ -17,7 +17,6 @@ public class NewAnimal : Agent
     
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
-    public Collider changer;
 
     [SerializeField] private Transform enviromentLocation;
 
