@@ -5,9 +5,10 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class NewAnimal : Agent
+public class PreyAnimal : Agent
 {
     [SerializeField] private Transform target;
     public int foodCount;
@@ -25,8 +26,9 @@ public class NewAnimal : Agent
     [SerializeField] private int timeForEpisode;
     private float timeLeft;
     
-    //Enemy Agent
-    public HunterAnimal classObject;
+    //Enemys Agent
+    [FormerlySerializedAs("classObject")] public HunterAnimal weakestHunterAnimal;
+    public AlfaHunterAnimal strongestHunterAnimal;
 
     public override void Initialize()
     {
@@ -35,7 +37,7 @@ public class NewAnimal : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-9f, 9f), 0f, Random.Range(-9f, 9f));
+        transform.localPosition = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
         
         CreateFood();
         
@@ -61,18 +63,18 @@ public class NewAnimal : Agent
             
             GameObject newFood = Instantiate(food, enviromentLocation, true);
 
-            Vector3 foodLocation= new Vector3(Random.Range(-9f, 9f), -0.43f, Random.Range(-9f, 9f));
+            Vector3 foodLocation= new Vector3(Random.Range(-50f, 50f), -0.43f, Random.Range(-50f, 50f));
 
             if (spawnedFoodList.Count != 0)
             {
                 for (int k = 0; k < spawnedFoodList.Count; k++)
                 {
-                    if (counter < 10)
+                    if (counter < 20)
                     {
                         distanceGood = CheckOverLap(foodLocation, spawnedFoodList[k].transform.localPosition, 5f);
                         if (distanceGood == false)
                         {
-                            foodLocation= new Vector3(Random.Range(-9f, 9f), -0.43f, Random.Range(-9f, 9f));
+                            foodLocation= new Vector3(Random.Range(-50f, 50f), -0.43f, Random.Range(-50f, 50f));
                             k--;
                             alreadyDecr = true;
                         }
@@ -80,7 +82,7 @@ public class NewAnimal : Agent
                         distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
                         if (distanceGood == false)
                         {
-                            foodLocation= new Vector3(Random.Range(-9f, 9f), -0.43f, Random.Range(-9f, 9f));
+                            foodLocation= new Vector3(Random.Range(-50f, 50f), -0.43f, Random.Range(-50f, 50f));
                             if (alreadyDecr == false)
                             {
                                 k--;
@@ -129,7 +131,11 @@ public class NewAnimal : Agent
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
         
-        rb.MovePosition(transform.position + transform.forward*moveForward* moveSpeed*Time.deltaTime);
+        if (moveForward >= 0) {
+            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+        } else {
+            rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
+        }
         transform.Rotate(0f,moveRotate*moveSpeed,0f,Space.Self);
     }
 
@@ -152,8 +158,10 @@ public class NewAnimal : Agent
             {
                 RemoveFood(spawnedFoodList);
                 AddReward(5f);
-                classObject.AddReward(-5f);
-                classObject.EndEpisode();
+                weakestHunterAnimal.AddReward(-5f);
+                weakestHunterAnimal.EndEpisode();
+                strongestHunterAnimal.AddReward(-5f);
+                strongestHunterAnimal.EndEpisode();
                 EndEpisode();
             }
         }
@@ -161,7 +169,8 @@ public class NewAnimal : Agent
         {
             RemoveFood(spawnedFoodList);
             AddReward(-15f);
-            classObject.EndEpisode();
+            weakestHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }
@@ -176,11 +185,12 @@ public class NewAnimal : Agent
         if (Time.time >= timeLeft)
         {
             AddReward(-15f);
-            classObject.AddReward(-15f);
+            weakestHunterAnimal.AddReward(-15f);
+            strongestHunterAnimal.AddReward(-15f);
             RemoveFood(spawnedFoodList);
-            classObject.EndEpisode();
+            weakestHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }
-    
 }

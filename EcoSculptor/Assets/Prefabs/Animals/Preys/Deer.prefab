@@ -438,11 +438,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013546479359593532}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7511597, z: 1.5}
-  m_Center: {x: 0.008175506, y: 0.86212534, z: 0.19344199}
+  m_Size: {x: 1.1839169, y: 1.7511598, z: 1.612649}
+  m_Center: {x: 0.0033358731, y: 0.86212534, z: 0.16267458}
 --- !u!1 &4207730718807674366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1049,6 @@ MonoBehaviour:
   food: {fileID: 8321196021424200665, guid: e2902cc352967f14e84af70b4390dc86, type: 3}
   spawnedFoodList: []
   moveSpeed: 8
-  changer: {fileID: 0}
   enviromentLocation: {fileID: 0}
   timeForEpisode: 15
   classObject: {fileID: 0}
@@ -1093,10 +1092,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8408356
-  m_Height: 3.0585306
+  m_Radius: 0.48547354
+  m_Height: 1.8199459
   m_Direction: 2
-  m_Center: {x: 0.01647287, y: 0.8304938, z: 0.14822537}
+  m_Center: {x: 0.00697871, y: 0.81434375, z: 0.16310056}
 --- !u!1 &6754833711216054835
 GameObject:
   m_ObjectHideFlags: 0

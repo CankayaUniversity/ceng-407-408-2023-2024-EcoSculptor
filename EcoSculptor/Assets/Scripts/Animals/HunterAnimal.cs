@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEngine.Serialization;
 
 public class HunterAnimal : Agent
 {
@@ -11,7 +12,8 @@ public class HunterAnimal : Agent
     private Rigidbody rb;
 
     public GameObject prey;
-    public NewAnimal classObject;
+    [FormerlySerializedAs("classObject")] public PreyAnimal weakestPreyAnimal;
+    public AlfaHunterAnimal strongestAlfaHunterAnimal;
     
     public override void Initialize()
     {
@@ -21,7 +23,7 @@ public class HunterAnimal : Agent
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-9f, 9f), 0f, Random.Range(-9f, 9f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
         transform.localPosition = spawnLocation;
     }
     
@@ -35,7 +37,11 @@ public class HunterAnimal : Agent
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
         
-        rb.MovePosition(transform.position + transform.forward*moveForward* moveSpeed*Time.deltaTime);
+        if (moveForward >= 0) {
+            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+        } else {
+            rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
+        }
         transform.Rotate(0f,moveRotate*moveSpeed,0f,Space.Self);
     }
 
@@ -48,17 +54,20 @@ public class HunterAnimal : Agent
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Agent")
+        if (other.gameObject.CompareTag("Agent"))
         {
             AddReward(10f);
-            classObject.AddReward(-13f);
-            classObject.EndEpisode();
+            weakestPreyAnimal.AddReward(-13f);
+            weakestPreyAnimal.EndEpisode();
+            strongestAlfaHunterAnimal.AddReward(-3f);
+            strongestAlfaHunterAnimal.EndEpisode();
             EndEpisode();
         }
-        if (other.gameObject.tag == "boundary")
+        if (other.gameObject.CompareTag("boundary"))
         {
             AddReward(-15f);
-            classObject.EndEpisode();
+            weakestPreyAnimal.EndEpisode();
+            strongestAlfaHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }
