@@ -59,7 +59,6 @@ public class HunterAnimal : Agent
             AddReward(10f);
             weakestPreyAnimal.AddReward(-13f);
             weakestPreyAnimal.EndEpisode();
-            strongestAlfaHunterAnimal.AddReward(-3f);
             strongestAlfaHunterAnimal.EndEpisode();
             EndEpisode();
         }
