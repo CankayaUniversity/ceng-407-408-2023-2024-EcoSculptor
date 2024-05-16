@@ -7,14 +7,14 @@ using UnityEngine.Serialization;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private float cameraSpeed = 20f;
-    [SerializeField] private float rotateSpeed = 60f;
+    [SerializeField] private float rotateSpeed = 80f;
     [SerializeField] private float thresholdX = 960f;
     [SerializeField] private float thresholdY = 535f;
-    [SerializeField] private float sensitivity = 300f; 
-    [SerializeField] private float controlZUp = 30f;
-    [SerializeField] private float controlZDown = -70f;
-    [SerializeField] private float controlXLeft = -50f;
-    [SerializeField] private float controlXRight = 50f;
+    [SerializeField] private float sensitivity = 800f; 
+    [SerializeField] private float controlZUp = 45f;
+    [SerializeField] private float controlZDown = -65f;
+    [SerializeField] private float controlXLeft = -56f;
+    [SerializeField] private float controlXRight = 51f;
     [SerializeField] private float scrollSpeed = 10000f;
     [SerializeField] private float scrollRotateSpeed = 1000f;
     
@@ -112,9 +112,11 @@ public class CameraMovement : MonoBehaviour
         
         _mouseTurn.x = rotation.eulerAngles.y;
         _mouseTurn.x += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(rotation.eulerAngles.x, _mouseTurn.x, rotation.eulerAngles.z);
 
-        //transform.rotation = Quaternion.Lerp(rotation, q, sensitivity * Time.deltaTime);
+        var v = new Vector3(rotation.eulerAngles.x, _mouseTurn.x, rotation.eulerAngles.z);
+        transform.DORotate(v, 0.1f).SetEase(Ease.OutQuad);     // Sensitivity = 800
+        
+        //transform.rotation = Quaternion.Euler(rotation.eulerAngles.x, _mouseTurn.x, rotation.eulerAngles.z);       Sensitivity = 300
 
     }
 
@@ -135,8 +137,8 @@ public class CameraMovement : MonoBehaviour
         
         var newPos = pos + forward * (Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime);
         newPos.y = positionY;
-        newPos.x = Mathf.Clamp(newPos.x, -50, 50);
-        newPos.z = Mathf.Clamp(newPos.z, -65, 50);
+        newPos.x = Mathf.Clamp(newPos.x, controlXLeft, controlXRight);
+        newPos.z = Mathf.Clamp(newPos.z, controlZDown, controlZUp);
         
         
         var rXIn = eulerAngles.x - scrollRotateSpeed * Time.deltaTime;
