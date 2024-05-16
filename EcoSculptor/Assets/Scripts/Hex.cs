@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [SelectionBase]
 public class Hex : MonoBehaviour
 {
     [Header("Component Elements")] 
     [SerializeField] private Outline outline;
-    [SerializeField] private Transform tileMeshPrent;
+    [SerializeField] private Transform tileMeshParent;
     [SerializeField] private GameObject tileMesh;
     
     private HexCoordinates _hexCoordinates;
@@ -20,10 +21,10 @@ public class Hex : MonoBehaviour
     }
 
 
-    public Transform TileMeshPrent
+    public Transform TileMeshParent
     {
-        get => tileMeshPrent;
-        set => tileMeshPrent = value;
+        get => tileMeshParent;
+        set => tileMeshParent = value;
     }
 
     public GameObject TileMesh

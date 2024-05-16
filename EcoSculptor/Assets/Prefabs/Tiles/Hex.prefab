@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outline: {fileID: 4622443159384345213}
-  tileMeshPrent: {fileID: 249563095965695311}
+  tileMeshParent: {fileID: 249563095965695311}
   tileMesh: {fileID: 249563096152510607}
 --- !u!114 &249563096266898190
 MonoBehaviour:
