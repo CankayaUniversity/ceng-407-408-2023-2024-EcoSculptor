@@ -154,15 +154,15 @@ public class CameraMovement : MonoBehaviour
         if(!_isSafe) return;
         
         _isSafe = false;
-        transform.DOMove(newPos, 1.0f).SetEase(Ease.OutCubic).OnComplete(() =>
+        transform.DOMove(newPos, 0.5f).SetEase(Ease.OutCubic).OnComplete(() =>
         {
             _isSafe = true;
         });
         if (Input.GetAxis("Mouse ScrollWheel") > 0.0f)
-            transform.DORotate(xChangedZoomIn, 1.0f).SetEase(Ease.OutQuad);
+            transform.DORotate(xChangedZoomIn, 0.5f).SetEase(Ease.OutQuad);
 
         else if (Input.GetAxis("Mouse ScrollWheel") < 0.0f)
-            transform.DORotate(xChangedZoomOut, 1.0f).SetEase(Ease.OutQuad);
+            transform.DORotate(xChangedZoomOut, 0.5f).SetEase(Ease.OutQuad);
 
 
     }
