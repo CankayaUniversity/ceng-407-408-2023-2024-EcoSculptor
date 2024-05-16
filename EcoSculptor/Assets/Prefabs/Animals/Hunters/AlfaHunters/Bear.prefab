@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 6760049803760934334}
   m_Layer: 0
   m_Name: BearCollider
-  m_TagString: Hunter
+  m_TagString: AlphaHunter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,11 +232,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129016464756892525}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6673306, y: 1.7511597, z: 2.693168}
-  m_Center: {x: 0.008175506, y: 0.86212534, z: 0.19344199}
+  m_Size: {x: 0.8540624, y: 0.74714524, z: 1.3877442}
+  m_Center: {x: 0.0041026175, y: 0.36011818, z: 0.06334913}
 --- !u!1 &1190949897043882550
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576381859324948343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.92, z: 1.78}
+  m_LocalPosition: {x: 0, y: 0.139, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -817,11 +817,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: RaysForward
   m_DetectableTags:
-  - nectar
+  - Agent
   - boundary
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 49
-  m_SphereCastRadius: 0.45
+  m_SphereCastRadius: 0.1
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
@@ -984,8 +984,8 @@ Transform:
   m_GameObject: {fileID: 2916087742466348207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1343551299583373279}
   - {fileID: 7253012287320159377}
@@ -1957,9 +1957,9 @@ GameObject:
   - component: {fileID: 4104390387307144507}
   - component: {fileID: 6316774225016067171}
   - component: {fileID: 3725713182020679110}
-  - component: {fileID: 4646594626233345417}
   - component: {fileID: 3495444857168549638}
   - component: {fileID: 6246574724296501531}
+  - component: {fileID: 1793492813}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -1976,8 +1976,8 @@ Transform:
   m_GameObject: {fileID: 7304351751140140539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3.24}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3596996786013798771}
   - {fileID: 377313321024593202}
@@ -2051,25 +2051,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &4646594626233345417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7304351751140140539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dad9a2230f61f348a59cfd34d352132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
-  moveSpeed: 4
-  prey: {fileID: 0}
-  classObject: {fileID: 0}
 --- !u!114 &3495444857168549638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2094,10 +2075,30 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8408356
-  m_Height: 3.0585306
+  m_Radius: 0.34945744
+  m_Height: 1.2785077
   m_Direction: 2
-  m_Center: {x: 0.01647287, y: 0.8304938, z: 0.14822537}
+  m_Center: {x: 0.010989696, y: 0.3488484, z: 0.047609568}
+--- !u!114 &1793492813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7304351751140140539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a20b38c0f38b94081ad53179c81452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  moveSpeed: 13
+  prey: {fileID: 0}
+  weakestPreyAnimal: {fileID: 0}
+  weakestHunterAnimal: {fileID: 0}
 --- !u!1 &7433778434394816098
 GameObject:
   m_ObjectHideFlags: 0

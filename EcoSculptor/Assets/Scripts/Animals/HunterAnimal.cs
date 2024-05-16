@@ -12,8 +12,8 @@ public class HunterAnimal : Agent
     private Rigidbody rb;
 
     public GameObject prey;
-    [FormerlySerializedAs("classObject")] public PreyAnimal weakestPreyAnimal;
-    public AlfaHunterAnimal strongestAlfaHunterAnimal;
+    public PreyAnimal weakestPreyAnimal;
+    public AlphaHunterAnimal strongestAlphaHunterAnimal;
     
     public override void Initialize()
     {
@@ -23,7 +23,7 @@ public class HunterAnimal : Agent
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-50f, 50f), 0.85f, Random.Range(-50f, 50f));
         transform.localPosition = spawnLocation;
     }
     
@@ -59,14 +59,14 @@ public class HunterAnimal : Agent
             AddReward(10f);
             weakestPreyAnimal.AddReward(-13f);
             weakestPreyAnimal.EndEpisode();
-            strongestAlfaHunterAnimal.EndEpisode();
+            strongestAlphaHunterAnimal.EndEpisode();
             EndEpisode();
         }
         if (other.gameObject.CompareTag("boundary"))
         {
             AddReward(-15f);
             weakestPreyAnimal.EndEpisode();
-            strongestAlfaHunterAnimal.EndEpisode();
+            strongestAlphaHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }

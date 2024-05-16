@@ -28,7 +28,7 @@ public class PreyAnimal : Agent
     
     //Enemys Agent
     [FormerlySerializedAs("classObject")] public HunterAnimal weakestHunterAnimal;
-    public AlfaHunterAnimal strongestHunterAnimal;
+    public AlphaHunterAnimal strongestHunterAnimal;
 
     public override void Initialize()
     {
@@ -37,7 +37,7 @@ public class PreyAnimal : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
+        transform.localPosition = new Vector3(Random.Range(-50f, 50f), 0.85f, Random.Range(-50f, 50f));
         
         CreateFood();
         
@@ -57,15 +57,15 @@ public class PreyAnimal : Agent
         }
         for (int i = 0; i < foodCount; i++)
         {
-            int counter = 0;
-            bool distanceGood;
-            bool alreadyDecr= false;
+            //int counter = 0;
+            //bool distanceGood;
+            //bool alreadyDecr= false;
             
             GameObject newFood = Instantiate(food, enviromentLocation, true);
 
-            Vector3 foodLocation= new Vector3(Random.Range(-50f, 50f), -0.43f, Random.Range(-50f, 50f));
+            Vector3 foodLocation= new Vector3(Random.Range(-50f, 50f), 0.43f, Random.Range(-50f, 50f));
 
-            if (spawnedFoodList.Count != 0)
+            /*if (spawnedFoodList.Count != 0)
             {
                 for (int k = 0; k < spawnedFoodList.Count; k++)
                 {
@@ -95,13 +95,13 @@ public class PreyAnimal : Agent
                         k = spawnedFoodList.Count;
                     }
                 }
-            }
+            }*/
             newFood.transform.localPosition = foodLocation;
             spawnedFoodList.Add(newFood);
         }
     }
 
-    private bool CheckOverLap(Vector3 objectOverLapping,Vector3 alreadyExistingObject, float minDistance)
+    /*private bool CheckOverLap(Vector3 objectOverLapping,Vector3 alreadyExistingObject, float minDistance)
     {
         float distanceBetweenObjects = Vector3.Distance(objectOverLapping, alreadyExistingObject);
         if (minDistance <= distanceBetweenObjects)
@@ -110,7 +110,7 @@ public class PreyAnimal : Agent
         }
 
         return false;
-    }
+    }*/
 
     private void RemoveFood(List<GameObject> toBeDeletedGameObject)
     {

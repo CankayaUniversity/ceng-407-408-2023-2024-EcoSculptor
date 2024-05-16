@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4871800256178806757}
   - component: {fileID: 1730400233708053966}
   m_Layer: 0
-  m_Name: BearCollider
+  m_Name: WolfCollider
   m_TagString: Hunter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,11 +40,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333066781194472124}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6673306, y: 1.7511597, z: 2.693168}
-  m_Center: {x: 0.008175506, y: 0.86212534, z: 0.19344199}
+  m_Size: {x: 0.44651556, y: 0.41188306, z: 0.77186966}
+  m_Center: {x: 0.00009417534, y: 0.20330998, z: 0.05702877}
 --- !u!1 &1346769057362641942
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346769057362641942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.92, z: 1.78}
+  m_LocalPosition: {x: 0, y: 0.128, z: 0.357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,11 +91,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: RaysForward
   m_DetectableTags:
-  - nectar
+  - Agent
   - boundary
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 49
-  m_SphereCastRadius: 0.45
+  m_SphereCastRadius: 0.1
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
@@ -130,8 +130,8 @@ Transform:
   m_GameObject: {fileID: 5645150178027911550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4628121154607146083}
   m_Father: {fileID: 3716766332509687722}
@@ -168,8 +168,8 @@ Transform:
   m_GameObject: {fileID: 8946642904570535460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.71, y: 0, z: -11.71}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4871800256178806757}
   - {fileID: 9151098670384739397}
@@ -221,7 +221,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: Hunteranimal
   TeamId: 0
   m_UseChildSensors: 1
@@ -259,10 +259,10 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  moveSpeed: 10
+  moveSpeed: 13
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
-  strongestAlfaHunterAnimal: {fileID: 0}
+  strongestAlphaHunterAnimal: {fileID: 0}
 --- !u!114 &4112302672909341778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,10 +287,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8408356
-  m_Height: 3.0585306
+  m_Radius: 0.19736114
+  m_Height: 0.65655136
   m_Direction: 2
-  m_Center: {x: 0.01647287, y: 0.8304938, z: 0.14822537}
+  m_Center: {x: -0.002052784, y: 0.20000786, z: 0.025686264}
 --- !u!1001 &1780303589161092350
 PrefabInstance:
   m_ObjectHideFlags: 0
