@@ -1,26 +1,27 @@
 ﻿using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private float cameraSpeed = 10f;
-    [SerializeField] private float rotateSpeed = 40f;
+    [SerializeField] private float cameraSpeed = 20f;
+    [SerializeField] private float rotateSpeed = 60f;
     [SerializeField] private float thresholdX = 960f;
     [SerializeField] private float thresholdY = 535f;
-    [SerializeField] private float sensitivity = 200f; 
+    [SerializeField] private float sensitivity = 300f; 
     [SerializeField] private float controlZUp = 30f;
     [SerializeField] private float controlZDown = -70f;
     [SerializeField] private float controlXLeft = -50f;
     [SerializeField] private float controlXRight = 50f;
-    [SerializeField] private float scrollSpeed = 500f;
-    [SerializeField] private float scrollRotateSpeed = 20f;
+    [SerializeField] private float scrollSpeed = 10000f;
+    [SerializeField] private float scrollRotateSpeed = 1000f;
     
     private int _width;
     private int _height;
     private Vector2 _mouseTurn;
-    private bool _control;
+    private bool _isSafe = true;
     private Camera _mainCamera;
 
     private void Start()
@@ -121,31 +122,46 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0.0f && transform.position.y <= 2.0f ||
             Input.GetAxis("Mouse ScrollWheel") < 0.0f && transform.position.y >= 30.0f ) return;
-        
-        var pos = transform.position;
-        var eulerAngles = transform.eulerAngles;
-        var xChangedZoomIn = new Vector3(eulerAngles.x - scrollRotateSpeed * Time.deltaTime, eulerAngles.y, eulerAngles.z);
-        var xChangedZoomOut = new Vector3(eulerAngles.x + scrollRotateSpeed * Time.deltaTime, eulerAngles.y, eulerAngles.z);
-        
-        var vec = new Vector3(pos.x, pos.y - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime,
-            pos.z + Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime);
-        
-        transform.position = Vector3.Lerp(pos, vec, scrollSpeed * Time.deltaTime);
-        
-        if(transform.position.y < 4.0f && !_control)
-        {
-            transform.eulerAngles = Vector3.Lerp(eulerAngles, xChangedZoomIn, scrollRotateSpeed * Time.deltaTime);
-            if(transform.eulerAngles.x <= 25.0f)
-                _control = true;
-        }
 
-        if (transform.position.y > 4.0f && _control)
-        {
-            transform.eulerAngles = Vector3.Lerp(eulerAngles, xChangedZoomOut, scrollRotateSpeed * Time.deltaTime);
-            if (transform.eulerAngles.x >= 50.0f)
-                _control = false;
+        var trans = transform;
+        var pos = trans.position;
+        var eulerAngles = trans.eulerAngles;
 
-        }
+        var forward = trans.forward;
+        forward.y = 0f;
+        
+        var py = pos.y - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime;
+        var positionY = Mathf.Clamp(py, 1.0f, 30.0f);
+        
+        var newPos = pos + forward * (Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime);
+        newPos.y = positionY;
+        newPos.x = Mathf.Clamp(newPos.x, -50, 50);
+        newPos.z = Mathf.Clamp(newPos.z, -65, 50);
+        
+        
+        var rXIn = eulerAngles.x - scrollRotateSpeed * Time.deltaTime;
+        var rXOut = eulerAngles.x + scrollRotateSpeed * Time.deltaTime;
+        var rotateXIn = Mathf.Clamp(rXIn, 0.0f, 50.0f);
+        var rotateXOut = Mathf.Clamp(rXOut, 0.0f, 50.0f);
+        
+        var xChangedZoomIn = new Vector3(rotateXIn, eulerAngles.y, eulerAngles.z);
+        var xChangedZoomOut = new Vector3(rotateXOut, eulerAngles.y, eulerAngles.z);
+
+
+        if (!(Input.GetAxis("Mouse ScrollWheel") > 0.0f) && !(Input.GetAxis("Mouse ScrollWheel") < 0.0f)) return;
+        if(!_isSafe) return;
+        
+        _isSafe = false;
+        transform.DOMove(newPos, 1.0f).SetEase(Ease.OutCubic).OnComplete(() =>
+        {
+            _isSafe = true;
+        });
+        if (Input.GetAxis("Mouse ScrollWheel") > 0.0f)
+            transform.DORotate(xChangedZoomIn, 1.0f).SetEase(Ease.OutQuad);
+
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0.0f)
+            transform.DORotate(xChangedZoomOut, 1.0f).SetEase(Ease.OutQuad);
+
 
     }
 }
