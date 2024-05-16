@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float controlZDown = -65f;
     [SerializeField] private float controlXLeft = -56f;
     [SerializeField] private float controlXRight = 51f;
-    [SerializeField] private float scrollSpeed = 10000f;
+    [SerializeField] private float scrollSpeed = 15000f;
     [SerializeField] private float scrollRotateSpeed = 1000f;
     
     private int _width;

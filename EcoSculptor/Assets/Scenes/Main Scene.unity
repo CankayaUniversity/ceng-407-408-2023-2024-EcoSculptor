@@ -9995,6 +9995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
+      propertyPath: scrollSpeed
+      value: 15000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
+        type: 3}
       propertyPath: sensitivity
       value: 800
       objectReference: {fileID: 0}
