@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -34,8 +35,10 @@ public class SelectionManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                var rotation = new Vector3(0, 60, 0);
-                _selectedHex.transform.Rotate(rotation);
+                var rotation = _selectedHex.transform.eulerAngles;
+                var targetRotation = new Vector3(rotation.x, (rotation.y + 60) % 360, rotation.z);
+                Debug.Log(targetRotation);
+                _selectedHex.transform.DORotate(targetRotation, 0.1f).SetEase(Ease.Linear);
             }
         }
     }
