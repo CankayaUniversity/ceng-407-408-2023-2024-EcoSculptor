@@ -23,7 +23,7 @@ public class AlphaHunterAnimal : Agent
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-50f, 50f), 0.85f, Random.Range(-50f, 50f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
         transform.localPosition = spawnLocation;
     }
     
