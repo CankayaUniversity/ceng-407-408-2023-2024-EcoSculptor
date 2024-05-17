@@ -14,3 +14,5 @@
 ## [Project Report PDF](https://drive.google.com/file/d/14kLW3BM6FG9R_-VtGyh9rs8_p7TAa7U0/view?usp=sharing)
 
 ## [Test Plan Document](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Test-Plan-Document)
+
+## [User Manual](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/User-Manual)
