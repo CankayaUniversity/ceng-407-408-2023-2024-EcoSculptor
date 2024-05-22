@@ -7,8 +7,6 @@
     <list default="true" id="5daeccb9-ccec-4022-a150-f6b618503cc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/WeakestHunter/Wolf.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/WeakestHunter/Wolf.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Stone/stone-hill.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/Stone/stone-hill.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ege 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ege 2.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
