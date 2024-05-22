@@ -1,0 +1,73 @@
+{
+    "Hunteranimal": {
+        "checkpoints": [
+            {
+                "steps": 2283,
+                "file_path": "results\\Final_1.1\\Hunteranimal\\Hunteranimal-2283.onnx",
+                "reward": -2.75,
+                "creation_time": 1716402823.2941055,
+                "auxillary_file_paths": [
+                    "results\\Final_1.1\\Hunteranimal\\Hunteranimal-2283.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2283,
+            "file_path": "results\\Final_1.1\\Hunteranimal.onnx",
+            "reward": -2.75,
+            "creation_time": 1716402823.2941055,
+            "auxillary_file_paths": [
+                "results\\Final_1.1\\Hunteranimal\\Hunteranimal-2283.pt"
+            ]
+        }
+    },
+    "Alphahunteranimal": {
+        "checkpoints": [
+            {
+                "steps": 2283,
+                "file_path": "results\\Final_1.1\\Alphahunteranimal\\Alphahunteranimal-2283.onnx",
+                "reward": -2.875,
+                "creation_time": 1716402823.316634,
+                "auxillary_file_paths": [
+                    "results\\Final_1.1\\Alphahunteranimal\\Alphahunteranimal-2283.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2283,
+            "file_path": "results\\Final_1.1\\Alphahunteranimal.onnx",
+            "reward": -2.875,
+            "creation_time": 1716402823.316634,
+            "auxillary_file_paths": [
+                "results\\Final_1.1\\Alphahunteranimal\\Alphahunteranimal-2283.pt"
+            ]
+        }
+    },
+    "Preyanimal": {
+        "checkpoints": [
+            {
+                "steps": 2283,
+                "file_path": "results\\Final_1.1\\Preyanimal\\Preyanimal-2283.onnx",
+                "reward": -7.475,
+                "creation_time": 1716402823.3392243,
+                "auxillary_file_paths": [
+                    "results\\Final_1.1\\Preyanimal\\Preyanimal-2283.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2283,
+            "file_path": "results\\Final_1.1\\Preyanimal.onnx",
+            "reward": -7.475,
+            "creation_time": 1716402823.3392243,
+            "auxillary_file_paths": [
+                "results\\Final_1.1\\Preyanimal\\Preyanimal-2283.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

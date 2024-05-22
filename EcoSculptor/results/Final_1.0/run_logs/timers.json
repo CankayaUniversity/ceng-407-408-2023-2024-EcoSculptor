@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1716402462",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\PC\\ceng-407-408-2023-2024-EcoSculptor\\EcoSculptor\\MLvenv\\Scripts\\mlagents-learn .\\MultiTraining.yaml --run-id Final_1.0",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.2.2+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1716402523"
+    },
+    "total": 61.2635776,
+    "count": 1,
+    "self": 0.005891899999994621,
+    "children": {
+        "run_training.setup": {
+            "total": 0.04846980000000012,
+            "count": 1,
+            "self": 0.04846980000000012
+        },
+        "TrainerController.start_learning": {
+            "total": 61.209215900000004,
+            "count": 1,
+            "self": 7.700000000454565e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 61.2091255,
+                    "count": 1,
+                    "self": 61.2091255
+                },
+                "TrainerController._save_models": {
+                    "total": 1.3400000000274304e-05,
+                    "count": 1,
+                    "self": 1.3400000000274304e-05
+                }
+            }
+        }
+    }
+}
