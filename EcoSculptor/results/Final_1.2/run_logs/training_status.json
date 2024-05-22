@@ -1,0 +1,100 @@
+{
+    "Alphahunteranimal": {
+        "checkpoints": [
+            {
+                "steps": 499994,
+                "file_path": "results\\Final_1.2\\Alphahunteranimal\\Alphahunteranimal-499994.onnx",
+                "reward": 2.2580645161290325,
+                "creation_time": 1716406376.1164298,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Alphahunteranimal\\Alphahunteranimal-499994.pt"
+                ]
+            },
+            {
+                "steps": 520367,
+                "file_path": "results\\Final_1.2\\Alphahunteranimal\\Alphahunteranimal-520367.onnx",
+                "reward": 1.0,
+                "creation_time": 1716406485.5764759,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Alphahunteranimal\\Alphahunteranimal-520367.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 520367,
+            "file_path": "results\\Final_1.2\\Alphahunteranimal.onnx",
+            "reward": 1.0,
+            "creation_time": 1716406485.5764759,
+            "auxillary_file_paths": [
+                "results\\Final_1.2\\Alphahunteranimal\\Alphahunteranimal-520367.pt"
+            ]
+        }
+    },
+    "Preyanimal": {
+        "checkpoints": [
+            {
+                "steps": 499929,
+                "file_path": "results\\Final_1.2\\Preyanimal\\Preyanimal-499929.onnx",
+                "reward": 7.125,
+                "creation_time": 1716406376.5224907,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Preyanimal\\Preyanimal-499929.pt"
+                ]
+            },
+            {
+                "steps": 519983,
+                "file_path": "results\\Final_1.2\\Preyanimal\\Preyanimal-519983.onnx",
+                "reward": 2.2962962962962963,
+                "creation_time": 1716406485.5539522,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Preyanimal\\Preyanimal-519983.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 519983,
+            "file_path": "results\\Final_1.2\\Preyanimal.onnx",
+            "reward": 2.2962962962962963,
+            "creation_time": 1716406485.5539522,
+            "auxillary_file_paths": [
+                "results\\Final_1.2\\Preyanimal\\Preyanimal-519983.pt"
+            ]
+        }
+    },
+    "Hunteranimal": {
+        "checkpoints": [
+            {
+                "steps": 499929,
+                "file_path": "results\\Final_1.2\\Hunteranimal\\Hunteranimal-499929.onnx",
+                "reward": -2.75,
+                "creation_time": 1716406376.5610247,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Hunteranimal\\Hunteranimal-499929.pt"
+                ]
+            },
+            {
+                "steps": 519983,
+                "file_path": "results\\Final_1.2\\Hunteranimal\\Hunteranimal-519983.onnx",
+                "reward": -2.2962962962962963,
+                "creation_time": 1716406485.5999978,
+                "auxillary_file_paths": [
+                    "results\\Final_1.2\\Hunteranimal\\Hunteranimal-519983.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 519983,
+            "file_path": "results\\Final_1.2\\Hunteranimal.onnx",
+            "reward": -2.2962962962962963,
+            "creation_time": 1716406485.5999978,
+            "auxillary_file_paths": [
+                "results\\Final_1.2\\Hunteranimal\\Hunteranimal-519983.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

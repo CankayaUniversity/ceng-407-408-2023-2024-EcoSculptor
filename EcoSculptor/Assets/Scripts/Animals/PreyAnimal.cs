@@ -63,7 +63,7 @@ public class PreyAnimal : Agent
             
             GameObject newFood = Instantiate(food, enviromentLocation, true);
 
-            Vector3 foodLocation= new Vector3(Random.Range(-20f, 20f), -0.16f, Random.Range(-20f, 20f));
+            Vector3 foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
 
             if (spawnedFoodList.Count != 0)
             {
@@ -74,7 +74,7 @@ public class PreyAnimal : Agent
                         distanceGood = CheckOverLap(foodLocation, spawnedFoodList[k].transform.localPosition, 5f);
                         if (distanceGood == false)
                         {
-                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.16f, Random.Range(-20f, 20f));
+                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
                             k--;
                             alreadyDecr = true;
                         }
@@ -82,7 +82,7 @@ public class PreyAnimal : Agent
                         distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
                         if (distanceGood == false)
                         {
-                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.16f, Random.Range(-20f, 20f));
+                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
                             if (alreadyDecr == false)
                             {
                                 k--;
