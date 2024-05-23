@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7581015623483094085}
   - component: {fileID: 6817031596507036640}
   - component: {fileID: 8754436201084784426}
+  - component: {fileID: 7985943952643873460}
   m_Layer: 0
   m_Name: river-corner
   m_TagString: River
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7985943952643873460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097388409694793471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e5d0282f984bae84954163cb61e880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 14

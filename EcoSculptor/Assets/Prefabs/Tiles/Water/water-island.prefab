@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4204373010823536372}
   - component: {fileID: 1006331792655864145}
   - component: {fileID: 3031980446532478363}
+  - component: {fileID: 2083851635969396602}
   m_Layer: 0
   m_Name: water-island
   m_TagString: Water
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2083851635969396602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536238675259032654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e5d0282f984bae84954163cb61e880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1

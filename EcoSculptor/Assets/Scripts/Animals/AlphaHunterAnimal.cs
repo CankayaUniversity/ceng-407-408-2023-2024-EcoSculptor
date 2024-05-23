@@ -38,7 +38,8 @@ public class AlphaHunterAnimal : Agent
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 100;
         } else {
             rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
         }

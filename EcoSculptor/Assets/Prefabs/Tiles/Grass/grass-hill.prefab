@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1672935606494848130}
   - component: {fileID: 2348818002267695911}
   - component: {fileID: 539405898890977261}
+  - component: {fileID: -6374637141676414878}
   m_Layer: 0
   m_Name: grass-hill
   m_TagString: Grass
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-6374637141676414878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052698867690520120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e5d0282f984bae84954163cb61e880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 12
