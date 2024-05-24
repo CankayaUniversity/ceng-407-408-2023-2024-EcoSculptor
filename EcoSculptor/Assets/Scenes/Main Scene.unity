@@ -3067,6 +3067,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 7593024989588016058, guid: 9d681bccf6ebb964582b6c02098827c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593024990153593484, guid: 9d681bccf6ebb964582b6c02098827c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7593024990874154304, guid: 9d681bccf6ebb964582b6c02098827c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -9986,7 +9996,7 @@ PrefabInstance:
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
       propertyPath: controlZUp
-      value: 45
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}

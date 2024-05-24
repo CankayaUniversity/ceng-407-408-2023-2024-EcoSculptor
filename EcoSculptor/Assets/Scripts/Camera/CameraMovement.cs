@@ -23,7 +23,12 @@ public class CameraMovement : MonoBehaviour
     private Vector2 _mouseTurn;
     private bool _isSafe = true;
     private Camera _mainCamera;
-
+    private Vector3 initialPosition;
+    private Vector3 maxForward;
+    private Vector3 minForward;
+    private Vector3 maxRight;
+    private Vector3 minRight;
+    
     private void Start()
     {
         _width = Screen.width;
@@ -32,7 +37,8 @@ public class CameraMovement : MonoBehaviour
         thresholdX = thresholdX * _width / 1920;
         thresholdY = thresholdY * _height / 1080;
         _mainCamera = Camera.main;
-
+        
+        initialPosition = transform.position;
     }
     
     private void LateUpdate()
@@ -44,46 +50,141 @@ public class CameraMovement : MonoBehaviour
         CameraZoomInOut();
 
     }
+    // private void MoveCamera()
+    // {
+    //     var forward = transform.forward;
+    //     var right = transform.right;
+    //     var mousePos = Input.mousePosition;
+    //
+    //     forward.y = 0f;
+    //     right.y = 0f;
+    //     forward.Normalize();
+    //     right.Normalize();
+    //     var position = transform.position;
+    //     
+    //     if (Input.GetKey(KeyCode.W) || mousePos.y >= _height / 2f + thresholdY)
+    //     {
+    //         position = Vector3.Lerp(position, position + forward, cameraSpeed * Time.deltaTime);
+    //         //transform.position +=  forward * (cameraSpeed * Time.deltaTime);
+    //     }
+    //
+    //     if (Input.GetKey(KeyCode.S) || mousePos.y <= _height / 2f - thresholdY)
+    //     {
+    //         position = Vector3.Lerp(position, position - forward, cameraSpeed * Time.deltaTime);
+    //         //transform.position -= forward * (cameraSpeed * Time.deltaTime);
+    //     }
+    //
+    //     if (Input.GetKey(KeyCode.A) || mousePos.x <= _width / 2f - thresholdX)
+    //     {
+    //         position = Vector3.Lerp(position, position - right, cameraSpeed * Time.deltaTime);
+    //         //transform.position -= right * (cameraSpeed * Time.deltaTime);
+    //     }
+    //
+    //     if (Input.GetKey(KeyCode.D) || mousePos.x >= _width / 2f + thresholdX)
+    //     {
+    //         position = Vector3.Lerp(position, position + right, cameraSpeed * Time.deltaTime);
+    //         //transform.position += right * (cameraSpeed * Time.deltaTime);
+    //     } 
+    //     // Calculate the constrained position
+    //     //position = ConstrainPosition(position);
+    //
+    //     // Apply the constrained position to the camera
+    //     transform.position = position;
+    //
+    // }
     
+    // private Vector3 ConstrainPosition(Vector3 position)
+    // {
+    //     var rotatedInitialPosition = Quaternion.Euler(0, transform.eulerAngles.y, 0) * initialPosition;
+    //
+    //     if (transform.eulerAngles.y >= -45 && transform.eulerAngles.y <= 45)
+    //     {
+    //         maxForward = rotatedInitialPosition + transform.forward * controlZUp;
+    //         minForward = rotatedInitialPosition + transform.forward * controlZDown;
+    //         maxRight = rotatedInitialPosition + transform.right * controlXRight;
+    //         minRight = rotatedInitialPosition + transform.right * controlXLeft;
+    //     }
+    //     else if (transform.eulerAngles.y > 45 && transform.eulerAngles.y < 135)
+    //     {
+    //         maxForward = rotatedInitialPosition + transform.right * controlZUp;
+    //         minForward = rotatedInitialPosition + transform.right * controlZDown;
+    //         maxRight = rotatedInitialPosition + transform.forward * controlXRight;
+    //         minRight = rotatedInitialPosition + transform.forward * controlXLeft;
+    //
+    //     }
+    //     else if (transform.eulerAngles.y >= 135 && transform.eulerAngles.y <= -135)
+    //     {
+    //         maxForward = rotatedInitialPosition + transform.forward * controlZUp;
+    //         minForward = rotatedInitialPosition + transform.forward * controlZDown;
+    //         maxRight = rotatedInitialPosition + transform.right * controlXRight;
+    //         minRight = rotatedInitialPosition + transform.right * controlXLeft;
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("VAR");
+    //         maxForward = rotatedInitialPosition + transform.right * controlZUp;
+    //         minForward = rotatedInitialPosition + transform.right * controlZDown;
+    //         maxRight = rotatedInitialPosition + transform.forward * controlXRight;
+    //         minRight = rotatedInitialPosition + transform.forward * controlXLeft;
+    //     }
+    //
+    //     // Clamp the position based on these bounds
+    //     var minX = Mathf.Min(minRight.x, maxRight.x);
+    //     var maxX = Mathf.Max(minRight.x, maxRight.x);
+    //     var minZ = Mathf.Min(minForward.z, maxForward.z);
+    //     var maxZ = Mathf.Max(minForward.z, maxForward.z);
+    //
+    //     position.x = Mathf.Clamp(position.x, minX, maxX);
+    //     position.z = Mathf.Clamp(position.z, minZ, maxZ);
+    //
+    //     return position;
+    // }
+
     private void MoveCamera()
     {
-        var camTransform = transform;
-        var forward = camTransform.forward;
-        var right = camTransform.right;
+        var forward = transform.forward;
+        var right = transform.right;
         var mousePos = Input.mousePosition;
-
+    
         forward.y = 0f;
         right.y = 0f;
         forward.Normalize();
         right.Normalize();
         var position = transform.position;
-
-        if ((Input.GetKey(KeyCode.W) || mousePos.y >= (_height / 2f) + thresholdY) && transform.position.z < controlZUp)
+    
+        if (Input.GetKey(KeyCode.W) || mousePos.y >= (_height / 2f) + thresholdY)
         {
-            transform.position = Vector3.Lerp(position, position + forward, cameraSpeed * Time.deltaTime);
+            position = Vector3.Lerp(position, position + forward, cameraSpeed * Time.deltaTime);
             //transform.position +=  forward * (cameraSpeed * Time.deltaTime);
         }
-
-        if ((Input.GetKey(KeyCode.S) || mousePos.y <= (_height / 2f) - thresholdY) &&
-            transform.position.z > controlZDown)
+    
+        if (Input.GetKey(KeyCode.S) || mousePos.y <= (_height / 2f) - thresholdY)
         {
-            transform.position = Vector3.Lerp(position, position - forward, cameraSpeed * Time.deltaTime);
+            position = Vector3.Lerp(position, position - forward, cameraSpeed * Time.deltaTime);
             //transform.position -= forward * (cameraSpeed * Time.deltaTime);
         }
 
-        if ((Input.GetKey(KeyCode.A) || mousePos.x <= (_width / 2f) - thresholdX) &&
-            transform.position.x > controlXLeft)
+        if (Input.GetKey(KeyCode.A) || mousePos.x <= (_width / 2f) - thresholdX)
         {
-            transform.position = Vector3.Lerp(position, position - right, cameraSpeed * Time.deltaTime);
-            //transform.position -= right * (cameraSpeed * Time.deltaTime);
+            position = Vector3.Lerp(position, position - right, cameraSpeed * Time.deltaTime);
+            //transform.position -= right * (cameraSpeed * Time.deltaTime);}
         }
 
-        if ((Input.GetKey(KeyCode.D) || mousePos.x >= (_width / 2f) + thresholdX) &&
-            transform.position.x < controlXRight)
+        if (Input.GetKey(KeyCode.D) || mousePos.x >= (_width / 2f) + thresholdX)
         {
-            transform.position = Vector3.Lerp(position, position + right, cameraSpeed * Time.deltaTime);
+            position = Vector3.Lerp(position, position + right, cameraSpeed * Time.deltaTime);
             //transform.position += right * (cameraSpeed * Time.deltaTime);
-        } 
+        }
+
+        if (position.z > controlZUp)
+            position.z = controlZUp;
+        if (position.z < controlZDown)
+            position.z = controlZDown;
+        if (position.x > controlXRight)
+            position.x = controlXRight;
+        if (position.x < controlXLeft)
+            position.x = controlXLeft;
+        transform.position = position;
     }
     
     private void RotateCamera()
