@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3843170179125818110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6670775918874585690}
+  - component: {fileID: 6070761461574134494}
+  m_Layer: 0
+  m_Name: river-intersectionG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6670775918874585690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843170179125818110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8884202041677532263}
+  - {fileID: 8174715015144153483}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6070761461574134494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843170179125818110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e1b5bc20494ddda77b6edafb702172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 8070685841364424413}
+  winterTile: {fileID: 8807276508017621809}
+--- !u!1001 &5319782312972976917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6670775918874585690}
+    m_Modifications:
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166814642370516424, guid: 238f865326fdec34e874d89c8d0d5a80,
+        type: 3}
+      propertyPath: m_Name
+      value: river-intersectionG
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 238f865326fdec34e874d89c8d0d5a80, type: 3}
+--- !u!1 &8070685841364424413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4166814642370516424, guid: 238f865326fdec34e874d89c8d0d5a80,
+    type: 3}
+  m_PrefabInstance: {fileID: 5319782312972976917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8884202041677532263 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3645856844155735922, guid: 238f865326fdec34e874d89c8d0d5a80,
+    type: 3}
+  m_PrefabInstance: {fileID: 5319782312972976917}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8330164635728356884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6670775918874585690}
+    m_Modifications:
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 694411737576004901, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_Name
+      value: river-intersectionG-winter
+      objectReference: {fileID: 0}
+    - target: {fileID: 694411737576004901, guid: 88886e2fb605261418904d9ae193761e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 88886e2fb605261418904d9ae193761e, type: 3}
+--- !u!4 &8174715015144153483 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 209658619319551903, guid: 88886e2fb605261418904d9ae193761e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8330164635728356884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8807276508017621809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694411737576004901, guid: 88886e2fb605261418904d9ae193761e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8330164635728356884}
+  m_PrefabAsset: {fileID: 0}

@@ -10,6 +10,7 @@ public class Hex : MonoBehaviour
     [SerializeField] private Transform tileMeshParent;
     [SerializeField] private GameObject tileMesh;
     
+    
     private HexCoordinates _hexCoordinates;
     
     public Vector3Int HexCoords => _hexCoordinates.GetHexCoords();

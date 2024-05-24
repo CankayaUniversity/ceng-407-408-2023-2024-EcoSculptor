@@ -6,9 +6,8 @@ using UnityEngine.UIElements;
 
 public class TileChanger : SelectionManager
 {
-    [SerializeField] private GameObject defaultTile;
-    
     private GameObject _tilePrefab;
+    private GameObject _tileWinterPrefab;
     private TileClassifier _tileClassifier;
     private Tween newTween;
     private bool isSafeToClick;
@@ -17,6 +16,12 @@ public class TileChanger : SelectionManager
     {
         get => _tilePrefab;
         set => _tilePrefab = value;
+    }
+
+    public GameObject TileWinterPrefab
+    {
+        get => _tileWinterPrefab;
+        set => _tileWinterPrefab = value;
     }
 
     private void Start()
@@ -40,8 +45,25 @@ public class TileChanger : SelectionManager
         Destroy(SelectedHex.TileMesh);
 
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshParent);
+        newTile.tag = _tilePrefab.tag;
 
-        var beginY = newTile.transform.position.y - 5;
+
+        var winterHandler = newTile.GetComponentInChildren<WinterHandler>();
+        var winterTilesDict = TileManager.Instance.WinterHandlersDict;
+
+        if (winterHandler)
+        {
+            if (!winterTilesDict.TryAdd(oldTile.transform.position, winterHandler))
+                winterTilesDict[oldTile.transform.position] = newTile.GetComponentInChildren<WinterHandler>();
+        }
+        else
+        {
+            if (winterTilesDict.ContainsKey(oldTile.transform.position))
+                winterTilesDict.Remove(oldTile.transform.position);
+        }
+
+        
+        var beginY = newTile.transform.position.y + 5;
         var endY = newTile.transform.position.y;
 
         isSafeToClick = false;
@@ -52,18 +74,6 @@ public class TileChanger : SelectionManager
             position.y = v;
             newTile.transform.position = position;
         }).SetEase(Ease.OutBack).OnComplete(() => isSafeToClick = true);
-        
-        TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
-    }
-
-
-    public void ChangeTileToDefault(Vector3 mousePos)
-    {
-        base.GetHexAndOutline(mousePos);
-        
-        var oldTile = SelectedHex.TileMesh;
-        Destroy(SelectedHex.TileMesh);
-        var newTile = SelectedHex.TileMesh = Instantiate(defaultTile, SelectedHex.TileMeshParent);
         
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
     }
