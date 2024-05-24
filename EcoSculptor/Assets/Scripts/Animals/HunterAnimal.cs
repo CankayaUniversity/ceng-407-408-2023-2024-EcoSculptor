@@ -17,7 +17,7 @@ public class HunterAnimal : Agent
 
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
-    public AlphaHunterAnimal strongestAlphaHunterAnimal;
+    public AlphaHunterAnimal strongestHunterAnimal;
     
     public override void Initialize()
     {
@@ -27,7 +27,7 @@ public class HunterAnimal : Agent
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0.15f, Random.Range(-4f, 4f));
         transform.localPosition = spawnLocation;
         PlayAnimation("Movement");
     }
@@ -71,14 +71,14 @@ public class HunterAnimal : Agent
             AddReward(10f);
             weakestPreyAnimal.AddReward(-13f);
             weakestPreyAnimal.EndEpisode();
-            strongestAlphaHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
         if (other.gameObject.CompareTag("boundary"))
         {
             AddReward(-15f);
             weakestPreyAnimal.EndEpisode();
-            strongestAlphaHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }

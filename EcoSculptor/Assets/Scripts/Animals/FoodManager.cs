@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FoodManager : MonoBehaviour
 {
@@ -10,7 +12,11 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private int timeForEpisode;
     private float timeLeft;
 
-    private List<GameObject> spawnedFoodList = new List<GameObject>();
+    private List<GameObject> _spawnedFoodList = new List<GameObject>();
+    
+    public PreyAnimal weakestPreyAnimal;
+    public AlphaHunterAnimal strongestHunterAnimal;
+    public HunterAnimal weakestHunterAnimal;
 
     private void Start()
     {
@@ -24,7 +30,7 @@ public class FoodManager : MonoBehaviour
 
     public void CreateFood()
     {
-        if (spawnedFoodList.Count != 0)
+        if (_spawnedFoodList.Count != 0)
         {
             ClearFood();
         }
@@ -36,18 +42,18 @@ public class FoodManager : MonoBehaviour
 
             GameObject newFood = Instantiate(foodPrefab, environmentTransform, true);
 
-            Vector3 foodLocation = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
+            Vector3 foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
 
-            if (spawnedFoodList.Count != 0)
+            if (_spawnedFoodList.Count != 0)
             {
-                for (int k = 0; k < spawnedFoodList.Count; k++)
+                for (int k = 0; k < _spawnedFoodList.Count; k++)
                 {
                     if (counter < 20)
                     {
-                        distanceGood = CheckOverLap(foodLocation, spawnedFoodList[k].transform.localPosition, 5f);
+                        distanceGood = CheckOverLap(foodLocation, _spawnedFoodList[k].transform.localPosition, 5f);
                         if (!distanceGood)
                         {
-                            foodLocation = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
+                            foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
                             k--;
                             alreadyDecr = true;
                         }
@@ -55,7 +61,7 @@ public class FoodManager : MonoBehaviour
                         distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
                         if (!distanceGood)
                         {
-                            foodLocation = new Vector3(Random.Range(-20f, 20f), 0.5f, Random.Range(-20f, 20f));
+                            foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
                             if (!alreadyDecr)
                             {
                                 k--;
@@ -65,12 +71,12 @@ public class FoodManager : MonoBehaviour
                     }
                     else
                     {
-                        k = spawnedFoodList.Count;
+                        k = _spawnedFoodList.Count;
                     }
                 }
             }
             newFood.transform.localPosition = foodLocation;
-            spawnedFoodList.Add(newFood);
+            _spawnedFoodList.Add(newFood);
         }
     }
 
@@ -82,19 +88,14 @@ public class FoodManager : MonoBehaviour
 
     private void ClearFood()
     {
-        foreach (GameObject food in spawnedFoodList)
+        foreach (GameObject food in _spawnedFoodList)
         {
             Destroy(food);
         }
-        spawnedFoodList.Clear();
+        _spawnedFoodList.Clear();
     }
 
-    public bool AllFoodConsumed()
-    {
-        return spawnedFoodList.Count == 0;
-    }
-
-    private void EpisodeTimerNew()
+    internal void EpisodeTimerNew()
     {
         timeLeft = Time.time + timeForEpisode;
     }
@@ -103,13 +104,12 @@ public class FoodManager : MonoBehaviour
     {
         if (Time.time >= timeLeft)
         {
-            var animals = FindObjectsOfType<PreyAnimal>();
-            foreach (var animal in animals)
-            {
-                animal.AddReward(-15f);
-                animal.EndEpisode();
-            }
-            ClearFood();
+            weakestPreyAnimal.AddReward(-15f);
+            weakestHunterAnimal.AddReward(-15f);
+            strongestHunterAnimal.AddReward(-15f);
+            weakestHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
+            weakestPreyAnimal.EndEpisode();
         }
     }
 }

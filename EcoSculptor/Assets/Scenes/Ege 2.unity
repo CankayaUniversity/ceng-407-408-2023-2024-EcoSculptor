@@ -758,7 +758,7 @@ PrefabInstance:
     - target: {fileID: 613463719895087930, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c0823c21cc35744b5ad1ed3136effb, type: 3}
@@ -2325,7 +2325,7 @@ PrefabInstance:
     - target: {fileID: 613463719895087930, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c0823c21cc35744b5ad1ed3136effb, type: 3}
@@ -2806,7 +2806,7 @@ PrefabInstance:
     - target: {fileID: 613463719895087930, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2319129365299483414, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
@@ -4972,7 +4972,7 @@ PrefabInstance:
     - target: {fileID: 613463719895087930, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c0823c21cc35744b5ad1ed3136effb, type: 3}
@@ -6336,7 +6336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388591624}
   m_LocalRotation: {x: -0, y: 0.8599138, z: -0.5104393, w: 0}
-  m_LocalPosition: {x: 51, y: 55.200005, z: 25.95}
+  m_LocalPosition: {x: 58.55, y: 36.48, z: 26.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10178,7 +10178,7 @@ PrefabInstance:
     - target: {fileID: 613463719895087930, guid: 11c0823c21cc35744b5ad1ed3136effb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c0823c21cc35744b5ad1ed3136effb, type: 3}
@@ -10573,29 +10573,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingMap
       objectReference: {fileID: 0}
-    - target: {fileID: 2319129365299483414, guid: 11c0823c21cc35744b5ad1ed3136effb,
-        type: 3}
-      propertyPath: m_Model
-      value: 
-      objectReference: {fileID: 5022602860645237092, guid: 9af86f4aed534764aa0d1eb71de20e25,
-        type: 3}
-    - target: {fileID: 2319129365299483414, guid: 11c0823c21cc35744b5ad1ed3136effb,
-        type: 3}
-      propertyPath: m_BehaviorType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675571415219959154, guid: 11c0823c21cc35744b5ad1ed3136effb,
-        type: 3}
-      propertyPath: m_Model
-      value: 
-      objectReference: {fileID: 5022602860645237092, guid: 0336e873418d3cf4185ecd8b6066b87a,
-        type: 3}
-    - target: {fileID: 6987920419736052774, guid: 11c0823c21cc35744b5ad1ed3136effb,
-        type: 3}
-      propertyPath: m_Model
-      value: 
-      objectReference: {fileID: 5022602860645237092, guid: 3d570c91d6f2f9948a7cf853e167de97,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11c0823c21cc35744b5ad1ed3136effb, type: 3}
 --- !u!224 &656402269190109878

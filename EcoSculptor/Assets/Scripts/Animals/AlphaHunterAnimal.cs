@@ -16,7 +16,7 @@ public class AlphaHunterAnimal : Agent
     private Rigidbody rb;
 
     public GameObject prey;
-    [FormerlySerializedAs("classObject")] public PreyAnimal weakestPreyAnimal;
+    public PreyAnimal weakestPreyAnimal;
     public HunterAnimal weakestHunterAnimal;
     
     public override void Initialize()

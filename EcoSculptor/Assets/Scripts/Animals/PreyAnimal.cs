@@ -12,23 +12,23 @@ public class PreyAnimal : Agent
 {
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
-
-    public int foodCountToReward = 5; // Kaç yemek yedikten sonra ekstra ödül verileceği
+    
     private int foodEaten = 0;
-
-    private FoodManager foodManager;
+    [SerializeField] private FoodManager foodManager;
+    public AlphaHunterAnimal strongestHunterAnimal;
+    public HunterAnimal weakestHunterAnimal;
 
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        foodManager = FindObjectOfType<FoodManager>(); // FoodManager'ı bul
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.46f, Random.Range(-20f, 20f));
+        transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.26f, Random.Range(-20f, 20f));
         foodManager.CreateFood();
         foodEaten = 0; // Yenilen yemek sayısını sıfırla
+        foodManager.EpisodeTimerNew();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -61,20 +61,23 @@ public class PreyAnimal : Agent
         if (other.gameObject.CompareTag("nectar"))
         {
             Destroy(other.gameObject);
-            AddReward(1f);
+            AddReward(10f);
             foodEaten++;
-            if (foodEaten == foodCountToReward)
+            if (foodEaten == foodManager.foodCount)
             {
-                AddReward(10f); // Ekstra ödül ver
-            }
-            if (foodManager.AllFoodConsumed())
-            {
+                AddReward(5f); // Ekstra ödül ver
+                weakestHunterAnimal.AddReward(-5f);
+                weakestHunterAnimal.EndEpisode();
+                strongestHunterAnimal.AddReward(-5f);
+                strongestHunterAnimal.EndEpisode();
                 EndEpisode();
             }
         }
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-1f);
+            AddReward(-15f);
+            weakestHunterAnimal.EndEpisode();
+            strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
     }
