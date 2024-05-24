@@ -8,6 +8,10 @@ using UnityEngine.Serialization;
 
 public class AlphaHunterAnimal : Agent
 {
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
+    
+    [Header("Move Speed")]
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
 
@@ -25,11 +29,18 @@ public class AlphaHunterAnimal : Agent
         //Hunter
         Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
         transform.localPosition = spawnLocation;
+        PlayAnimation("Movement");
+
     }
     
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
+    }
+
+    public void PlayAnimation(string stateName)
+    {
+        animator.CrossFadeInFixedTime(stateName, 0f, 0, 0f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -39,7 +50,8 @@ public class AlphaHunterAnimal : Agent
         
         if (moveForward >= 0) {
             //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
-            rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 100;
+            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
+            animator.SetFloat("Movement", velocity.magnitude);
         } else {
             rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
         }

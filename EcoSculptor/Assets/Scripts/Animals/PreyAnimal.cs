@@ -10,7 +10,11 @@ using Random = UnityEngine.Random;
 
 public class PreyAnimal : Agent
 {
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
+    
     [SerializeField] private Transform target;
+    
     public int foodCount;
     public GameObject food;
 
@@ -42,6 +46,8 @@ public class PreyAnimal : Agent
         CreateFood();
         
         EpisodeTimerNew();
+        
+        PlayAnimation("Movement");
     }
 
     private void Update()
@@ -125,6 +131,11 @@ public class PreyAnimal : Agent
     {
         sensor.AddObservation(transform.localPosition);
     }
+    
+    public void PlayAnimation(string stateName)
+    {
+        animator.CrossFadeInFixedTime(stateName, 0f, 0, 0f);
+    }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -132,7 +143,8 @@ public class PreyAnimal : Agent
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime;
+            animator.SetFloat("Movement", velocity.magnitude);
         } else {
             rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
         }

@@ -1002,7 +1002,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2916087742466348207}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: b7822eb5951163b48830b6d9bcbf48b4, type: 3}
   m_Controller: {fileID: 9100000, guid: 6b74c0471f91af34f8e98a4d46810410, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -2095,6 +2095,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  animator: {fileID: 0}
   moveSpeed: 13
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
