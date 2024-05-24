@@ -18,3 +18,5 @@
 ## [User Manual](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/User-Manual)
 
 ## [Test Results](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Test-Results)
+
+## [CENG 408 Project Report](https://drive.google.com/file/d/1XDI-pPxTloRCYyBIbNu-oN5zH3kGy9uT/view?usp=sharing)
