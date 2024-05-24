@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5daeccb9-ccec-4022-a150-f6b618503cc0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animals/PreyAnimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animals/PreyAnimal.cs" afterDir="false" />
-    </list>
+    <list default="true" id="5daeccb9-ccec-4022-a150-f6b618503cc0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
