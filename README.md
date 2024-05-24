@@ -16,3 +16,5 @@
 ## [Test Plan Document](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Test-Plan-Document)
 
 ## [User Manual](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/User-Manual)
+
+## [Test Results](https://github.com/CankayaUniversity/ceng-407-408-2023-2024-EcoSculptor/wiki/Test-Results)
