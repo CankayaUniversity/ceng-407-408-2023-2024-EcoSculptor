@@ -10,115 +10,25 @@ using Random = UnityEngine.Random;
 
 public class PreyAnimal : Agent
 {
-    [SerializeField] private Transform target;
-    public int foodCount;
-    public GameObject food;
-
-    [SerializeField] private List<GameObject> spawnedFoodList = new List<GameObject>();
-    
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
 
-    [SerializeField] private Transform enviromentLocation;
+    public int foodCountToReward = 5; // Kaç yemek yedikten sonra ekstra ödül verileceği
+    private int foodEaten = 0;
 
-    
-    //time keeping variables
-    [SerializeField] private int timeForEpisode;
-    private float timeLeft;
-    
-    //Enemys Agent
-    [FormerlySerializedAs("classObject")] public HunterAnimal weakestHunterAnimal;
-    public AlphaHunterAnimal strongestHunterAnimal;
+    private FoodManager foodManager;
 
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        foodManager = FindObjectOfType<FoodManager>(); // FoodManager'ı bul
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-4f, 4f), 0.46f, Random.Range(-4f, 4f));
-        
-        CreateFood();
-        
-        EpisodeTimerNew();
-    }
-
-    private void Update()
-    {
-        CheckRemainingTime();
-    }
-
-    private void CreateFood()
-    {
-        if (spawnedFoodList.Count != 0)
-        {
-            RemoveFood(spawnedFoodList);
-        }
-        for (int i = 0; i < foodCount; i++)
-        {
-            int counter = 0;
-            bool distanceGood;
-            bool alreadyDecr= false;
-            
-            GameObject newFood = Instantiate(food, enviromentLocation, true);
-
-            Vector3 foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
-
-            if (spawnedFoodList.Count != 0)
-            {
-                for (int k = 0; k < spawnedFoodList.Count; k++)
-                {
-                    if (counter < 20)
-                    {
-                        distanceGood = CheckOverLap(foodLocation, spawnedFoodList[k].transform.localPosition, 5f);
-                        if (distanceGood == false)
-                        {
-                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
-                            k--;
-                            alreadyDecr = true;
-                        }
-                        
-                        distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
-                        if (distanceGood == false)
-                        {
-                            foodLocation= new Vector3(Random.Range(-20f, 20f), -0.41f, Random.Range(-20f, 20f));
-                            if (alreadyDecr == false)
-                            {
-                                k--;
-                            }
-                        }
-                        counter++;
-                    }
-                    else
-                    {
-                        k = spawnedFoodList.Count;
-                    }
-                }
-            }
-            newFood.transform.localPosition = foodLocation;
-            spawnedFoodList.Add(newFood);
-        }
-    }
-
-    private bool CheckOverLap(Vector3 objectOverLapping,Vector3 alreadyExistingObject, float minDistance)
-    {
-        float distanceBetweenObjects = Vector3.Distance(objectOverLapping, alreadyExistingObject);
-        if (minDistance <= distanceBetweenObjects)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    private void RemoveFood(List<GameObject> toBeDeletedGameObject)
-    {
-        foreach (GameObject i in toBeDeletedGameObject)
-        {
-            Destroy(i.gameObject);
-        }
-        toBeDeletedGameObject.Clear();
+        transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.46f, Random.Range(-20f, 20f));
+        foodManager.CreateFood();
+        foodEaten = 0; // Yenilen yemek sayısını sıfırla
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -132,11 +42,11 @@ public class PreyAnimal : Agent
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 100;
         } else {
             rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
         }
-        transform.Rotate(0f,moveRotate*moveSpeed,0f,Space.Self);
+        transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -150,46 +60,21 @@ public class PreyAnimal : Agent
     {
         if (other.gameObject.CompareTag("nectar"))
         {
-            var parent = other.transform.parent;
-            spawnedFoodList.Remove(parent.gameObject);
-            Destroy(parent.gameObject);
-            AddReward(10f);
-            if (spawnedFoodList.Count==0)
+            Destroy(other.gameObject);
+            AddReward(1f);
+            foodEaten++;
+            if (foodEaten == foodCountToReward)
             {
-                RemoveFood(spawnedFoodList);
-                AddReward(5f);
-                weakestHunterAnimal.AddReward(-5f);
-                weakestHunterAnimal.EndEpisode();
-                strongestHunterAnimal.AddReward(-5f);
-                strongestHunterAnimal.EndEpisode();
+                AddReward(10f); // Ekstra ödül ver
+            }
+            if (foodManager.AllFoodConsumed())
+            {
                 EndEpisode();
             }
         }
         if (other.gameObject.CompareTag("boundary"))
         {
-            RemoveFood(spawnedFoodList);
-            AddReward(-15f);
-            weakestHunterAnimal.EndEpisode();
-            strongestHunterAnimal.EndEpisode();
-            EndEpisode();
-        }
-    }
-
-    private void EpisodeTimerNew()
-    {
-        timeLeft = Time.time + timeForEpisode;
-    }
-
-    private void CheckRemainingTime()
-    {
-        if (Time.time >= timeLeft)
-        {
-            AddReward(-15f);
-            weakestHunterAnimal.AddReward(-15f);
-            strongestHunterAnimal.AddReward(-15f);
-            RemoveFood(spawnedFoodList);
-            weakestHunterAnimal.EndEpisode();
-            strongestHunterAnimal.EndEpisode();
+            AddReward(-1f);
             EndEpisode();
         }
     }

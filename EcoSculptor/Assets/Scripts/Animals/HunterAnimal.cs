@@ -23,7 +23,7 @@ public class HunterAnimal : Agent
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0f, Random.Range(-20f, 20f));
         transform.localPosition = spawnLocation;
     }
     
@@ -38,7 +38,8 @@ public class HunterAnimal : Agent
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            //rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
+            rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 100;
         } else {
             rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
         }
