@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5031786058273981923}
   m_Layer: 0
   m_Name: River Corner
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
