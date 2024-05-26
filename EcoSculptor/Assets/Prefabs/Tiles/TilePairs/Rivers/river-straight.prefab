@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -426258922921705319}
   m_Layer: 0
   m_Name: river-straight
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
