@@ -13,8 +13,6 @@ public class Hex : MonoBehaviour
     [SerializeField] private GameObject foods;
 
     private bool _flag;
-    private bool _isSafe = true;
-
 
     private HexCoordinates _hexCoordinates;
     
@@ -48,36 +46,27 @@ public class Hex : MonoBehaviour
     private void OnEnable()
     {
         TileManager.Instance.RegisterTile(tileMesh.gameObject.tag);
-        if(tileMesh.gameObject.tag != "River") return;
-        var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
-        foreach (var neighborVector in neighborsList)
-        {
-            if(!_flag)
-                _flag = CreateFoodTile(neighborVector);
-            else 
-                break;
-        }
+        // if(!tileMesh.gameObject.CompareTag("River")) return;
+        // var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
+        // foreach (var neighborVector in neighborsList)
+        // {
+        //     CreateFoodTile(neighborVector);
+        // }
         
     }
 
-    private bool CreateFoodTile(Vector3Int neighborVector)
+    private void CreateFoodTile(Vector3Int neighborVector)
     {
         var tile = HexGrid.Instance.GetTileAt(neighborVector);
-        if (!tile.tileMesh.gameObject.CompareTag("Grass")) return false;
-        if(!_isSafe) return false;
+        if (!tile.tileMesh.gameObject.CompareTag("Grass")) return;
 
-        _isSafe = false;
         var newTile= Instantiate(foods, transform);
         var position1 = tileMesh.transform.position;
         newTile.transform.position = new Vector3(position1.x, position1.y - 5, position1.z);
         var endY = new Vector3(position1.x, position1.y + 2, position1.z);
-        
-        transform.DOMove(endY, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
-        {
-            _isSafe = true;
-        });
+
+        transform.DOMove(endY, 0.5f).SetEase(Ease.OutBack);
         Debug.Log("instantiated: "+ newTile.transform.position);
 
-        return true;
     }
 }
