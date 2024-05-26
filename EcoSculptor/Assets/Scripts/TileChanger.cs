@@ -76,6 +76,8 @@ public class TileChanger : SelectionManager
         }).SetEase(Ease.OutBack).OnComplete(() => isSafeToClick = true);
         
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
+        
+        AnimalSpawner.Instance.SpawnAnimals();
     }
 
     

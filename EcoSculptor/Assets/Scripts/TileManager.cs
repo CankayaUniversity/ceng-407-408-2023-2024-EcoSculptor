@@ -9,12 +9,12 @@ using Random = UnityEngine.Random;
 public class TileManager : MonoBehaviour
 {
     [Header("Tiles")]
-    [SerializeField] private int _grassTile;
-    [SerializeField] private int _waterTile;
-    [SerializeField] private int _riverTile;
-    [SerializeField] private int _sandTile;
-    [SerializeField] private int _dirtTile;
-    [SerializeField] private int _stoneTile;
+    [SerializeField] private int grassTile;
+    [SerializeField] private int waterTile;
+    [SerializeField] private int riverTile;
+    [SerializeField] private int sandTile;
+    [SerializeField] private int dirtTile;
+    [SerializeField] private int stoneTile;
 
     [Header("Speed Seconds")] 
     [SerializeField] private float waitingSeconds;
@@ -24,7 +24,6 @@ public class TileManager : MonoBehaviour
 
     //private List<WinterHandler> _winterHandlers;
     
-    public static TileManager Instance;
 
     public Dictionary<Vector3, WinterHandler> WinterHandlersDict
     {
@@ -32,6 +31,14 @@ public class TileManager : MonoBehaviour
         set => _winterHandlersDict = value;
     }
 
+    public int GrassTile => grassTile;
+    public int WaterTile => waterTile;
+    public int RiverTile => riverTile;
+    public int SandTile => sandTile;
+    public int DirtTile => dirtTile;
+    public int StoneTile => stoneTile;
+
+    public static TileManager Instance;
     private void Awake()
     {
         if (Instance == null)
@@ -46,12 +53,12 @@ public class TileManager : MonoBehaviour
 
     private void Start()
     {
-        TileDataManager.Instance.UpdateCount("Grass", _grassTile);
-        TileDataManager.Instance.UpdateCount("Water", _waterTile);
-        TileDataManager.Instance.UpdateCount("River", _riverTile);
-        TileDataManager.Instance.UpdateCount("Sand", _sandTile);
-        TileDataManager.Instance.UpdateCount("Dirt", _dirtTile);
-        TileDataManager.Instance.UpdateCount("Stone", _stoneTile);
+        TileDataManager.Instance.UpdateCount("Grass", grassTile);
+        TileDataManager.Instance.UpdateCount("Water", waterTile);
+        TileDataManager.Instance.UpdateCount("River", riverTile);
+        TileDataManager.Instance.UpdateCount("Sand", sandTile);
+        TileDataManager.Instance.UpdateCount("Dirt", dirtTile);
+        TileDataManager.Instance.UpdateCount("Stone", stoneTile);
 
         _winterHandlersDict = new Dictionary<Vector3, WinterHandler>();
 
@@ -68,11 +75,11 @@ public class TileManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(temp(true));
+            StartCoroutine(HandleWinter(true));
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            StartCoroutine(temp(false));
+            StartCoroutine(HandleWinter(false));
         }
     }
 
@@ -80,24 +87,24 @@ public class TileManager : MonoBehaviour
     {
         var count = newTileTag switch
         {
-            "Grass" => ++_grassTile,
-            "Water" => ++_waterTile,
-            "River" => ++_riverTile,
-            "Sand" => ++_sandTile,
-            "Dirt" => ++_dirtTile,
-            "Stone" => ++_stoneTile,
+            "Grass" => ++grassTile,
+            "Water" => ++waterTile,
+            "River" => ++riverTile,
+            "Sand" => ++sandTile,
+            "Dirt" => ++dirtTile,
+            "Stone" => ++stoneTile,
             _ => -1
         };
         TileDataManager.Instance.UpdateCount(newTileTag, count);
 
         count = oldTileTag switch
         {
-            "Grass" => --_grassTile,
-            "Water" => --_waterTile,
-            "River" => --_riverTile,
-            "Sand" => --_sandTile,
-            "Dirt" => --_dirtTile,
-            "Stone" => --_stoneTile,
+            "Grass" => --grassTile,
+            "Water" => --waterTile,
+            "River" => --riverTile,
+            "Sand" => --sandTile,
+            "Dirt" => --dirtTile,
+            "Stone" => --stoneTile,
             _ => -1
         };
         TileDataManager.Instance.UpdateCount(oldTileTag, count);
@@ -111,27 +118,27 @@ public class TileManager : MonoBehaviour
         switch (tileTag)
         {
             case "Grass":
-                _grassTile++;
+                grassTile++;
                 break;
             case "Water":
-                _waterTile++;
+                waterTile++;
                 break;
             case "River":
-                _riverTile++;
+                riverTile++;
                 break;
             case "Sand":
-                _sandTile++;
+                sandTile++;
                 break;
             case "Dirt":
-                _dirtTile++;
+                dirtTile++;
                 break;
             case "Stone":
-                _stoneTile++;
+                stoneTile++;
                 break;
         }
     }
     
-    private IEnumerator temp(bool isWinter)
+    private IEnumerator HandleWinter(bool isWinter)
     {
         var winterHandlers = ShuffleArray(_winterHandlersDict.Values.ToArray());
 

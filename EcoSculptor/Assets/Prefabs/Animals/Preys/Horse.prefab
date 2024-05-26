@@ -190,15 +190,10 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  target: {fileID: 8660706982469189987, guid: e2902cc352967f14e84af70b4390dc86, type: 3}
-  foodCount: 3
-  food: {fileID: 8321196021424200665, guid: e2902cc352967f14e84af70b4390dc86, type: 3}
-  spawnedFoodList: []
   moveSpeed: 8
-  enviromentLocation: {fileID: 0}
-  timeForEpisode: 15
-  weakestHunterAnimal: {fileID: 0}
+  foodManager: {fileID: 0}
   strongestHunterAnimal: {fileID: 0}
+  weakestHunterAnimal: {fileID: 0}
 --- !u!114 &4952891902858988287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +390,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8e4676e3297cdf04b85a8550b4ab4b3e,
         type: 3}
       propertyPath: m_Name
-      value: at-animations
+      value: Horse
       objectReference: {fileID: 0}
     - target: {fileID: 1889315962337037899, guid: 8e4676e3297cdf04b85a8550b4ab4b3e,
         type: 3}

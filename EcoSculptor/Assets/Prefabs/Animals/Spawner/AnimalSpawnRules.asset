@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1628424f2d4b7a85ca8359e1a85a44, type: 3}
+  m_Name: AnimalSpawnRules
+  m_EditorClassIdentifier: 
+  riverTileCountForDeer: 2
+  dirtTileCountForHorse: 4
+  deerCountForWolf: 4
+  stoneHillTileCountForBear: 1
+  deerPrefab: {fileID: 6721530134298135210, guid: 77827c1a32a6377458af0fa28ac20ce7,
+    type: 3}
+  horsePrefab: {fileID: 6721530134298135210, guid: 5edc2ecd374b8e340a9d48f5fc70ab37,
+    type: 3}
+  wolfPrefab: {fileID: 8946642904570535460, guid: d460bc36fd0561b4792fd7325cba6f39,
+    type: 3}
+  tigerPrefab: {fileID: 5961884353508373188, guid: 99934b22b8fd11646a5c14db128555de,
+    type: 3}
+  bearPrefab: {fileID: 7304351751140140539, guid: e15c1898101396d4380835f0f4572edd,
+    type: 3}

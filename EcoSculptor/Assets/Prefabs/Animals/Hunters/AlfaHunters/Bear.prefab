@@ -975,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7744558930040922351
 Transform:
   m_ObjectHideFlags: 0
@@ -2095,7 +2095,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  animator: {fileID: 0}
+  animator: {fileID: 8833519348196424687}
   moveSpeed: 13
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
