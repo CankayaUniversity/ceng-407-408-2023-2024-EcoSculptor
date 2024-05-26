@@ -3205,7 +3205,7 @@ PrefabInstance:
     - target: {fileID: 8660706982066624688, guid: 9d681bccf6ebb964582b6c02098827c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d681bccf6ebb964582b6c02098827c2, type: 3}
@@ -9992,7 +9992,7 @@ PrefabInstance:
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
       propertyPath: controlZUp
-      value: 60
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
@@ -10008,6 +10008,21 @@ PrefabInstance:
         type: 3}
       propertyPath: sensitivity
       value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
+        type: 3}
+      propertyPath: controlXLeft
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
+        type: 3}
+      propertyPath: controlZDown
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
+        type: 3}
+      propertyPath: controlXRight
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8538bf8b8f6e8054197975f8e9d73717, type: 3}
