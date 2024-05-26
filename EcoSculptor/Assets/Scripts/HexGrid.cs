@@ -8,6 +8,20 @@ public class HexGrid : MonoBehaviour
     private Dictionary<Vector3Int, List<Vector3Int>> _hexTileNeighboursDict =
         new Dictionary<Vector3Int, List<Vector3Int>>();
     
+    public static HexGrid Instance;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    
     private void Start()
     {
         foreach (var hex in FindObjectsOfType<Hex>())

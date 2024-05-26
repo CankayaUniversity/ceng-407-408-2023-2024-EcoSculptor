@@ -3,7 +3,11 @@ guid: e8b500024ce4bf84a8815c7eb4c7579c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - outline: {instanceID: 0}
+  - tileMeshParent: {instanceID: 0}
+  - tileMesh: {instanceID: 0}
+  - foodTile: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

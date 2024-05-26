@@ -131,7 +131,7 @@ MonoBehaviour:
   outline: {fileID: 4622443159384345213}
   tileMeshParent: {fileID: 249563095965695311}
   tileMesh: {fileID: 7403021200838681765}
-  winterTileMesh: {fileID: 0}
+  foods: {fileID: 6800714773860756409, guid: 5981f4461a2123d448521427c0244c1b, type: 3}
 --- !u!114 &249563096266898190
 MonoBehaviour:
   m_ObjectHideFlags: 0
