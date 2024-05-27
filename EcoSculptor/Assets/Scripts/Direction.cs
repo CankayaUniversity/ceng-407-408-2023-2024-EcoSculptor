@@ -16,12 +16,12 @@ public static class Direction
 
     public static readonly List<Vector3Int> DirectionsOffsetEven = new List<Vector3Int>()
     {
-        new Vector3Int(0, 0, 1), //N1
-        new Vector3Int(1, 0, 1), //N2
-        new Vector3Int(1, 0, 0), //E
-        new Vector3Int(1, 0, -1), //S2
-        new Vector3Int(0, 0, -1), //S1
-        new Vector3Int(-1, 0, 0), //W
+        new Vector3Int(-1, 0, 2), //N1
+        new Vector3Int(-2, 0, 0), //N2
+        new Vector3Int(-1, 0, -2), //E
+        new Vector3Int(1, 0, -2), //S2
+        new Vector3Int(2, 0, 0), //S1
+        new Vector3Int(1, 0, 2), //W
     };
 
     public static List<Vector3Int> GetDirectionList(int z) 

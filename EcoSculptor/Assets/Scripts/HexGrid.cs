@@ -39,19 +39,27 @@ public class HexGrid : MonoBehaviour
 
     public List<Vector3Int> GetNeighboursFor(Vector3Int hexCoordinates)
     {
-        if (_hexTileDict.ContainsKey(hexCoordinates) == false) return new List<Vector3Int>();
-        if (_hexTileNeighboursDict.ContainsKey(hexCoordinates)) return _hexTileNeighboursDict[hexCoordinates];
-        
-        _hexTileNeighboursDict.Add(hexCoordinates, new List<Vector3Int>());
+        if (!_hexTileDict.ContainsKey(hexCoordinates)) 
+            return new List<Vector3Int>();
+
+        if (_hexTileNeighboursDict.ContainsKey(hexCoordinates)) 
+            return _hexTileNeighboursDict[hexCoordinates];
+
+        var neighbours = new List<Vector3Int>();
 
         foreach (var direction in Direction.GetDirectionList(hexCoordinates.z))
         {
-            if(_hexTileDict.ContainsKey(hexCoordinates + direction))
-                _hexTileNeighboursDict[hexCoordinates].Add(hexCoordinates + direction);
+            Vector3Int neighbourCoords = hexCoordinates + direction;
+            
+            Debug.Log("Dir: " + direction +" neigbourCoords" + neighbourCoords);
+            if (_hexTileDict.ContainsKey(neighbourCoords))
+            {
+                neighbours.Add(neighbourCoords);
+            }
         }
 
-        return _hexTileNeighboursDict[hexCoordinates];
+        _hexTileNeighboursDict[hexCoordinates] = neighbours;
+        Debug.Log(neighbours.Count);
+        return neighbours;
     }
 }
-
-

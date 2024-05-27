@@ -9947,7 +9947,7 @@ PrefabInstance:
     - target: {fileID: 8976415921440310698, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8976415921440310698, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
@@ -10002,7 +10002,7 @@ PrefabInstance:
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}
       propertyPath: scrollSpeed
-      value: 15000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8976415921440310700, guid: 8538bf8b8f6e8054197975f8e9d73717,
         type: 3}

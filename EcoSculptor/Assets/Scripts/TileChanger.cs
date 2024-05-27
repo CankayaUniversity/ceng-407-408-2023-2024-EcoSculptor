@@ -46,7 +46,7 @@ public class TileChanger : SelectionManager
 
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshParent);
         newTile.tag = _tilePrefab.tag;
-
+        _selectedHex.tag = newTile.tag;
 
         var winterHandler = newTile.GetComponentInChildren<WinterHandler>();
         var winterTilesDict = TileManager.Instance.WinterHandlersDict;
@@ -77,7 +77,9 @@ public class TileChanger : SelectionManager
         
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
         
-        AnimalSpawner.Instance.SpawnAnimals();
+        //AnimalSpawner.Instance.SpawnAnimals();
+        _selectedHex.ControlRiver();
+        
     }
 
     

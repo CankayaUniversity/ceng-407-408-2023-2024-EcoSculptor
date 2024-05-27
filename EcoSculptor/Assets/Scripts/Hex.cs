@@ -46,13 +46,6 @@ public class Hex : MonoBehaviour
     private void OnEnable()
     {
         TileManager.Instance.RegisterTile(tileMesh.gameObject.tag);
-        // if(!tileMesh.gameObject.CompareTag("River")) return;
-        // var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
-        // foreach (var neighborVector in neighborsList)
-        // {
-        //     CreateFoodTile(neighborVector);
-        // }
-        
     }
 
     private void CreateFoodTile(Vector3Int neighborVector)
@@ -60,13 +53,25 @@ public class Hex : MonoBehaviour
         var tile = HexGrid.Instance.GetTileAt(neighborVector);
         if (!tile.tileMesh.gameObject.CompareTag("Grass")) return;
 
-        var newTile= Instantiate(foods, transform);
-        var position1 = tileMesh.transform.position;
+        var newTile= Instantiate(foods, tile.transform);
+        var position1 = tile.tileMesh.transform.position;
         newTile.transform.position = new Vector3(position1.x, position1.y - 5, position1.z);
         var endY = new Vector3(position1.x, position1.y + 2, position1.z);
 
-        transform.DOMove(endY, 0.5f).SetEase(Ease.OutBack);
+        newTile.transform.DOMove(endY, 0.5f).SetEase(Ease.OutBack);
         Debug.Log("instantiated: "+ newTile.transform.position);
 
+    }
+
+    public void ControlRiver()
+    {
+        if(!tileMesh.gameObject.CompareTag("River")) return;
+        var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
+        Debug.Log(neighborsList.Count);
+        foreach (var neighborVector in neighborsList)
+        {
+            
+            CreateFoodTile(neighborVector);
+        }
     }
 }
