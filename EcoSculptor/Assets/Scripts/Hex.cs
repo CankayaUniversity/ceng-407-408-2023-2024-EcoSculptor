@@ -89,7 +89,6 @@ public class Hex : MonoBehaviour
     {
         if(!tileMesh.gameObject.CompareTag("River")) return;
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
-        Debug.Log(neighborsList.Count);
         foreach (var neighborVector in neighborsList)
             CreateFoodTile(neighborVector);
     }

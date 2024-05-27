@@ -132,8 +132,8 @@ public class CameraMovement : MonoBehaviour
 
     private void CameraZoomInOut()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0.0f && transform.position.y <= 5.0f ||
-            Input.GetAxis("Mouse ScrollWheel") < 0.0f && transform.position.y >= 35.0f || 
+        if (Input.GetAxis("Mouse ScrollWheel") > 0.0f && transform.position.y <= 1.0f ||
+            Input.GetAxis("Mouse ScrollWheel") < 0.0f && transform.position.y >= 21.0f || 
             Input.GetAxis("Mouse ScrollWheel") == 0.0f) return;
 
 
@@ -145,14 +145,14 @@ public class CameraMovement : MonoBehaviour
         forward.y = 0f;
         
         var py = position.y - Input.GetAxis("Mouse ScrollWheel") * cameraScrollSpeed;
-        var positionY = Mathf.Clamp(py, 5.0f, 35.0f);
+        var positionY = Mathf.Clamp(py, 1.0f, 21.0f);
         
         var newPos = position + forward * (Input.GetAxis("Mouse ScrollWheel") * cameraScrollSpeed);
         newPos.y = positionY;
         newPos.x = Mathf.Clamp(newPos.x, controlXLeft, controlXRight);
         newPos.z = Mathf.Clamp(newPos.z, controlZDown, controlZUp);
 
-        var rX = eulerAngles.x - Input.GetAxis("Mouse ScrollWheel") * cameraScrollSpeed;
+        var rX = eulerAngles.x - Input.GetAxis("Mouse ScrollWheel") * 150f;
         var rotateX = Mathf.Clamp(rX, 20.0f, 50.0f);
         
         var xRotationChange = new Vector3(rotateX, eulerAngles.y, eulerAngles.z);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [ExecuteAlways]
 public class LightingManager : MonoBehaviour
@@ -9,14 +10,25 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light DirectionalLight;
     //[SerializeField] private LightingPreset Preset;      Mevsimler için kullanılabilir
 
-    [Header("Variables")] 
-    [SerializeField, Range(0, 300f)] private float TimeOfDay = 100;
-
     [Header("Textures")] 
     [SerializeField] private Texture2D skyboxDay;
     [SerializeField] private Texture2D skyboxSunset;
     [SerializeField] private Texture2D skyboxNight;
     [SerializeField] private Texture2D skyboxSunrise;
+
+    public static LightingManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -27,27 +39,8 @@ public class LightingManager : MonoBehaviour
         //Debug.Log("skyboxNight: "+ skyboxNight.name + " skyboxSunrise: "+ skyboxSunrise.name + 
                  // " skyboxDay: "+ skyboxDay.name + " skyboxSunset: "+ skyboxSunset.name);
     }
-
-    private void Update()
-    {
-        // if(!Preset)
-        //     return;
-        if (Application.isPlaying)
-        {
-            TimeOfDay += Time.deltaTime;
-            TimeOfDay %= 300f;
-            UpdateLighting(TimeOfDay / 300f);
-            ChangeSkybox();
-        }
-        else
-        {
-            UpdateLighting(TimeOfDay / 300f);
-        }
-
-    }
-
-
-    private void UpdateLighting(float timePercent)
+    
+    public void UpdateLighting(float timePercent)
     {
         //RenderSettings.ambientLight = Preset.ambientColor.Evaluate(timePercent);
         //RenderSettings.fogColor = Preset.fogColor.Evaluate(timePercent);
@@ -60,23 +53,23 @@ public class LightingManager : MonoBehaviour
         }
     }
 
-    private void ChangeSkybox()
+    public void ChangeSkybox()
     {
-        if(TimeOfDay is >= 100.0f and < 105.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxDay.name)
+        if(TimeManager.Instance.CurrentTimeOfDay is >= 100.0f and < 105.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxDay.name)
         {
             StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 20f));
         }
-        else if (TimeOfDay is >= 225.0f  and < 230.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxSunset.name)
+        else if (TimeManager.Instance.CurrentTimeOfDay is >= 225.0f  and < 230.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxSunset.name)
         {
             StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
 
         }
-        else if(TimeOfDay is >= 250.0f and < 255.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxNight.name)
+        else if(TimeManager.Instance.CurrentTimeOfDay is >= 250.0f and < 255.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxNight.name)
         {
             StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 20f));
 
         }
-        else if(TimeOfDay is >= 75.0f and < 80.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxSunrise.name)
+        else if(TimeManager.Instance.CurrentTimeOfDay is >= 75.0f and < 80.0f && RenderSettings.skybox.GetTexture("_Texture1").name != skyboxSunrise.name)
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
         }
