@@ -51,7 +51,6 @@ public class HexGrid : MonoBehaviour
         {
             Vector3Int neighbourCoords = hexCoordinates + direction;
             
-            Debug.Log("Dir: " + direction +" neigbourCoords" + neighbourCoords);
             if (_hexTileDict.ContainsKey(neighbourCoords))
             {
                 neighbours.Add(neighbourCoords);
@@ -59,7 +58,6 @@ public class HexGrid : MonoBehaviour
         }
 
         _hexTileNeighboursDict[hexCoordinates] = neighbours;
-        Debug.Log(neighbours.Count);
         return neighbours;
     }
 }

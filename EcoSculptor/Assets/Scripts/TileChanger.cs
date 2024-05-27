@@ -47,6 +47,11 @@ public class TileChanger : SelectionManager
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshParent);
         newTile.tag = _tilePrefab.tag;
         _selectedHex.tag = newTile.tag;
+        if (_selectedHex.FoodFlag)
+        {
+            Destroy(_selectedHex.Food);
+            _selectedHex.FoodFlag = false;
+        }
 
         var winterHandler = newTile.GetComponentInChildren<WinterHandler>();
         var winterTilesDict = TileManager.Instance.WinterHandlersDict;

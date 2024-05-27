@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
@@ -12,8 +13,8 @@ public class Hex : MonoBehaviour
     [SerializeField] private GameObject tileMesh;
     [SerializeField] private GameObject foods;
 
-    private bool _flag;
-
+    private bool _foodFlag;      // Whether the tile has food or not
+    private GameObject _food;
     private HexCoordinates _hexCoordinates;
     
     public Vector3Int HexCoords => _hexCoordinates.GetHexCoords();
@@ -37,6 +38,18 @@ public class Hex : MonoBehaviour
         set => tileMesh = value;
     }
 
+    public bool FoodFlag
+    {
+        get => _foodFlag;
+        set => _foodFlag = value;
+    }
+
+    public GameObject Food
+    {
+        get => _food;
+        set => _food = value;
+    }
+
 
     private void Awake()
     {
@@ -50,17 +63,26 @@ public class Hex : MonoBehaviour
 
     private void CreateFoodTile(Vector3Int neighborVector)
     {
-        var tile = HexGrid.Instance.GetTileAt(neighborVector);
-        if (!tile.tileMesh.gameObject.CompareTag("Grass")) return;
+        var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
+        if (!neighborTile.tileMesh.gameObject.CompareTag("Grass") || neighborTile.FoodFlag) return;
+        var position1 = neighborTile.transform.position;
 
-        var newTile= Instantiate(foods, tile.transform);
-        var position1 = tile.tileMesh.transform.position;
-        newTile.transform.position = new Vector3(position1.x, position1.y - 5, position1.z);
-        var endY = new Vector3(position1.x, position1.y + 2, position1.z);
+        neighborTile.Food = Instantiate(foods, neighborTile.transform);
+        neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 5, position1.z);
+        neighborTile.FoodFlag = true;
+        var endPosition = new Vector3(position1.x, position1.y + 1, position1.z);
 
-        newTile.transform.DOMove(endY, 0.5f).SetEase(Ease.OutBack);
-        Debug.Log("instantiated: "+ newTile.transform.position);
+        StartCoroutine(WaitForSeconds(10f, () =>
+        {
+            neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+        }));
+        
+    }
 
+    private IEnumerator WaitForSeconds(float sec, Action onWaitEnd)
+    {
+        yield return new WaitForSeconds(sec);
+        onWaitEnd?.Invoke();
     }
 
     public void ControlRiver()
@@ -69,9 +91,6 @@ public class Hex : MonoBehaviour
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
         Debug.Log(neighborsList.Count);
         foreach (var neighborVector in neighborsList)
-        {
-            
             CreateFoodTile(neighborVector);
-        }
     }
 }
