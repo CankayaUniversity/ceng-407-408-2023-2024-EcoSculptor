@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float cameraRotateSpeed = 80f;
     [SerializeField] private float rightClickSensitivity = 800f;      //For right click rotation
     [SerializeField] private float cameraScrollSpeed = 100f;
+    [SerializeField] private float cameraScrollRotateSpeed = 150f;
     
     [SerializeField] private float controlZUp = 45f;
     [SerializeField] private float controlZDown = -65f;
@@ -152,7 +153,7 @@ public class CameraMovement : MonoBehaviour
         newPos.x = Mathf.Clamp(newPos.x, controlXLeft, controlXRight);
         newPos.z = Mathf.Clamp(newPos.z, controlZDown, controlZUp);
 
-        var rX = eulerAngles.x - Input.GetAxis("Mouse ScrollWheel") * 150f;
+        var rX = eulerAngles.x - Input.GetAxis("Mouse ScrollWheel") * cameraScrollRotateSpeed;
         var rotateX = Mathf.Clamp(rX, 20.0f, 50.0f);
         
         var xRotationChange = new Vector3(rotateX, eulerAngles.y, eulerAngles.z);
