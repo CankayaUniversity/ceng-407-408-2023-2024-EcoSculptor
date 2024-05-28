@@ -21,10 +21,7 @@ public class TileManager : MonoBehaviour
     
 
     private Dictionary<Vector3, WinterHandler> _winterHandlersDict;
-
-    //private List<WinterHandler> _winterHandlers;
     
-
     public Dictionary<Vector3, WinterHandler> WinterHandlersDict
     {
         get => _winterHandlersDict;
@@ -136,7 +133,7 @@ public class TileManager : MonoBehaviour
         }
     }
     
-    private IEnumerator HandleWinter(bool isWinter)
+    public IEnumerator HandleWinter(bool isWinter)
     {
         var winterHandlers = ShuffleArray(_winterHandlersDict.Values.ToArray());
 
