@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TimeManager : MonoBehaviour
 {
     [SerializeField, Range(0, 300f)] private float currentTimeOfDay = 100;
     [SerializeField, Range(0, 1000f)] private float seasonTime = 900f;
     
-    private float _totalTimeInGame;
+    public float totalTimeInGame;
+    public int seasonCount;
     private bool _isWinter;
-    private int _seasonCount = 0;
+    
     public static TimeManager Instance;
 
     public float CurrentTimeOfDay
@@ -37,11 +40,13 @@ public class TimeManager : MonoBehaviour
         if (Application.isPlaying)
         {
             CurrentTimeOfDay += Time.deltaTime;
-            _totalTimeInGame = CurrentTimeOfDay;
+            totalTimeInGame += Time.deltaTime;
             
             CurrentTimeOfDay %= 300f;
             LightingManager.Instance.UpdateLighting(CurrentTimeOfDay / 300f);
             LightingManager.Instance.ChangeSkybox();
+
+            ControlChangeSeason();
         }
         else
         {
@@ -52,9 +57,22 @@ public class TimeManager : MonoBehaviour
 
     private void ControlChangeSeason()
     {
-        if (seasonTime - _totalTimeInGame % seasonTime <= 0.01f && seasonTime - _totalTimeInGame % seasonTime >= 0)
+        if (seasonTime - totalTimeInGame % seasonTime > 0.01f) return;
+        
+        seasonCount++;
+        totalTimeInGame = seasonCount * seasonTime;
+        if(seasonCount % 2 == 1)
         {
-            
+            StartCoroutine(TileManager.Instance.HandleWinter(true));
+            _isWinter = true;
         }
+        else
+        {
+            StartCoroutine(TileManager.Instance.HandleWinter(false));
+            _isWinter = false;
+        }
+        
+        Debug.Log("controlChangeSeason, season count = " + seasonCount + " totaltime = " + totalTimeInGame + " iswinter = " + _isWinter);
+        
     }
 }
