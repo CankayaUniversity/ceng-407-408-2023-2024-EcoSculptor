@@ -8,6 +8,19 @@ public class InputManager : MonoBehaviour
     // Reference to the settings GameObject
     public GameObject settingsMenu;
     private bool isActive;
+    public static InputManager Instance;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     
     void Update()
     {
@@ -29,6 +42,7 @@ public class InputManager : MonoBehaviour
     public void  ResumeGame()
     {
         Time.timeScale = 1;
+        if (!settingsMenu) return;
         settingsMenu.SetActive(false);
     }
     
@@ -36,6 +50,7 @@ public class InputManager : MonoBehaviour
     public void StopGame()
     {
         Time.timeScale = 0;
+        if (!settingsMenu) return;
         settingsMenu.SetActive(true);
     }
 }
