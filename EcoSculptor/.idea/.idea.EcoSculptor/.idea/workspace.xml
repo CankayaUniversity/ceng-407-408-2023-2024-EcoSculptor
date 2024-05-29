@@ -6,13 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="5daeccb9-ccec-4022-a150-f6b618503cc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EcoSculptor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/Deer CTRL.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/Deer CTRL.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/deer_deer_death.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/deer_deer_death.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/deer_deer_eat.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Deer/deer_deer_eat.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/Wolf CTRL.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/Wolf CTRL.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-attack.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-death.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-death.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-eat.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/kurt/kurt2-animasyonlar/dog_test_wolf-eat.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/Bear/Bear_Prefabs/BearAnimator.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/Bear/Bear_Prefabs/BearAnimator.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Ege 2_timers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Main Scene_timers.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ML-Agents/Timers/Main Scene_timers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/AlfaHunters/Bear.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/AlfaHunters/Bear.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/WeakestHunter/Wolf.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Animals/Hunters/WeakestHunter/Wolf.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Animals/Preys/Deer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Animals/Preys/Deer.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Animals/TrainingMap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Animals/TrainingMap.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiles/grasses.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiles/grasses.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Ege 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Ege 2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animals/AlphaHunterAnimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animals/AlphaHunterAnimal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animals/FoodManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animals/FoodManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animals/HunterAnimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animals/HunterAnimal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animals/PreyAnimal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animals/PreyAnimal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +39,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animals/AlphaHunterAnimal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animals/DeerAreaCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animals/FoodManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HexGrid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ml-agents@2.0.1/Runtime/Actuators/ActionSegment.cs" root0="SKIP_HIGHLIGHTING" />
@@ -52,9 +68,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\PC\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\egeoz\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\egeoz\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\egeoz\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -135,6 +151,10 @@
       <workItem from="1715941405673" duration="116000" />
       <workItem from="1715941571046" duration="3094000" />
       <workItem from="1716403031290" duration="322000" />
+      <workItem from="1716832121503" duration="1879000" />
+      <workItem from="1716900002467" duration="24905000" />
+      <workItem from="1716984192185" duration="3994000" />
+      <workItem from="1716988295076" duration="5763000" />
     </task>
     <servers />
   </component>

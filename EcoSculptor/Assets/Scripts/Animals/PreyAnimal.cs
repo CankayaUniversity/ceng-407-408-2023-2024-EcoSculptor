@@ -10,22 +10,36 @@ using Random = UnityEngine.Random;
 
 public class PreyAnimal : Agent
 {
+    [Header("Animations")]
+    [SerializeField] private Animator animator;
+    
+    [Header("Speeds")]
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float rotateSpeed = 6f;
+    
+    [SerializeField] private Collider deerArea;
     private Rigidbody rb;
+
+    private Collider colliderWith;
     
     private int foodEaten = 0;
     [SerializeField] private FoodManager foodManager;
     public AlphaHunterAnimal strongestHunterAnimal;
     public HunterAnimal weakestHunterAnimal;
-
+    
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        Debug.Log(rb);
+        PlayAnimation("Movement");
     }
 
     public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.26f, Random.Range(-20f, 20f));
+        rb.isKinematic = false;
+        rotateSpeed = 6f;
+        PlayAnimation("Movement");
         foodManager.CreateFood();
         foodEaten = 0; // Yenilen yemek sayısını sıfırla
         foodManager.EpisodeTimerNew();
@@ -36,17 +50,23 @@ public class PreyAnimal : Agent
         sensor.AddObservation(transform.localPosition);
     }
 
+    public void PlayAnimation(string stateName)
+    {
+        animator.CrossFadeInFixedTime(stateName, 0f, 0, 0f);
+    }
+    
     public override void OnActionReceived(ActionBuffers actions)
     {
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 100;
+            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
+            animator.SetFloat("Movement", velocity.magnitude);
         } else {
-            rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
+            rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
         }
-        transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
+        transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -60,18 +80,10 @@ public class PreyAnimal : Agent
     {
         if (other.gameObject.CompareTag("nectar"))
         {
-            Destroy(other.gameObject);
-            AddReward(10f);
-            foodEaten++;
-            if (foodEaten == foodManager.foodCount)
-            {
-                AddReward(5f); // Ekstra ödül ver
-                weakestHunterAnimal.AddReward(-5f);
-                weakestHunterAnimal.EndEpisode();
-                strongestHunterAnimal.AddReward(-5f);
-                strongestHunterAnimal.EndEpisode();
-                EndEpisode();
-            }
+            rb.isKinematic = true;
+            rotateSpeed = 0;
+            colliderWith = other;
+            animator.Play("deer_deer_eat");
         }
         if (other.gameObject.CompareTag("boundary"))
         {
@@ -80,5 +92,40 @@ public class PreyAnimal : Agent
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
+    }
+    
+    public void RewardFood()
+    {
+        Destroy(colliderWith.gameObject);
+        AddReward(10f);
+        foodEaten++;
+        if (foodEaten == foodManager.foodCount)
+        {
+            AddReward(5f); // Ekstra ödül ver
+            weakestHunterAnimal.AddReward(-5f);
+            weakestHunterAnimal.EndEpisode();
+            strongestHunterAnimal.AddReward(-5f);
+            strongestHunterAnimal.EndEpisode();
+            EndEpisode();
+        }
+        rb.isKinematic = false;
+        rotateSpeed = 6f;
+    }
+    public void OnHunterEnter()
+    {
+        animator.Play("Movement");
+    }
+
+    public void OnHunterStay()
+    {
+        rb.isKinematic = false;
+        rotateSpeed = 6f;
+    }
+
+    public void PreyDeath()
+    {
+        rb.isKinematic = true;
+        rotateSpeed = 0;
+        animator.Play("deer_deer_death");
     }
 }
