@@ -22,15 +22,6 @@ public class TileManager : MonoBehaviour
 
     private Dictionary<Vector3, Hex> _winterHandlersDict;
 
-    //private List<WinterHandler> _winterHandlers;
-    
-
-    public Dictionary<Vector3, Hex> WinterHandlersDict
-    private Dictionary<Vector3, WinterHandler> _winterHandlersDict;
-    
-    public Dictionary<Vector3, WinterHandler> WinterHandlersDict
-   
-
     public int GrassTile => grassTile;
     public int WaterTile => waterTile;
     public int RiverTile => riverTile;
