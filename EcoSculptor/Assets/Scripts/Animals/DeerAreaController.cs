@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 
 public class DeerAreaController : MonoBehaviour
 {
     [SerializeField] private PreyAnimal parent;
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hunter")||other.CompareTag("AlphaHunter"))
+        if (other.CompareTag("Hunter") || other.CompareTag("BearArea"))
         {
             if (parent != null)
             {
@@ -14,14 +15,6 @@ public class DeerAreaController : MonoBehaviour
             }
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Hunter")||other.CompareTag("AlphaHunter"))
-        {
-            if (parent != null)
-            {
-                parent.OnHunterStay();
-            }
-        }
-    }
+    
+    
 }

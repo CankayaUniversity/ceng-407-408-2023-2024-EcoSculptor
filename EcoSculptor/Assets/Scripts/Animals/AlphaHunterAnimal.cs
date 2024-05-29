@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,9 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
+[SelectionBase]
 public class AlphaHunterAnimal : Agent
 {
     [Header("Animations")]
@@ -23,12 +26,27 @@ public class AlphaHunterAnimal : Agent
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
     public HunterAnimal weakestHunterAnimal;
-    
+
+    private bool isAttacking;
+    private Coroutine _coroutine;
+
+    public Rigidbody Rb
+    {
+        get => rb;
+        set => rb = value;
+    }
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         alphaAnim = GetComponentInChildren<HandleEatingAnim>();
         PlayAnimation("Movement");
+    }
+
+    private void OnDestroy()
+    {
+        if(_coroutine != null)
+            StopCoroutine(_coroutine);
     }
 
     public override void OnEpisodeBegin()
@@ -72,6 +90,9 @@ public class AlphaHunterAnimal : Agent
     {
         if (other.gameObject.CompareTag("Agent"))
         {
+            if(isAttacking) return;
+            
+            
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             
             alphaAnim.preyParentAnimal = pa;
@@ -80,6 +101,8 @@ public class AlphaHunterAnimal : Agent
             rotateSpeed = 0;
             isAgent = true;
             animator.Play("Bear_Attack1");
+            _coroutine = StartCoroutine(AttackCoolDown());
+            pa.PreyDeath();
         }
         if (other.gameObject.CompareTag("boundary"))
         {
@@ -97,7 +120,15 @@ public class AlphaHunterAnimal : Agent
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("Bear_Attack1");
+            
         }
+    }
+
+    IEnumerator AttackCoolDown()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
     }
 
     public void EatHunter()

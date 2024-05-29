@@ -80,13 +80,20 @@ public class Hex : MonoBehaviour
         var position1 = neighborTile.transform.position;
 
         neighborTile.Food = Instantiate(foods, neighborTile.transform);
-        neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 5, position1.z);
+        neighborTile.Food.SetActive(false);
+        
+        neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 10, position1.z);
         neighborTile.FoodFlag = true;
+        
         var endPosition = new Vector3(position1.x, position1.y + 1, position1.z);
 
         newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
-            neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+            if(neighborTile.FoodFlag)
+            {
+                neighborTile.Food.SetActive(true);
+                neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+            }
         }));
         
     }

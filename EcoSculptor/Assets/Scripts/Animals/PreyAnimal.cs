@@ -8,29 +8,30 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+[SelectionBase]
 public class PreyAnimal : Agent
 {
-    [Header("Animations")]
-    [SerializeField] private Animator animator;
-    
-    [Header("Speeds")]
-    [SerializeField] private float moveSpeed = 4f;
+    [Header("Animations")] [SerializeField]
+    private Animator animator;
+
+    [Header("Speeds")] [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotateSpeed = 6f;
-    
+
     [SerializeField] private Collider deerArea;
     private Rigidbody rb;
 
     private Collider colliderWith;
-    
+
     private int foodEaten = 0;
     [SerializeField] private FoodManager foodManager;
     public AlphaHunterAnimal strongestHunterAnimal;
     public HunterAnimal weakestHunterAnimal;
-    
+
+    private bool isDead;
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(rb);
         PlayAnimation("Movement");
     }
 
@@ -43,6 +44,7 @@ public class PreyAnimal : Agent
         foodManager.CreateFood();
         foodEaten = 0; // Yenilen yemek sayısını sıfırla
         foodManager.EpisodeTimerNew();
+        isDead = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -54,18 +56,23 @@ public class PreyAnimal : Agent
     {
         animator.CrossFadeInFixedTime(stateName, 0f, 0, 0f);
     }
-    
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
-        
-        if (moveForward >= 0) {
+
+        if (moveForward >= 0)
+        {
             var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
-            animator.SetFloat("Movement", velocity.magnitude);
-        } else {
+            if(!isDead)
+                animator.SetFloat("Movement", velocity.magnitude);
+        }
+        else
+        {
             rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
         }
+
         transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
     }
 
@@ -85,6 +92,7 @@ public class PreyAnimal : Agent
             colliderWith = other;
             animator.Play("deer_deer_eat");
         }
+
         if (other.gameObject.CompareTag("boundary"))
         {
             AddReward(-15f);
@@ -93,7 +101,7 @@ public class PreyAnimal : Agent
             EndEpisode();
         }
     }
-    
+
     public void RewardFood()
     {
         Destroy(colliderWith.gameObject);
@@ -108,24 +116,25 @@ public class PreyAnimal : Agent
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
+
         rb.isKinematic = false;
         rotateSpeed = 6f;
-    }
-    public void OnHunterEnter()
-    {
-        animator.Play("Movement");
     }
 
-    public void OnHunterStay()
+    public void OnHunterEnter()
     {
+
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        Debug.Log("Enter");
     }
 
     public void PreyDeath()
     {
+        Debug.Log("Prey Death");
+        isDead = true;
         rb.isKinematic = true;
         rotateSpeed = 0;
-        animator.Play("deer_deer_death");
+        animator.SetTrigger("Death");
     }
 }

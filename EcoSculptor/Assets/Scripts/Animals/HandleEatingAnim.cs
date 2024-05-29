@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HandleEatingAnim : MonoBehaviour
 {
+    [SerializeField] private Transform colliderTransform;
+    
     public PreyAnimal preyParentAnimal;
     public AlphaHunterAnimal alphaParentAnimal;
     public HunterAnimal hunterParentAnimal;
@@ -34,7 +36,7 @@ public class HandleEatingAnim : MonoBehaviour
     {
         if (alphaParentAnimal.isAgent)
         {
-            preyParentAnimal.PreyDeath();
+            //preyParentAnimal.PreyDeath();
         }
         else
         {
@@ -49,6 +51,16 @@ public class HandleEatingAnim : MonoBehaviour
 
     public void HunterAttacked()
     {
-        preyParentAnimal.PreyDeath();
+        //preyParentAnimal.PreyDeath();
+    }
+
+    public void OnAnimPlay()
+    {
+        colliderTransform.gameObject.SetActive(false);
+    }
+
+    public void OnAnimEnd()
+    {
+        colliderTransform.gameObject.SetActive(true);
     }
 }

@@ -16,6 +16,7 @@ TagManager:
   - Agent
   - AlphaHunter
   - RunArea
+  - BearArea
   layers:
   - Default
   - TransparentFX
@@ -31,10 +32,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - PreyArea
-  - HunterArea
+  - CatchArea
+  - CaughtArea
+  - EatingCollision
+  - EatenCollision
   - 
   - 
   - 

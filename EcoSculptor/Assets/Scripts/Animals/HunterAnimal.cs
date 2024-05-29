@@ -8,6 +8,7 @@ using Unity.MLAgents.Sensors;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+[SelectionBase]
 public class HunterAnimal : Agent
 {
     [Header("Animations")]
@@ -39,6 +40,8 @@ public class HunterAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         PlayAnimation("Movement");
+        
+        
     }
     
     public override void CollectObservations(VectorSensor sensor)
@@ -78,6 +81,7 @@ public class HunterAnimal : Agent
         if (other.gameObject.CompareTag("Agent"))
         {
             var pah = other.gameObject.GetComponentInParent<PreyAnimal>();
+            
             
             hunterAnim.preyParentAnimal = pah;
             rb.isKinematic = true;
