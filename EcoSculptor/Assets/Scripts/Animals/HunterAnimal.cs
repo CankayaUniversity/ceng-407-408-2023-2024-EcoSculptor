@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,19 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class HunterAnimal : Agent
 {
     [Header("Animations")]
     [SerializeField] private Animator animator;
     
-    [Header("Move Speed")]
+    [Header("Move Speeds")]
     [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float rotateSpeed = 6f;
+    
     private Rigidbody rb;
+    private HandleEatingAnim hunterAnim;
 
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
@@ -22,13 +27,17 @@ public class HunterAnimal : Agent
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
+        hunterAnim = GetComponentInChildren<HandleEatingAnim>();
+        PlayAnimation("Movement");
     }
 
     public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-4f, 4f), 0.15f, Random.Range(-4f, 4f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0.15f, Random.Range(-20f, 20f));
         transform.localPosition = spawnLocation;
+        rb.isKinematic = false;
+        rotateSpeed = 6f;
         PlayAnimation("Movement");
     }
     
@@ -49,12 +58,12 @@ public class HunterAnimal : Agent
         float moveForward = actions.ContinuousActions[1];
         
         if (moveForward >= 0) {
-            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 10;
+            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
             animator.SetFloat("Movement", velocity.magnitude);
         } else {
-            rb.MovePosition(transform.position - transform.forward * Mathf.Abs(moveForward) * moveSpeed * 0.2f * Time.deltaTime);
+            rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
         }
-        transform.Rotate(0f,moveRotate*moveSpeed,0f,Space.Self);
+        transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -68,11 +77,12 @@ public class HunterAnimal : Agent
     {
         if (other.gameObject.CompareTag("Agent"))
         {
-            AddReward(10f);
-            weakestPreyAnimal.AddReward(-13f);
-            weakestPreyAnimal.EndEpisode();
-            strongestHunterAnimal.EndEpisode();
-            EndEpisode();
+            var pah = other.gameObject.GetComponentInParent<PreyAnimal>();
+            
+            hunterAnim.preyParentAnimal = pah;
+            rb.isKinematic = true;
+            rotateSpeed = 0;
+            animator.Play("dog_test_wolf-attack");
         }
         if (other.gameObject.CompareTag("boundary"))
         {
@@ -81,5 +91,23 @@ public class HunterAnimal : Agent
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
+    }
+
+    public void EatAgent()
+    {
+        AddReward(10f);
+        weakestPreyAnimal.AddReward(-13f);
+        rb.isKinematic = false;
+        rotateSpeed = 6f;
+        weakestPreyAnimal.EndEpisode();
+        strongestHunterAnimal.EndEpisode();
+        EndEpisode();
+    }
+
+    public void HunterDeath()
+    {
+        rb.isKinematic = true;
+        rotateSpeed = 0;
+        animator.Play("dog_test_wolf-death");
     }
 }

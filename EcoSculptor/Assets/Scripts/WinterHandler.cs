@@ -11,18 +11,6 @@ public class WinterHandler : MonoBehaviour
 
     private Tween newTween;
 
-    private void WinterMode()
-    {
-        winterTile.SetActive(true);
-        tile.SetActive(false);
-    }
-
-    private void NormalMode()
-    {
-        winterTile.SetActive(false);
-        tile.SetActive(true);
-    }
-
     public void ChangeTileToWinter()
     {
         winterTile.SetActive(true);
@@ -43,6 +31,7 @@ public class WinterHandler : MonoBehaviour
     
     public void ChangeTileToNormal()
     {
+        
         winterTile.SetActive(false);
         tile.SetActive(true);
 

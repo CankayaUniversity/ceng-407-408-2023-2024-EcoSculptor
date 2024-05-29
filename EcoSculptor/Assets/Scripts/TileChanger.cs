@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class TileChanger : SelectionManager
 {
+    
     private GameObject _tilePrefab;
     private GameObject _tileWinterPrefab;
     private TileClassifier _tileClassifier;
@@ -47,27 +48,27 @@ public class TileChanger : SelectionManager
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshParent);
         newTile.tag = _tilePrefab.tag;
         _selectedHex.tag = newTile.tag;
+        
         if (_selectedHex.FoodFlag)
         {
             Destroy(_selectedHex.Food);
             _selectedHex.FoodFlag = false;
         }
 
-        var winterHandler = newTile.GetComponentInChildren<WinterHandler>();
-        var winterTilesDict = TileManager.Instance.WinterHandlersDict;
-
-        if (winterHandler)
-        {
-            if (!winterTilesDict.TryAdd(oldTile.transform.position, winterHandler))
-                winterTilesDict[oldTile.transform.position] = newTile.GetComponentInChildren<WinterHandler>();
-        }
-        else
-        {
-            if (winterTilesDict.ContainsKey(oldTile.transform.position))
-                winterTilesDict.Remove(oldTile.transform.position);
-        }
-
+        SelectedHex.winterHandler = newTile.GetComponent<WinterHandler>();
         
+        
+        PutTile(newTile);
+
+        TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
+        
+        //AnimalSpawner.Instance.SpawnAnimals();
+        _selectedHex.ControlRiver();
+        
+    }
+
+    private void PutTile(GameObject newTile)
+    {
         var beginY = newTile.transform.position.y + 5;
         var endY = newTile.transform.position.y;
 
@@ -79,14 +80,5 @@ public class TileChanger : SelectionManager
             position.y = v;
             newTile.transform.position = position;
         }).SetEase(Ease.OutBack).OnComplete(() => isSafeToClick = true);
-        
-        TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
-        
-        //AnimalSpawner.Instance.SpawnAnimals();
-        _selectedHex.ControlRiver();
-        
     }
-
-    
-    
 }

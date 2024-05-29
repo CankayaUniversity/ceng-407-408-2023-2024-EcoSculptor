@@ -42,7 +42,7 @@ public class FoodManager : MonoBehaviour
 
             GameObject newFood = Instantiate(foodPrefab, environmentTransform, true);
 
-            Vector3 foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
+            Vector3 foodLocation = new Vector3(Random.Range(-20f, 20f), 0.04f, Random.Range(-20f, 20f));
 
             if (_spawnedFoodList.Count != 0)
             {
@@ -53,7 +53,7 @@ public class FoodManager : MonoBehaviour
                         distanceGood = CheckOverLap(foodLocation, _spawnedFoodList[k].transform.localPosition, 5f);
                         if (!distanceGood)
                         {
-                            foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
+                            foodLocation = new Vector3(Random.Range(-20f, 20f), 0.04f, Random.Range(-20f, 20f));
                             k--;
                             alreadyDecr = true;
                         }
@@ -61,7 +61,7 @@ public class FoodManager : MonoBehaviour
                         distanceGood = CheckOverLap(foodLocation, transform.localPosition, 5f);
                         if (!distanceGood)
                         {
-                            foodLocation = new Vector3(Random.Range(-20f, 20f), -0.4f, Random.Range(-20f, 20f));
+                            foodLocation = new Vector3(Random.Range(-20f, 20f), 0.04f, Random.Range(-20f, 20f));
                             if (!alreadyDecr)
                             {
                                 k--;

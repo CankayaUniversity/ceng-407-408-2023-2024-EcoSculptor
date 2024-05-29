@@ -20,13 +20,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float waitingSeconds;
     
 
-    private Dictionary<Vector3, WinterHandler> _winterHandlersDict;
-    
-    public Dictionary<Vector3, WinterHandler> WinterHandlersDict
-    {
-        get => _winterHandlersDict;
-        set => _winterHandlersDict = value;
-    }
+    private Dictionary<Vector3, Hex> _winterHandlersDict;
 
     public int GrassTile => grassTile;
     public int WaterTile => waterTile;
@@ -57,12 +51,14 @@ public class TileManager : MonoBehaviour
         TileDataManager.Instance.UpdateCount("Dirt", dirtTile);
         TileDataManager.Instance.UpdateCount("Stone", stoneTile);
 
-        _winterHandlersDict = new Dictionary<Vector3, WinterHandler>();
+        _winterHandlersDict = new Dictionary<Vector3, Hex>();
 
-        foreach (var w in FindObjectsOfType<WinterHandler>())
+        foreach (var h in FindObjectsOfType<Hex>())
         {
-            _winterHandlersDict.Add(w.transform.position, w);
+            _winterHandlersDict.Add(h.transform.position, h);
         }
+
+        Debug.Log(_winterHandlersDict.Count);
 
     }
 
@@ -137,11 +133,13 @@ public class TileManager : MonoBehaviour
     {
         var winterHandlers = ShuffleArray(_winterHandlersDict.Values.ToArray());
 
+        
         if(isWinter)
         {
             foreach (var tile in winterHandlers)
             {
-                tile.ChangeTileToWinter();
+                if(tile.winterHandler)
+                    tile.ChangeTileToWinter();
                 yield return new WaitForSeconds(waitingSeconds);
             }
 
@@ -151,7 +149,8 @@ public class TileManager : MonoBehaviour
         {
             foreach (var tile in winterHandlers)
             {
-                tile.ChangeTileToNormal();
+                if(tile.winterHandler)
+                    tile.ChangeTileToNormal();
                 yield return new WaitForSeconds(waitingSeconds);
             }
         }
@@ -159,15 +158,15 @@ public class TileManager : MonoBehaviour
         
     }
     
-    private WinterHandler[] ShuffleArray(WinterHandler[] winterHandlers)
+    private Hex[] ShuffleArray(Hex[] hexes)
     {
-        for (var i = winterHandlers.Length - 1; i > 0; i--)
+        for (var i = hexes.Length - 1; i > 0; i--)
         {
             var randomIndex = Random.Range(0, i + 1);
-            (winterHandlers[i], winterHandlers[randomIndex]) = (winterHandlers[randomIndex], winterHandlers[i]);
+            (hexes[i], hexes[randomIndex]) = (hexes[randomIndex], hexes[i]);
         }
 
-        return winterHandlers;
+        return hexes;
     }
     
     
