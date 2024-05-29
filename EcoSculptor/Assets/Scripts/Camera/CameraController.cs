@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CameraMovement : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private float thresholdX = 960f;
     [SerializeField] private float thresholdY = 535f;

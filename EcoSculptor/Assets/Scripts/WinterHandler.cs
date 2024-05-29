@@ -11,11 +11,6 @@ public class WinterHandler : MonoBehaviour
 
     private Tween newTween;
 
-    private void Start()
-    {
-        //TileManager.Instance.RegisterToList(this);
-    }
-
     private void WinterMode()
     {
         winterTile.SetActive(true);
