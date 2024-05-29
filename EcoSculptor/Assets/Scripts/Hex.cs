@@ -16,6 +16,9 @@ public class Hex : MonoBehaviour
     private bool _foodFlag;      // Whether the tile has food or not
     private GameObject _food;
     private HexCoordinates _hexCoordinates;
+    private Coroutine newRoutine;
+
+    public WinterHandler winterHandler;
     
     public Vector3Int HexCoords => _hexCoordinates.GetHexCoords();
 
@@ -54,11 +57,20 @@ public class Hex : MonoBehaviour
     private void Awake()
     {
         _hexCoordinates = GetComponent<HexCoordinates>();
+        winterHandler = GetComponentInChildren<WinterHandler>();
     }
 
     private void OnEnable()
     {
         TileManager.Instance.RegisterTile(tileMesh.gameObject.tag);
+    }
+
+    private void OnDisable()
+    {
+        if (newRoutine != null)
+        {
+            StopCoroutine(newRoutine);
+        }
     }
 
     private void CreateFoodTile(Vector3Int neighborVector)
@@ -72,7 +84,7 @@ public class Hex : MonoBehaviour
         neighborTile.FoodFlag = true;
         var endPosition = new Vector3(position1.x, position1.y + 1, position1.z);
 
-        StartCoroutine(WaitForSeconds(10f, () =>
+        newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
             neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
@@ -91,5 +103,15 @@ public class Hex : MonoBehaviour
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
         foreach (var neighborVector in neighborsList)
             CreateFoodTile(neighborVector);
+    }
+
+    public void ChangeTileToWinter()
+    {
+        winterHandler.ChangeTileToWinter();
+    }
+
+    public void ChangeTileToNormal()
+    {
+        winterHandler.ChangeTileToNormal();
     }
 }
