@@ -23,11 +23,12 @@ public class VolumeSlider : MonoBehaviour
 
     public void ChangeVolume()
     {
-        AudioListener.volume = volumeSlider.value;
+        BackgroundMusic_Script.Instance.MyAudioSource.volume = volumeSlider.value;
     }
 
     private void Start()
     {
+        Debug.Log("start");
         volumeSlider.value = FindObjectOfType<BackgroundMusic_Script>().VolumeLevel;
     }
 }

@@ -9,27 +9,21 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private BackgroundMusic_Script BGM;
-    [SerializeField] private VolumeSlider slider;
-    
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("go to play game " +slider.volumeSlider.value);
-        BGM.SetVoiceVal(slider.volumeSlider.value);
-        //Time.timeScale = 1;
-        InputManager.Instance.ResumeGame();
-        slider.volumeSlider.value = BackgroundMusic_Script.Instance.MyAudioSource.volume;
+        Debug.Log("go to play game " + VolumeSlider.Instance.volumeSlider.value);
+        BackgroundMusic_Script.Instance.SetVoiceVal(VolumeSlider.Instance.volumeSlider.value);
     }
     
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(0);
-        Debug.Log("go to main menu " +slider.volumeSlider.value);
-        BGM.SetVoiceVal(slider.volumeSlider.value);
+        Debug.Log("go to main menu " + VolumeSlider.Instance.volumeSlider.value);
+        BackgroundMusic_Script.Instance.SetVoiceVal(VolumeSlider.Instance.volumeSlider.value);
         //Time.timeScale = 1;
-        InputManager.Instance.StopGame();
-        slider.volumeSlider.value = BackgroundMusic_Script.Instance.MyAudioSource.volume;
+        //InputManager.Instance.StopGame();
+        //slider.volumeSlider.value = BackgroundMusic_Script.Instance.MyAudioSource.volume;
         
     }
     
@@ -41,9 +35,5 @@ public class MainMenu : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
-
-    private void Start()
-    {
-        BGM = FindObjectOfType<BackgroundMusic_Script>();
-    }
+    
 }

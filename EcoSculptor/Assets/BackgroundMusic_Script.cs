@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class BackgroundMusic_Script : MonoBehaviour
 {
     public static BackgroundMusic_Script Instance;
-    private float volumeLevel=0.5f;
+    private float volumeLevel = 1f;
     [SerializeField] private AudioSource myAudioSource;
     [SerializeField] private Slider volume;
 
@@ -40,11 +40,14 @@ public class BackgroundMusic_Script : MonoBehaviour
     private void Start()
     {
         volume = FindObjectOfType<Slider>();
+        myAudioSource.volume = volumeLevel;
+
     }
 
     public void SetVoiceVal(float val)
     {
         volumeLevel = val;
+        myAudioSource.volume = volumeLevel;
     }
 
 }
