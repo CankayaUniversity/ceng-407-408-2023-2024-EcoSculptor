@@ -12,8 +12,8 @@ behaviors:
       learning_rate_schedule: linear
     network_settings:
       normalize: false
-      hidden_units: 256
-      num_layers: 1
+      hidden_units: 512
+      num_layers: 2
       vis_encode_type: simple
     reward_signals:
       extrinsic:
@@ -21,7 +21,7 @@ behaviors:
         strength: 1.0
     keep_checkpoints: 5
     max_steps: 2000000
-    time_horizon: 256
+    time_horizon: 512
     summary_freq: 50000
   Hunteranimal:
     trainer_type: ppo
@@ -36,8 +36,8 @@ behaviors:
       learning_rate_schedule: linear
     network_settings:
       normalize: false
-      hidden_units: 256
-      num_layers: 1
+      hidden_units: 512
+      num_layers: 2
       vis_encode_type: simple
     reward_signals:
       extrinsic:
@@ -45,7 +45,7 @@ behaviors:
         strength: 1.0
     keep_checkpoints: 5
     max_steps: 2000000
-    time_horizon: 256
+    time_horizon: 512
     summary_freq: 50000
   Alphahunteranimal:
     trainer_type: ppo
@@ -60,8 +60,8 @@ behaviors:
       learning_rate_schedule: linear
     network_settings:
       normalize: false
-      hidden_units: 256
-      num_layers: 1
+      hidden_units: 512
+      num_layers: 2
       vis_encode_type: simple
     reward_signals:
       extrinsic:
@@ -69,5 +69,5 @@ behaviors:
         strength: 1.0
     keep_checkpoints: 5
     max_steps: 2000000
-    time_horizon: 128
+    time_horizon: 512
     summary_freq: 50000

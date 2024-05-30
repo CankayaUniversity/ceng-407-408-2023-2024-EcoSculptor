@@ -104,9 +104,9 @@ public class FoodManager : MonoBehaviour
     {
         if (Time.time >= timeLeft)
         {
-            weakestPreyAnimal.AddReward(-15f);
-            weakestHunterAnimal.AddReward(-15f);
-            strongestHunterAnimal.AddReward(-15f);
+            weakestPreyAnimal.AddReward(-5f);
+            weakestHunterAnimal.AddReward(-5f);
+            strongestHunterAnimal.AddReward(-5f);
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             weakestPreyAnimal.EndEpisode();

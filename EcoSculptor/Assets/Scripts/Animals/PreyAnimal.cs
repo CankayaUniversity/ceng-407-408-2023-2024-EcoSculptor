@@ -74,10 +74,6 @@ public class PreyAnimal : Agent
                 if(!_isDead)
                     animator.SetFloat("Movement", velocity.magnitude);
             }
-            else
-            {
-                rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
-            }
 
             transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
         }
@@ -104,7 +100,7 @@ public class PreyAnimal : Agent
 
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-15f);
+            AddReward(-5f);
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
@@ -114,11 +110,11 @@ public class PreyAnimal : Agent
     public void RewardFood()
     {
         Destroy(colliderWith.gameObject);
-        AddReward(10f);
+        AddReward(15f);
         foodEaten++;
         if (foodEaten == foodManager.foodCount)
         {
-            AddReward(5f); // Ekstra ödül ver
+            AddReward(15f); // Ekstra ödül ver
             weakestHunterAnimal.AddReward(-5f);
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.AddReward(-5f);
@@ -137,14 +133,12 @@ public class PreyAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         _isEating = false;
-        Debug.Log("Enter");
     }
 
     public void PreyDeath()
     {
         if(_isDead) return;
         
-        Debug.Log("Prey Death");
         _isDead = true;
         rb.isKinematic = true;
         rotateSpeed = 0;

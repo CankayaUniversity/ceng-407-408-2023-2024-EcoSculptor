@@ -64,10 +64,9 @@ public class HunterAnimal : Agent
             var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
             if(!isDead)
                 animator.SetFloat("Movement", velocity.magnitude);
-        } else {
-            rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
-        }
+        } 
         transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+        
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -89,9 +88,13 @@ public class HunterAnimal : Agent
             animator.Play("dog_test_wolf-attack");
             pah.PreyDeath();
         }
+        if (other.gameObject.CompareTag("RunArea"))
+        {
+            AddReward(2f);
+        }
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-15f);
+            AddReward(-5f);
             weakestPreyAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
@@ -100,8 +103,8 @@ public class HunterAnimal : Agent
 
     public void EatAgent()
     {
-        AddReward(10f);
-        weakestPreyAnimal.AddReward(-13f);
+        AddReward(12f);
+        weakestPreyAnimal.AddReward(-5f);
         rb.isKinematic = false;
         rotateSpeed = 6f;
         weakestPreyAnimal.EndEpisode();
