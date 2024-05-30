@@ -12049,6 +12049,11 @@ PrefabInstance:
       propertyPath: resource
       value: 
       objectReference: {fileID: 489059025}
+    - target: {fileID: 8375366407765656784, guid: 2a8adee6651e16a45bb213225f4990cf,
+        type: 3}
+      propertyPath: elementalResource
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8375366407765656786, guid: 2a8adee6651e16a45bb213225f4990cf,
         type: 3}
       propertyPath: m_Name
