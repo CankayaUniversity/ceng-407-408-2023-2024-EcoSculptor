@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1628424f2d4b7a85ca8359e1a85a44, type: 3}
   m_Name: AnimalSpawnRules
   m_EditorClassIdentifier: 
+  economyCatalog:
+    _serializedList:
+    - Key: Deer
+      Value: 0
+    - Key: Horse
+      Value: 0
+    - Key: Wolf
+      Value: 0
+    - Key: Tiger
+      Value: 0
+    - Key: Bear
+      Value: 0
   riverTileCountForDeer: 2
   dirtTileCountForHorse: 4
   deerCountForWolf: 4

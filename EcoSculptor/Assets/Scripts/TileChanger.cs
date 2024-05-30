@@ -40,6 +40,11 @@ public class TileChanger : SelectionManager
     private void ChangeTile()
     {
         if(!_tilePrefab || !isSafeToClick) return;
+        var tilePrice = EconomyManager.Instance.TilePriceCatalog.GetTilePrice(_selectedHex.tag);
+        var playerPrice = EconomyManager.Instance.ElementalResource;
+        
+        if(playerPrice < tilePrice) return;
+        EconomyManager.Instance.DecreaseResource(tilePrice);
         
         var oldTile = SelectedHex.TileMesh;
         
@@ -56,7 +61,6 @@ public class TileChanger : SelectionManager
         }
 
         SelectedHex.winterHandler = newTile.GetComponent<WinterHandler>();
-        
         
         PutTile(newTile);
 

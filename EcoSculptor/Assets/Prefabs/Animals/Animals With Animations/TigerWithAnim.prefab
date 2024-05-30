@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046562711717824769}
   m_Layer: 0
-  m_Name: Tiger
+  m_Name: TigerWithAnim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
