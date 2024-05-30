@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using AYellowpaper.SerializedCollections;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "AnimalSpawnRules", menuName = "Animal Spawn Rules")]
 public class AnimalSpawnRules : ScriptableObject
 {
+    
+    
     [Header("Spawn Rules")]
     public int riverTileCountForDeer = 2;
     public int dirtTileCountForHorse = 4;

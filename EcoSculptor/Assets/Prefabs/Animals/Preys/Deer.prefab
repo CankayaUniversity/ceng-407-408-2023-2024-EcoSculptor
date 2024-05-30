@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1935190728060240603}
   - component: {fileID: 3375085426832674540}
   - component: {fileID: 144810778716622563}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: DeerArea
-  m_TagString: Untagged
+  m_TagString: RunArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 716899967398735394}
   - component: {fileID: 7334512519304180463}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DeerCollider
   m_TagString: Agent
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4013546479359593532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.004999995, z: 0.058000088}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1102,7 +1102,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &5881489636422960203
+--- !u!114 &381264890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

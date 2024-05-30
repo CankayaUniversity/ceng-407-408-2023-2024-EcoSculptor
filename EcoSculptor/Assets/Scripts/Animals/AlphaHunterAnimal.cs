@@ -27,8 +27,8 @@ public class AlphaHunterAnimal : Agent
     public PreyAnimal weakestPreyAnimal;
     public HunterAnimal weakestHunterAnimal;
 
-    private bool isAttacking;
-    private Coroutine _coroutine;
+    //private bool isAttacking;
+    //private Coroutine _coroutine;
 
     public Rigidbody Rb
     {
@@ -43,11 +43,11 @@ public class AlphaHunterAnimal : Agent
         PlayAnimation("Movement");
     }
 
-    private void OnDestroy()
+    /*private void OnDestroy()
     {
         if(_coroutine != null)
             StopCoroutine(_coroutine);
-    }
+    }*/
 
     public override void OnEpisodeBegin()
     {
@@ -90,9 +90,7 @@ public class AlphaHunterAnimal : Agent
     {
         if (other.gameObject.CompareTag("Agent"))
         {
-            if(isAttacking) return;
-            
-            
+            //if(isAttacking) return;
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             
             alphaAnim.preyParentAnimal = pa;
@@ -101,7 +99,7 @@ public class AlphaHunterAnimal : Agent
             rotateSpeed = 0;
             isAgent = true;
             animator.Play("Bear_Attack1");
-            _coroutine = StartCoroutine(AttackCoolDown());
+            //_coroutine = StartCoroutine(AttackCoolDown());
             pa.PreyDeath();
         }
         if (other.gameObject.CompareTag("boundary"))
@@ -120,16 +118,16 @@ public class AlphaHunterAnimal : Agent
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("Bear_Attack1");
-            
+            pa.HunterDeath();
         }
     }
 
-    IEnumerator AttackCoolDown()
+    /*IEnumerator AttackCoolDown()
     {
         isAttacking = true;
         yield return new WaitForSeconds(1f);
         isAttacking = false;
-    }
+    }*/
 
     public void EatHunter()
     {

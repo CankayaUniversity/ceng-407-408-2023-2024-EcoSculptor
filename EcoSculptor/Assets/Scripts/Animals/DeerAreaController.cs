@@ -7,7 +7,7 @@ public class DeerAreaController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hunter") || other.CompareTag("BearArea"))
+        if (other.CompareTag("WolfArea") || other.CompareTag("BearArea"))
         {
             if (parent != null)
             {

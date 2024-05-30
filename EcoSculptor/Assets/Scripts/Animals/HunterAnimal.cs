@@ -20,6 +20,7 @@ public class HunterAnimal : Agent
     
     private Rigidbody rb;
     private HandleEatingAnim hunterAnim;
+    private bool isDead;
 
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
@@ -40,8 +41,8 @@ public class HunterAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         PlayAnimation("Movement");
-        
-        
+        Debug.Log("YÜRÜMESİ LAZIM");
+        isDead = false;
     }
     
     public override void CollectObservations(VectorSensor sensor)
@@ -62,7 +63,8 @@ public class HunterAnimal : Agent
         
         if (moveForward >= 0) {
             var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
-            animator.SetFloat("Movement", velocity.magnitude);
+            if(!isDead)
+                animator.SetFloat("Movement", velocity.magnitude);
         } else {
             rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
         }
@@ -82,11 +84,11 @@ public class HunterAnimal : Agent
         {
             var pah = other.gameObject.GetComponentInParent<PreyAnimal>();
             
-            
             hunterAnim.preyParentAnimal = pah;
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("dog_test_wolf-attack");
+            pah.PreyDeath();
         }
         if (other.gameObject.CompareTag("boundary"))
         {
@@ -110,8 +112,16 @@ public class HunterAnimal : Agent
 
     public void HunterDeath()
     {
+        if (isDead)
+        {
+            return;
+        }
+        Debug.Log("ölüm başladı");
+        isDead = true;
         rb.isKinematic = true;
         rotateSpeed = 0;
+        animator.SetTrigger("Death");
         animator.Play("dog_test_wolf-death");
+        Debug.Log("ölüm bitti");
     }
 }
