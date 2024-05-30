@@ -15,7 +15,9 @@ MonoBehaviour:
   riverTileCountForDeer: 2
   dirtTileCountForHorse: 4
   deerCountForWolf: 4
-  stoneHillTileCountForBear: 1
+  sandTileForTiger: 4
+  stoneTileCountForBear: 1
+  animalCountForBear: 10
   deerPrefab: {fileID: 6721530134298135210, guid: 77827c1a32a6377458af0fa28ac20ce7,
     type: 3}
   horsePrefab: {fileID: 6721530134298135210, guid: 5edc2ecd374b8e340a9d48f5fc70ab37,

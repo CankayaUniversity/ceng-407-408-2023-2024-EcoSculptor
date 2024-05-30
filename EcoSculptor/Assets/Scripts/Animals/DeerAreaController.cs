@@ -7,6 +7,8 @@ public class DeerAreaController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if(parent.IsDead) return;
+        
         if (other.CompareTag("WolfArea") || other.CompareTag("BearArea"))
         {
             if (parent != null)
