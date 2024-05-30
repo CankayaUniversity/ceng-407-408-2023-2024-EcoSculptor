@@ -41,7 +41,6 @@ public class HunterAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         PlayAnimation("Movement");
-        Debug.Log("YÜRÜMESİ LAZIM");
         isDead = false;
     }
     
@@ -112,16 +111,11 @@ public class HunterAnimal : Agent
 
     public void HunterDeath()
     {
-        if (isDead)
-        {
-            return;
-        }
-        Debug.Log("ölüm başladı");
+        if (isDead) return;
+        
         isDead = true;
         rb.isKinematic = true;
         rotateSpeed = 0;
-        animator.SetTrigger("Death");
         animator.Play("dog_test_wolf-death");
-        Debug.Log("ölüm bitti");
     }
 }

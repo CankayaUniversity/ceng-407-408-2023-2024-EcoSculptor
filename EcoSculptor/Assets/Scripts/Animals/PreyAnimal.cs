@@ -27,7 +27,9 @@ public class PreyAnimal : Agent
     public AlphaHunterAnimal strongestHunterAnimal;
     public HunterAnimal weakestHunterAnimal;
 
-    private bool isDead;
+    private bool _isDead;
+
+    public bool IsDead => _isDead;
 
     public override void Initialize()
     {
@@ -44,7 +46,7 @@ public class PreyAnimal : Agent
         foodManager.CreateFood();
         foodEaten = 0;
         foodManager.EpisodeTimerNew();
-        isDead = false;
+        _isDead = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -65,7 +67,7 @@ public class PreyAnimal : Agent
         if (moveForward >= 0)
         {
             var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
-            if(!isDead)
+            if(!_isDead)
                 animator.SetFloat("Movement", velocity.magnitude);
         }
         else
@@ -131,10 +133,12 @@ public class PreyAnimal : Agent
 
     public void PreyDeath()
     {
+        if(_isDead) return;
+        
         Debug.Log("Prey Death");
-        isDead = true;
+        _isDead = true;
         rb.isKinematic = true;
         rotateSpeed = 0;
-        animator.SetTrigger("Death");
+        animator.Play("deer_deer_death");
     }
 }
