@@ -52,12 +52,8 @@ public class EconomyManager : MonoBehaviour
 
     private void Start()
     {
-        ElementalResource = 100;
-    }
-
-    private void Update()
-    {
-        //resource.SetText(ElementalResource.ToString());??
+        ElementalResource = 50;     //PlayerPrefs
+        resource.SetText(ElementalResource.ToString());
     }
 
     public void IncreaseResource(int amount)
