@@ -11,6 +11,12 @@ public class WinterHandler : MonoBehaviour
 
     private Tween newTween;
 
+    public void PutTileAsWinter()
+    {
+        winterTile.SetActive(true);
+        tile.SetActive(false);
+    }
+
     public void ChangeTileToWinter()
     {
         winterTile.SetActive(true);

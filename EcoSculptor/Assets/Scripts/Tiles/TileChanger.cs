@@ -62,6 +62,12 @@ public class TileChanger : SelectionManager
 
         SelectedHex.winterHandler = newTile.GetComponent<WinterHandler>();
         
+        if(_selectedHex.winterHandler)
+            if(TimeManager.Instance.IsWinter)
+                _selectedHex.winterHandler.PutTileAsWinter();
+        
+        
+        
         PutTile(newTile);
 
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
