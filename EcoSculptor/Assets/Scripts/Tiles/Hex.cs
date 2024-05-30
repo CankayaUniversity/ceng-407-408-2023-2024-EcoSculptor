@@ -16,7 +16,8 @@ public class Hex : MonoBehaviour
     private bool _foodFlag;      // Whether the tile has food or not
     private GameObject _food;
     private HexCoordinates _hexCoordinates;
-    private Coroutine newRoutine;
+    private Coroutine _newRoutine;
+    private Coroutine _newRoutine2;
 
     public WinterHandler winterHandler;
     
@@ -65,11 +66,15 @@ public class Hex : MonoBehaviour
         TileManager.Instance.RegisterTile(tileMesh.gameObject.tag);
     }
 
-    private void OnDisable()
+    public void StopCoroutine()
     {
-        if (newRoutine != null)
+        if (_newRoutine != null)
         {
-            StopCoroutine(newRoutine);
+            StopCoroutine(_newRoutine);
+        }
+        if (_newRoutine2 != null)
+        {
+            StopCoroutine(_newRoutine);
         }
     }
 
@@ -87,7 +92,7 @@ public class Hex : MonoBehaviour
         
         var endPosition = new Vector3(position1.x, position1.y + 1, position1.z);
 
-        newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
+        _newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
             if (!neighborTile.FoodFlag) return;
             
@@ -95,6 +100,20 @@ public class Hex : MonoBehaviour
             neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
         
+    }
+
+    private void GrowFood(GameObject food) //Geyik otu yediğinde çağırılacak
+    {
+        if(food.activeInHierarchy)return;
+        var pos = food.transform.position;
+        var endPosition = new Vector3(pos.x, pos.y + 1, pos.z);
+        _newRoutine2 = StartCoroutine(WaitForSeconds(10f, () =>
+        {
+            if (!food) return;
+            
+            food.SetActive(true);
+            food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+        }));
     }
 
     private IEnumerator WaitForSeconds(float sec, Action onWaitEnd)
@@ -105,7 +124,11 @@ public class Hex : MonoBehaviour
 
     public void ControlRiver()
     {
-        if(!tileMesh.gameObject.CompareTag("River")) return;
+        if (!tileMesh.gameObject.CompareTag("River"))
+        {
+            StopCoroutine();
+            return;
+        }
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
         foreach (var neighborVector in neighborsList)
             CreateFoodTile(neighborVector);

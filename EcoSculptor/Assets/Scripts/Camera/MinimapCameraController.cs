@@ -6,13 +6,17 @@ using UnityEngine;
 public class MinimapCameraController : MonoBehaviour
 {
 
-    private void Start()
+    private Vector3 pos;
+    void Start()
     {
+        pos = Camera.main.transform.position;
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        transform.parent.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        pos.x = Camera.main.transform.position.x;
+        pos.z = Camera.main.transform.position.z;
 
+        transform.position = pos;
     }
 }
