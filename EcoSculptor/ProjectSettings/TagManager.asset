@@ -18,6 +18,11 @@ TagManager:
   - RunArea
   - BearArea
   - WolfArea
+  - DeerBase
+  - HorseBase
+  - WolfBase
+  - TigerBase
+  - BearBase
   layers:
   - Default
   - TransparentFX

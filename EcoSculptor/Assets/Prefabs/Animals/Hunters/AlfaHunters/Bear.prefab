@@ -1071,7 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6a8a31f53516040867400cae0c46c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderTransform: {fileID: 3596996786013798771}
   preyParentAnimal: {fileID: 0}
   alphaParentAnimal: {fileID: 0}
   hunterParentAnimal: {fileID: 0}
@@ -2044,7 +2043,7 @@ GameObject:
   - component: {fileID: 1793492813}
   m_Layer: 0
   m_Name: Bear
-  m_TagString: Untagged
+  m_TagString: BearBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

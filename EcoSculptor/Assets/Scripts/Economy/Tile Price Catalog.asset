@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7100f91f1074c2db6aeb37c3c363ec6, type: 3}
+  m_Name: Tile Price Catalog
+  m_EditorClassIdentifier: 
+  priceCatalog:
+    _serializedList:
+    - Key: Grass
+      Value: 25
+    - Key: Water
+      Value: 25
+    - Key: River
+      Value: 25
+    - Key: Sand
+      Value: 50
+    - Key: Rock
+      Value: 50
+    - Key: Dirt
+      Value: 50

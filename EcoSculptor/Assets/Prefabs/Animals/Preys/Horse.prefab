@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7974084530820936639}
   m_Layer: 0
   m_Name: Horse
-  m_TagString: Untagged
+  m_TagString: HorseBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,7 +190,10 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  animator: {fileID: 0}
   moveSpeed: 8
+  rotateSpeed: 6
+  deerArea: {fileID: 0}
   foodManager: {fileID: 0}
   strongestHunterAnimal: {fileID: 0}
   weakestHunterAnimal: {fileID: 0}

@@ -9,20 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7100f91f1074c2db6aeb37c3c363ec6, type: 3}
-  m_Name: Tile Price Catalog
+  m_Script: {fileID: 11500000, guid: 9e98946b3b6112a4c8f4c4d9b267d136, type: 3}
+  m_Name: Death Price Catalog
   m_EditorClassIdentifier: 
   priceCatalog:
     _serializedList:
-    - Key: Grass
-      Value: 0
-    - Key: Water
-      Value: 0
-    - Key: River
-      Value: 0
-    - Key: Sand
-      Value: 0
-    - Key: Rock
-      Value: 0
-    - Key: Dirt
-      Value: 0
+    - Key: DeerBase
+      Value: 15
+    - Key: HorseBase
+      Value: 15
+    - Key: TigerBase
+      Value: 25
+    - Key: WolfBase
+      Value: 25
+    - Key: BearBase
+      Value: 100
