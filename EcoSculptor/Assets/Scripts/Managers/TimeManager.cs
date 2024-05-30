@@ -30,6 +30,8 @@ public class TimeManager : MonoBehaviour
         set => newRoutine = value;
     }
 
+    public bool IsWinter => _isWinter;
+
     private void Awake()
     {
         if (Instance == null)
@@ -51,6 +53,11 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            _isWinter = true;
+        if (Input.GetKeyDown(KeyCode.L))
+            _isWinter = false;
+        
         // if(!Preset)
         //     return;
         if (Application.isPlaying)
