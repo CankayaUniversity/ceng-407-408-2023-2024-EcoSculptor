@@ -11,6 +11,9 @@ public class AnimalSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> tigers;
     [SerializeField] private List<GameObject> wolves;
     [SerializeField] private List<GameObject> bears;
+    
+    [Header("Animals Spawn Location")] 
+    [SerializeField] private List<Transform> spawnLocations;
 
     private int _animalCount;
     
@@ -64,4 +67,6 @@ public class AnimalSpawner : MonoBehaviour
         SpawnAnimalType(rules.tigerPrefab, TileManager.Instance.SandTile, rules.sandTileForTiger, tigers);
         SpawnBearIfNeeded();
     }
+    
+    
 }
