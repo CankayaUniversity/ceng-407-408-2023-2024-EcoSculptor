@@ -42,7 +42,7 @@ public class PreyAnimal : Agent
         rotateSpeed = 6f;
         PlayAnimation("Movement");
         foodManager.CreateFood();
-        foodEaten = 0; // Yenilen yemek sayısını sıfırla
+        foodEaten = 0;
         foodManager.EpisodeTimerNew();
         isDead = false;
     }

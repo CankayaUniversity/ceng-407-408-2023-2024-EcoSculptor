@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4871800256178806757}
   - component: {fileID: 1730400233708053966}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WolfCollider
   m_TagString: Hunter
   m_Icon: {fileID: 0}
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.50119394, y: 0.46656147, z: 0.7215656}
-  m_Center: {x: 0.0033748746, y: 0.21533923, z: 0.031876743}
+  m_Size: {x: 0.3333702, y: 0.31345537, z: 0.74217606}
+  m_Center: {x: 0.007791519, y: 0.08, z: 0.021571532}
 --- !u!1 &1346769057362641942
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +105,51 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
+--- !u!1 &3474121785639501671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407924590900296936}
+  - component: {fileID: 1106030127756920311}
+  m_Layer: 14
+  m_Name: WolfArea
+  m_TagString: BearArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407924590900296936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474121785639501671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0.199}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3716766332509687722}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1106030127756920311
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474121785639501671}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5645150178027911550
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5645150178027911550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -168,11 +213,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4871800256178806757}
   - {fileID: 9151098670384739397}
   - {fileID: 3911699453130720476}
+  - {fileID: 1407924590900296936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,7 +285,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 6932661746761166009}
-  moveSpeed: 13
+  moveSpeed: 7
   rotateSpeed: 6
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
@@ -268,10 +314,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.21085587
-  m_Height: 0.65655136
+  m_Radius: 0.13871878
+  m_Height: 0.65
   m_Direction: 2
-  m_Center: {x: -0.002052784, y: 0.21350259, z: 0.025686264}
+  m_Center: {x: 0, y: 0.08527824, z: 0}
 --- !u!1001 &2537249605063903718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 179.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: 600032457463590508, guid: 2b3392dcb85a5d840aa70258339a6a21,
+        type: 3}
+      propertyPath: m_Name
+      value: kurtMesh
       objectReference: {fileID: 0}
     - target: {fileID: 754308431809117897, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}
@@ -622,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 6045925207405205259, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 6045925207405205259, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}
@@ -786,6 +837,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7973264762124191742, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.77098346
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973264762124191742, guid: 2b3392dcb85a5d840aa70258339a6a21,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6345561
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973264762124191742, guid: 2b3392dcb85a5d840aa70258339a6a21,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.03706578
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973264762124191742, guid: 2b3392dcb85a5d840aa70258339a6a21,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.03936021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973264762124191742, guid: 2b3392dcb85a5d840aa70258339a6a21,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -77.30319
       objectReference: {fileID: 0}
@@ -852,7 +923,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2537249605063903718}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9108210493347530054
+--- !u!114 &5589149590605142242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

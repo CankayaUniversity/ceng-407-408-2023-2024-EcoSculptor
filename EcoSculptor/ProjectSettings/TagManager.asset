@@ -17,6 +17,7 @@ TagManager:
   - AlphaHunter
   - RunArea
   - BearArea
+  - WolfArea
   layers:
   - Default
   - TransparentFX
