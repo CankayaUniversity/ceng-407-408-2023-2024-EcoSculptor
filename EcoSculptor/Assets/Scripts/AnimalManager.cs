@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimalSpawner : MonoBehaviour
+public class AnimalManager : MonoBehaviour
 {
     [SerializeField] private AnimalSpawnRules rules;
 
@@ -14,10 +15,9 @@ public class AnimalSpawner : MonoBehaviour
     
     [Header("Animals Spawn Location")] 
     [SerializeField] private List<Transform> spawnLocations;
-
-    private int _animalCount;
     
-    public static AnimalSpawner Instance;
+    public static AnimalManager Instance;
+    private bool _flag;
     private void Awake()
     {
         if (Instance == null)
@@ -30,8 +30,12 @@ public class AnimalSpawner : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        CheckAnimalCount();
+    }
 
-    private int TotalAnimalCount()
+    public int TotalAnimalCount()
     {
         return deers.Count + horses.Count + wolves.Count + tigers.Count + bears.Count;
     }
@@ -67,6 +71,14 @@ public class AnimalSpawner : MonoBehaviour
         SpawnAnimalType(rules.tigerPrefab, TileManager.Instance.SandTile, rules.sandTileForTiger, tigers);
         SpawnBearIfNeeded();
     }
-    
+
+    private void CheckAnimalCount()
+    {
+        if (TotalAnimalCount() >= 3 && !_flag)
+        {
+            TimeManager.Instance.NewRoutine = TimeManager.Instance.StartCoroutine(nameof(TimeManager.LoseControl));
+            _flag = true;
+        }
+    }
     
 }

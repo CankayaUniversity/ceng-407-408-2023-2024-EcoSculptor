@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -8,17 +9,25 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField, Range(0, 300f)] private float currentTimeOfDay = 100;
     [SerializeField, Range(0, 1000f)] private float seasonTime = 900f;
+    //[SerializeField, Range(0, 1000f)] private float LoseControlTime = 900f;
+    
     
     public float totalTimeInGame;
     public int seasonCount;
     private bool _isWinter;
-    
+    private Coroutine newRoutine;
     public static TimeManager Instance;
 
     public float CurrentTimeOfDay
     {
         get => currentTimeOfDay;
         set => currentTimeOfDay = value;
+    }
+
+    public Coroutine NewRoutine
+    {
+        get => newRoutine;
+        set => newRoutine = value;
     }
 
     private void Awake()
@@ -32,7 +41,14 @@ public class TimeManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    
+
+    private void OnDisable()
+    {
+        if (NewRoutine == null)return;
+        StopCoroutine(nameof(LoseControl));
+        
+    }
+
     private void Update()
     {
         // if(!Preset)
@@ -72,7 +88,21 @@ public class TimeManager : MonoBehaviour
             _isWinter = false;
         }
         
-        Debug.Log("controlChangeSeason, season count = " + seasonCount + " totaltime = " + totalTimeInGame + " iswinter = " + _isWinter);
         
+    }
+
+    public IEnumerator LoseControl()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            var totalAnimalCount = AnimalManager.Instance.TotalAnimalCount();
+            if (totalAnimalCount == 0)
+            {
+                Debug.Log("game over");
+                //game over scene will open
+                break;
+            }
+        }
     }
 }
