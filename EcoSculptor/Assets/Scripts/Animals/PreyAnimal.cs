@@ -28,6 +28,7 @@ public class PreyAnimal : Agent
     public HunterAnimal weakestHunterAnimal;
 
     private bool _isDead;
+    private bool _isEating;
 
     public bool IsDead => _isDead;
 
@@ -47,6 +48,7 @@ public class PreyAnimal : Agent
         foodEaten = 0;
         foodManager.EpisodeTimerNew();
         _isDead = false;
+        _isEating = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -63,19 +65,22 @@ public class PreyAnimal : Agent
     {
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
-
-        if (moveForward >= 0)
+        
+        if (!_isEating)
         {
-            var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
-            if(!_isDead)
-                animator.SetFloat("Movement", velocity.magnitude);
-        }
-        else
-        {
-            rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
-        }
+            if (moveForward >= 0)
+            {
+                var velocity = rb.velocity = transform.forward * moveForward * moveSpeed * Time.deltaTime * 50;
+                if(!_isDead)
+                    animator.SetFloat("Movement", velocity.magnitude);
+            }
+            else
+            {
+                rb.velocity = -transform.forward * Mathf.Abs(moveForward) * 0.2f * Time.deltaTime;
+            }
 
-        transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+            transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -89,9 +94,11 @@ public class PreyAnimal : Agent
     {
         if (other.gameObject.CompareTag("nectar"))
         {
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             colliderWith = other;
+            animator.SetBool("EatingDone",false);
             animator.Play("deer_deer_eat");
         }
 
@@ -118,9 +125,10 @@ public class PreyAnimal : Agent
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
         }
-
+        _isEating = false;
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        animator.SetBool("EatingDone",true);
     }
 
     public void OnHunterEnter()
@@ -128,6 +136,7 @@ public class PreyAnimal : Agent
 
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        _isEating = false;
         Debug.Log("Enter");
     }
 
