@@ -89,11 +89,10 @@ public class Hex : MonoBehaviour
 
         newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
-            if(neighborTile.FoodFlag)
-            {
-                neighborTile.Food.SetActive(true);
-                neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
-            }
+            if (!neighborTile.FoodFlag) return;
+            
+            neighborTile.Food.SetActive(true);
+            neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
         
     }
