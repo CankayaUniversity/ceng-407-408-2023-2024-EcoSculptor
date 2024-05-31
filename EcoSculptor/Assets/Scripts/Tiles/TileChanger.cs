@@ -72,7 +72,7 @@ public class TileChanger : SelectionManager
 
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
         
-        //AnimalSpawner.Instance.SpawnAnimals();
+        AnimalManager.Instance.SpawnAnimals();
         _selectedHex.ControlRiver();
         
     }

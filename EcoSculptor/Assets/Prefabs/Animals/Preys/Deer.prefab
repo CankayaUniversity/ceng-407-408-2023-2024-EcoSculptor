@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1799622, y: 0.77603173, z: 3.657757}
+  m_Size: {x: 3.17, y: 0.77, z: 3.65}
   m_Center: {x: 0, y: 0.135, z: 0}
 --- !u!114 &144810778716622563
 MonoBehaviour:
@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 6721530134298135210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4406091961223148131}
@@ -258,7 +258,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: dd2c3ce97f4ae4d43b90fa5e903e1beb, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Preyanimal
@@ -286,9 +286,6 @@ MonoBehaviour:
   moveSpeed: 8
   rotateSpeed: 6
   deerArea: {fileID: 3375085426832674540}
-  foodManager: {fileID: 0}
-  strongestHunterAnimal: {fileID: 0}
-  weakestHunterAnimal: {fileID: 0}
 --- !u!114 &4952891902858988287
 MonoBehaviour:
   m_ObjectHideFlags: 0

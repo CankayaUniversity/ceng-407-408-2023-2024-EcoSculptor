@@ -90,7 +90,7 @@ public class Hex : MonoBehaviour
         neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 10, position1.z);
         neighborTile.FoodFlag = true;
         
-        var endPosition = new Vector3(position1.x, position1.y + 1, position1.z);
+        var endPosition = new Vector3(position1.x, position1.y + 0.5f, position1.z);
 
         _newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
@@ -106,7 +106,7 @@ public class Hex : MonoBehaviour
     {
         if(food.activeInHierarchy)return;
         var pos = food.transform.position;
-        var endPosition = new Vector3(pos.x, pos.y + 1, pos.z);
+        var endPosition = new Vector3(pos.x, pos.y + 0.5f, pos.z);
         _newRoutine2 = StartCoroutine(WaitForSeconds(10f, () =>
         {
             if (!food) return;

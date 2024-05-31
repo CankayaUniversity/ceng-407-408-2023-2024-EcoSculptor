@@ -23,9 +23,11 @@ public class AlphaHunterAnimal : Agent
     private Rigidbody rb;
     public bool isAgent;
 
-    public GameObject prey;
+    private Collider _collideWith;
+
+    /*public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
-    public HunterAnimal weakestHunterAnimal;
+    public HunterAnimal weakestHunterAnimal;*/
 
     //private bool isAttacking;
     //private Coroutine _coroutine;
@@ -49,11 +51,11 @@ public class AlphaHunterAnimal : Agent
             StopCoroutine(_coroutine);
     }*/
 
-    public override void OnEpisodeBegin()
+    /*public override void OnEpisodeBegin()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0f, Random.Range(-20f, 20f));
         transform.localPosition = spawnLocation;
-    }
+    }*/
     
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -77,12 +79,12 @@ public class AlphaHunterAnimal : Agent
         transform.Rotate(0f, moveRotate * rotateSpeed, 0f, Space.Self);
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut)
+    /*public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxisRaw("Horizontal");
         continuousActions[1] = Input.GetAxisRaw("Vertical");
-    }
+    }*/
     
     private void OnTriggerEnter(Collider other)
     {
@@ -90,6 +92,7 @@ public class AlphaHunterAnimal : Agent
         {
             //if(isAttacking) return;
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
+            _collideWith = other;
             
             alphaAnim.preyParentAnimal = pa;
             
@@ -100,7 +103,7 @@ public class AlphaHunterAnimal : Agent
             //_coroutine = StartCoroutine(AttackCoolDown());
             pa.PreyDeath();
         }
-        if (other.gameObject.CompareTag("RunArea"))
+        /*if (other.gameObject.CompareTag("RunArea"))
         {
             AddReward(2f);
         }
@@ -110,11 +113,12 @@ public class AlphaHunterAnimal : Agent
             weakestPreyAnimal.EndEpisode();
             weakestHunterAnimal.EndEpisode();
             EndEpisode();
-        }
+        }*/
         if (other.gameObject.CompareTag("Hunter"))
         {
             var pa = other.gameObject.GetComponentInParent<HunterAnimal>();
-            
+            _collideWith = other;
+
             alphaAnim.hunterParentAnimal = pa;
             
             rb.isKinematic = true;
@@ -126,24 +130,29 @@ public class AlphaHunterAnimal : Agent
 
     public void EatHunter()
     {
-        AddReward(6f);
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        Debug.Log("Yedim bitti AYI");
+        Destroy(_collideWith.transform.parent.gameObject);
+
+
+        /*AddReward(6f);
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.AddReward(-5f);
         weakestHunterAnimal.EndEpisode();
-        EndEpisode();
+        EndEpisode();*/
     }
 
     public void EatAgent()
     {
-        AddReward(6f);
         rb.isKinematic = false;
         rotateSpeed = 6f;
         isAgent = false;
+        Destroy(_collideWith.transform.parent.parent.gameObject);
+        /*AddReward(6f);
         weakestPreyAnimal.AddReward(-5f);
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.EndEpisode();
-        EndEpisode();
+        EndEpisode();*/
     }
 }
