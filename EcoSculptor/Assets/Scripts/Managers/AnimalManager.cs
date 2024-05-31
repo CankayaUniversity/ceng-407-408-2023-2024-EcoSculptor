@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AnimalManager : MonoBehaviour
 {
@@ -42,23 +43,28 @@ public class AnimalManager : MonoBehaviour
 
     private void SpawnAnimalType(GameObject prefab, int tileCount, int spawnCount, List<GameObject> animalList)
     {
-        Debug.Log("Tile C: " + tileCount);
         if(tileCount == 0) return;
         if (tileCount % spawnCount != 0) return;
         var newAnimal = Instantiate(prefab, transform);
         animalList.Add(newAnimal);
-        Debug.Log("Name: " + newAnimal.name);
+        newAnimal.transform.position = SpawnAtRandomPosition();
+    }
+    
+    private Vector3 SpawnAtRandomPosition()
+    {
+        var spawnIndex = Random.Range(0, spawnLocations.Count);
+        return spawnLocations[spawnIndex].transform.position;
     }
 
     private void SpawnBearIfNeeded()
     {
         if (TileManager.Instance.StoneTile % rules.stoneTileCountForBear != 0) return;
+        
         var totalAnimal = TotalAnimalCount();
+        
         if(totalAnimal == 0) return;
         if (totalAnimal % rules.animalCountForBear != 0) return;
         
-        
-        Debug.Log("Stone: " +TileManager.Instance.StoneTile +" totalAnimal: " + totalAnimal);
         var newBear = Instantiate(rules.bearPrefab, transform);
         bears.Add(newBear);
     }
