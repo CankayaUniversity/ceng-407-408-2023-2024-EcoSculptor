@@ -98,7 +98,7 @@ public class AlphaHunterAnimal : Agent
         }
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-6f);
+            AddReward(-10f);
             weakestPreyAnimal.EndEpisode();
             weakestHunterAnimal.EndEpisode();
             EndEpisode();
@@ -122,7 +122,7 @@ public class AlphaHunterAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         //Destroy(_collideWith.transform.parent.gameObject);
-        AddReward(6f);
+        AddReward(5f);
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.AddReward(-5f);
         weakestHunterAnimal.EndEpisode();
@@ -135,7 +135,7 @@ public class AlphaHunterAnimal : Agent
         rotateSpeed = 6f;
         isAgent = false;
         //Destroy(_collideWith.transform.parent.parent.gameObject);
-        AddReward(8f);
+        AddReward(5f);
         weakestPreyAnimal.AddReward(-5f);
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.EndEpisode();

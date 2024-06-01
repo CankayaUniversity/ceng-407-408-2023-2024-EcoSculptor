@@ -107,6 +107,7 @@ MonoBehaviour:
   m_DetectableTags:
   - nectar
   - boundary
+  - GrassArea
   m_RaysPerDirection: 20
   m_MaxRayDegrees: 120
   m_SphereCastRadius: 0.1

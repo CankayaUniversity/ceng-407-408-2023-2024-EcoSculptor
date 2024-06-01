@@ -95,11 +95,11 @@ public class HunterAnimal : Agent
         }
         if (other.gameObject.CompareTag("RewardArea"))
         {
-            AddReward(2f);
+            AddReward(3f);
         }
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-6f);
+            AddReward(-10f);
             weakestPreyAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
@@ -111,7 +111,7 @@ public class HunterAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         //Destroy(_collideWith.transform.parent.parent.gameObject);
-        AddReward(12f);
+        AddReward(6f);
         weakestPreyAnimal.AddReward(-5f);
         weakestPreyAnimal.EndEpisode();
         strongestHunterAnimal.EndEpisode();

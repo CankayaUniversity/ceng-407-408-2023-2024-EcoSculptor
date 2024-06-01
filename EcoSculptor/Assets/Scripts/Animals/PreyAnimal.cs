@@ -103,12 +103,12 @@ public class PreyAnimal : Agent
         }
         if (other.gameObject.CompareTag("GrassArea"))
         {
-            AddReward(2f);
+            AddReward(5f);
         }
 
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-5f);
+            AddReward(-10f);
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
@@ -118,7 +118,7 @@ public class PreyAnimal : Agent
     public void RewardFood()
     {
         Destroy(collideWith.gameObject);
-        AddReward(12f);
+        AddReward(5f);
         foodEaten++;
         if (foodEaten == foodManager.foodCount)
         {
