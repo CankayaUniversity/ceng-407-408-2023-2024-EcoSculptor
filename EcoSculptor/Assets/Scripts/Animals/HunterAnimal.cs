@@ -24,9 +24,9 @@ public class HunterAnimal : Agent
 
     private Collider _collideWith;
 
-    /*public GameObject prey;
+    public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
-    public AlphaHunterAnimal strongestHunterAnimal;*/
+    public AlphaHunterAnimal strongestHunterAnimal;
     
     public override void Initialize()
     {
@@ -38,16 +38,16 @@ public class HunterAnimal : Agent
         rotateSpeed = 6f;
     }
 
-    /*public override void OnEpisodeBegin()
+    public override void OnEpisodeBegin()
     {
         //Hunter
-        Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0.15f, Random.Range(-20f, 20f));
+        Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0.24f, Random.Range(-20f, 20f));
         transform.localPosition = spawnLocation;
         rb.isKinematic = false;
         rotateSpeed = 6f;
         PlayAnimation("Movement");
         isDead = false;
-    }*/
+    }
     
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -74,12 +74,12 @@ public class HunterAnimal : Agent
         
     }
 
-    /*public override void Heuristic(in ActionBuffers actionsOut)
+    public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxisRaw("Horizontal");
         continuousActions[1] = Input.GetAxisRaw("Vertical");
-    }*/
+    }
     
     private void OnTriggerEnter(Collider other)
     {
@@ -93,30 +93,29 @@ public class HunterAnimal : Agent
             animator.Play("dog_test_wolf-attack");
             pah.PreyDeath();
         }
-        /*if (other.gameObject.CompareTag("RunArea"))
+        if (other.gameObject.CompareTag("RewardArea"))
         {
             AddReward(2f);
         }
         if (other.gameObject.CompareTag("boundary"))
         {
-            AddReward(-5f);
+            AddReward(-6f);
             weakestPreyAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }*/
+        }
     }
 
     public void EatAgent()
     {
         rb.isKinematic = false;
         rotateSpeed = 6f;
-        Destroy(_collideWith.transform.parent.parent.gameObject);
-        Debug.Log("Yedim Bitti KURT");
-        /*AddReward(12f);
+        //Destroy(_collideWith.transform.parent.parent.gameObject);
+        AddReward(12f);
         weakestPreyAnimal.AddReward(-5f);
         weakestPreyAnimal.EndEpisode();
         strongestHunterAnimal.EndEpisode();
-        EndEpisode();*/
+        EndEpisode();
     }
 
     public void HunterDeath()

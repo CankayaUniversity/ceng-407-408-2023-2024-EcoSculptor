@@ -841,7 +841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576381859324948343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.139, z: 0.71}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -865,13 +865,13 @@ MonoBehaviour:
   - Agent
   - boundary
   - Hunter
-  m_RaysPerDirection: 5
-  m_MaxRayDegrees: 49
+  m_RaysPerDirection: 20
+  m_MaxRayDegrees: 100
   m_SphereCastRadius: 0.1
-  m_RayLength: 20
+  m_RayLength: 35
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4293918715
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_Model: {fileID: 5022602860645237092, guid: 7f76a862a61b33b44b2d68788e065b96, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: Hunteranimal
+  m_BehaviorName: Alphahunteranimal
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -2159,9 +2159,12 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 8833519348196424687}
-  moveSpeed: 7
+  moveSpeed: 12
   rotateSpeed: 6
   isAgent: 0
+  prey: {fileID: 0}
+  weakestPreyAnimal: {fileID: 0}
+  weakestHunterAnimal: {fileID: 0}
 --- !u!1 &7433778434394816098
 GameObject:
   m_ObjectHideFlags: 0

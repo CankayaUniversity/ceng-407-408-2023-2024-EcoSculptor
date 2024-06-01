@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346769057362641942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.128, z: 0.357}
+  m_LocalPosition: {x: 0, y: 0.128, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,13 +93,13 @@ MonoBehaviour:
   m_DetectableTags:
   - Agent
   - boundary
-  m_RaysPerDirection: 5
-  m_MaxRayDegrees: 49
+  m_RaysPerDirection: 20
+  m_MaxRayDegrees: 120
   m_SphereCastRadius: 0.1
-  m_RayLength: 20
+  m_RayLength: 35
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4293918715
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1106030127756920311}
   m_Layer: 14
   m_Name: WolfArea
-  m_TagString: BearArea
+  m_TagString: WolfArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,8 +285,11 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 6932661746761166009}
-  moveSpeed: 7
+  moveSpeed: 14
   rotateSpeed: 6
+  prey: {fileID: 0}
+  weakestPreyAnimal: {fileID: 0}
+  strongestHunterAnimal: {fileID: 0}
 --- !u!114 &4112302672909341778
 MonoBehaviour:
   m_ObjectHideFlags: 0

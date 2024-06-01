@@ -22,10 +22,10 @@ public class PreyAnimal : Agent
 
     private Collider collideWith;
 
-    /*private int foodEaten = 0;
+    private int foodEaten = 0;
     [SerializeField] private FoodManager foodManager;
     public AlphaHunterAnimal strongestHunterAnimal;
-    public HunterAnimal weakestHunterAnimal;*/
+    public HunterAnimal weakestHunterAnimal;
 
     private bool _isDead;
     private bool _isEating;
@@ -42,9 +42,9 @@ public class PreyAnimal : Agent
         _isEating = false;
     }
 
-    /*public override void OnEpisodeBegin()
+    public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.26f, Random.Range(-20f, 20f));
+        transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.4f, Random.Range(-20f, 20f));
         rb.isKinematic = false;
         rotateSpeed = 6f;
         PlayAnimation("Movement");
@@ -53,7 +53,7 @@ public class PreyAnimal : Agent
         foodManager.EpisodeTimerNew();
         _isDead = false;
         _isEating = false;
-    }*/
+    }
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -83,12 +83,12 @@ public class PreyAnimal : Agent
         }
     }
 
-    /*public override void Heuristic(in ActionBuffers actionsOut)
+    public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxisRaw("Horizontal");
         continuousActions[1] = Input.GetAxisRaw("Vertical");
-    }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -101,20 +101,24 @@ public class PreyAnimal : Agent
             animator.Play("deer_deer_eat");
             animator.SetBool("EatingDone",false);
         }
+        if (other.gameObject.CompareTag("GrassArea"))
+        {
+            AddReward(2f);
+        }
 
-        /*if (other.gameObject.CompareTag("boundary"))
+        if (other.gameObject.CompareTag("boundary"))
         {
             AddReward(-5f);
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }*/
+        }
     }
 
     public void RewardFood()
     {
         Destroy(collideWith.gameObject);
-        /*AddReward(15f);
+        AddReward(12f);
         foodEaten++;
         if (foodEaten == foodManager.foodCount)
         {
@@ -124,7 +128,7 @@ public class PreyAnimal : Agent
             strongestHunterAnimal.AddReward(-5f);
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }*/
+        }
         _isEating = false;
         rb.isKinematic = false;
         rotateSpeed = 6f;

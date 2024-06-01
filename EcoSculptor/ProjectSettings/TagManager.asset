@@ -23,6 +23,8 @@ TagManager:
   - WolfBase
   - TigerBase
   - BearBase
+  - RewardArea
+  - GrassArea
   layers:
   - Default
   - TransparentFX
@@ -44,7 +46,7 @@ TagManager:
   - EatenCollision
   - 
   - Boundary
-  - 
+  - Grasses
   - 
   - 
   - 

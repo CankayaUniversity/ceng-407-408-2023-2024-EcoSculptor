@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1935190728060240603
 Transform:
   m_ObjectHideFlags: 0
@@ -107,10 +107,10 @@ MonoBehaviour:
   m_DetectableTags:
   - nectar
   - boundary
-  m_RaysPerDirection: 15
+  m_RaysPerDirection: 20
   m_MaxRayDegrees: 120
   m_SphereCastRadius: 0.1
-  m_RayLength: 25
+  m_RayLength: 35
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
@@ -258,7 +258,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: dd2c3ce97f4ae4d43b90fa5e903e1beb, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 12175df83faadee46bc962d4d9840b03, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Preyanimal
@@ -283,9 +283,12 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 6928909256275896681}
-  moveSpeed: 8
+  moveSpeed: 16
   rotateSpeed: 6
   deerArea: {fileID: 3375085426832674540}
+  foodManager: {fileID: 0}
+  strongestHunterAnimal: {fileID: 0}
+  weakestHunterAnimal: {fileID: 0}
 --- !u!114 &4952891902858988287
 MonoBehaviour:
   m_ObjectHideFlags: 0
