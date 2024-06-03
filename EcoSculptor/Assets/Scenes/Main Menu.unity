@@ -630,7 +630,7 @@ PrefabInstance:
     - target: {fileID: 7617110853920493072, guid: 72e5723ab8df41d47a15165b7b3c0c1a,
         type: 3}
       propertyPath: m_Name
-      value: Directional Light (1)
+      value: Directional Light
       objectReference: {fileID: 0}
     - target: {fileID: 7617110853920493072, guid: 72e5723ab8df41d47a15165b7b3c0c1a,
         type: 3}
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Music Volume
+  m_text: 'MUSIC VOLUME
 
 '
   m_isRightToLeft: 0
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.28235295, g: 0.7411765, b: 0.9921569, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Window Mode
+  m_text: WINDOW MODE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -1797,7 +1797,7 @@ GameObject:
   - component: {fileID: 2143998744}
   - component: {fileID: 2143998746}
   m_Layer: 0
-  m_Name: Ambient 1
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2054,6 +2054,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1317965667}
     m_Modifications:
+    - target: {fileID: 3661135154546536773, guid: 839bf413973469940ae21c44e91d470d,
+        type: 3}
+      propertyPath: m_text
+      value: SETTINGS
+      objectReference: {fileID: 0}
     - target: {fileID: 3661135155029923698, guid: 839bf413973469940ae21c44e91d470d,
         type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -2268,6 +2273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661135156043821053, guid: 839bf413973469940ae21c44e91d470d,
+        type: 3}
+      propertyPath: m_text
+      value: QUIT GAME
       objectReference: {fileID: 0}
     - target: {fileID: 3661135156190493535, guid: 839bf413973469940ae21c44e91d470d,
         type: 3}
