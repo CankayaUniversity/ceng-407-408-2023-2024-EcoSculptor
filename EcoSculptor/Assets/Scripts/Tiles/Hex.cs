@@ -78,29 +78,7 @@ public class Hex : MonoBehaviour
         }
     }
 
-    private void CreateFoodTile(Vector3Int neighborVector)
-    {
-        var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
-        if (!neighborTile.tileMesh.gameObject.CompareTag("Grass") || neighborTile.FoodFlag) return;
-        var position1 = neighborTile.transform.position;
-
-        neighborTile.Food = Instantiate(foods, neighborTile.transform);
-        neighborTile.Food.SetActive(false);
-        
-        neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 10, position1.z);
-        neighborTile.FoodFlag = true;
-        
-        var endPosition = new Vector3(position1.x, position1.y + 0.5f, position1.z);
-
-        _newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
-        {
-            if (!neighborTile.FoodFlag) return;
-            
-            neighborTile.Food.SetActive(true);
-            neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
-        }));
-        
-    }
+   
 
     public void GrowFood(GameObject food) //Geyik otu yediğinde çağırılacak
     {
@@ -121,7 +99,50 @@ public class Hex : MonoBehaviour
             food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
     }
+    public bool ControlNeighborIsRiver(GameObject food)
+    {
+        var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
+        var flag = false;
+        foreach (var neighborVector in neighborsList)
+        {
+            var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
+            if (neighborTile.tileMesh.gameObject.CompareTag("River"))
+            {
+                flag = true;
+                break;
+            }
+        }
 
+        return flag;
+
+    }
+    private void CreateFoodTile(Vector3Int neighborVector, Hex hex)
+    {
+        var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
+        if (!neighborTile.tileMesh.gameObject.CompareTag("Grass") || neighborTile.FoodFlag) return;
+        var position1 = neighborTile.transform.position;
+
+        neighborTile.Food = Instantiate(foods, neighborTile.transform);
+        neighborTile.Food.SetActive(false);
+        
+        neighborTile.Food.transform.position = new Vector3(position1.x, position1.y - 10, position1.z);
+        neighborTile.FoodFlag = true;
+        
+        var endPosition = new Vector3(position1.x, position1.y + 0.5f, position1.z);
+
+        _newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
+        {
+            if (!neighborTile.FoodFlag) return;
+            if (!tileMesh.gameObject.CompareTag("River"))
+            {
+                Destroy(neighborTile.Food);
+                neighborTile._foodFlag = false;
+            }
+            neighborTile.Food.SetActive(true);
+            neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+        }));
+        
+    }
     private IEnumerator WaitForSeconds(float sec, Action onWaitEnd)
     {
         yield return new WaitForSeconds(sec);
@@ -137,7 +158,10 @@ public class Hex : MonoBehaviour
         }
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
         foreach (var neighborVector in neighborsList)
-            CreateFoodTile(neighborVector);
+        {
+            if (tileMesh.gameObject.CompareTag("River"))
+                CreateFoodTile(neighborVector, this);
+        }
     }
 
     public void ChangeTileToWinter()
@@ -149,4 +173,6 @@ public class Hex : MonoBehaviour
     {
         winterHandler.ChangeTileToNormal();
     }
+
+    
 }

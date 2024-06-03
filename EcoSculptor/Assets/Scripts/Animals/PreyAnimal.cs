@@ -137,10 +137,10 @@ public class PreyAnimal : Agent
         if (collideWith)
         {
             //Destroy(collideWith.gameObject);
-            
             collideWith.gameObject.SetActive(false);
             var hex = collideWith.GetComponentInParent<Hex>();
-            hex.GrowFood(collideWith.gameObject);
+            if(hex.ControlNeighborIsRiver(collideWith.gameObject))
+                hex.GrowFood(collideWith.gameObject);
             rotateSpeed = 6f;
             collideWith.enabled = true;
             rb.isKinematic = false;
