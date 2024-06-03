@@ -20,11 +20,18 @@ public class AlphaHunterAnimal : Agent
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotateSpeed = 6f;
     
+    [Header("Hunger")]
+    [SerializeField] private Hunger hunger;
+    [SerializeField] private float hungerAgainTimer = 60;
+    private bool _isHungry;
+    
     private Rigidbody rb;
     public bool isAgent;
 
+    [Header("Collider")]
     private Collider _collideWith;
     private Coroutine EatRoutine;
+    private bool _isEating;
 
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
@@ -41,6 +48,11 @@ public class AlphaHunterAnimal : Agent
         rb = GetComponent<Rigidbody>();
         alphaAnim = GetComponentInChildren<HandleEatingAnim>();
         PlayAnimation("Movement");
+
+
+        hunger.OnAnimalDeathByHunger += OnDeathByHunger;
+        hunger.enabled = true;
+        _isEating = false;
     }
 
     protected override void OnDisable()
@@ -88,16 +100,20 @@ public class AlphaHunterAnimal : Agent
         
         if (other.gameObject.CompareTag("Agent"))
         {
-            
+            if (_isEating)
+            {
+                return;
+            }
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
             
             alphaAnim.preyParentAnimal = pa;
-            
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             isAgent = true;
             animator.Play("Bear_Attack1");
+            pa.CloseColliders();
             pa.PreyDeath();
         }
         /*if (other.gameObject.CompareTag("RewardArea"))
@@ -113,11 +129,15 @@ public class AlphaHunterAnimal : Agent
         }*/
         if (other.gameObject.CompareTag("Hunter"))
         {
+            if (!_isEating)
+            {
+                return;
+            }
             var pa = other.gameObject.GetComponentInParent<HunterAnimal>();
             _collideWith = other;
 
             alphaAnim.hunterParentAnimal = pa;
-            
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("Bear_Attack1");
@@ -125,14 +145,21 @@ public class AlphaHunterAnimal : Agent
         }
     }
 
+    
+    [Header("Gain Elemental When Die")] 
+    [SerializeField] private int elementalResourceAmount = 100;
+
     public void EatHunter()
     {
         rb.isKinematic = false;
         rotateSpeed = 6f;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.gameObject);
+        
+        RestoreHunger();
+        _isEating = false;
 
-
+        EconomyManager.Instance.IncreaseResource(elementalResourceAmount);
         /*AddReward(5f);
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.AddReward(-5f);
@@ -147,6 +174,11 @@ public class AlphaHunterAnimal : Agent
         isAgent = false;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.parent.gameObject);
+        
+        RestoreHunger();
+        
+        EconomyManager.Instance.IncreaseResource(elementalResourceAmount);
+        _isEating = false;
 
 
 
@@ -155,5 +187,32 @@ public class AlphaHunterAnimal : Agent
         weakestPreyAnimal.EndEpisode();
         weakestHunterAnimal.EndEpisode();
         EndEpisode();*/
+    }
+    
+    private void RestoreHunger()
+    {
+        //Hunger
+        hunger.ResetCurrentHunger();
+        hunger.enabled = false;
+        _isHungry = false;
+        Invoke(nameof(HungerAgain), hungerAgainTimer);
+    }
+    
+    private void HungerAgain()
+    {
+        hunger.enabled = true;
+        _isHungry = true;
+    }
+    
+    public void OnDeathByHunger(Hunger hunger)
+    {
+        animator.Play("Bear_Death");
+    }
+
+    public void HandleAlphaDeath()
+    {
+        rb.isKinematic = true;
+        rotateSpeed = 0;
+        Destroy(gameObject);
     }
 }

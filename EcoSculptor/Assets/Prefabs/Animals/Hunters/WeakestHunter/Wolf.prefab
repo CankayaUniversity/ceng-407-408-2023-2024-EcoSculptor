@@ -194,9 +194,9 @@ GameObject:
   - component: {fileID: 4370438965027574132}
   - component: {fileID: 169474553274833917}
   - component: {fileID: 6458070498463507344}
-  - component: {fileID: 7447240240146640332}
   - component: {fileID: 4112302672909341778}
   - component: {fileID: 2304426136875221840}
+  - component: {fileID: -4383672867623698452}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: WolfBase
@@ -288,26 +288,12 @@ MonoBehaviour:
   animator: {fileID: 6932661746761166009}
   moveSpeed: 7
   rotateSpeed: 6
+  hunger: {fileID: -4383672867623698452}
+  hungerAgainTimer: 60
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
   strongestHunterAnimal: {fileID: 0}
-  handleHunger: {fileID: 7447240240146640332}
-  isHungry: 0
-  hungerTime: 90
---- !u!114 &7447240240146640332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946642904570535460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce32c46e049d416081099ea559c26c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultHungerRate: 60
-  hungerRate: 60
+  elementalResourceAmount: 100
 --- !u!114 &4112302672909341778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +322,21 @@ CapsuleCollider:
   m_Height: 0.4
   m_Direction: 2
   m_Center: {x: 0, y: 0.04, z: 0}
+--- !u!114 &-4383672867623698452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946642904570535460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76e49c7b9fa46e3902ac169c3dcade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHunger: 90
+  currentHunger: 0
+  hungerDepletionRate: 1
 --- !u!1001 &2537249605063903718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -691,7 +692,7 @@ PrefabInstance:
     - target: {fileID: 6045925207405205259, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6045925207405205259, guid: 2b3392dcb85a5d840aa70258339a6a21,
         type: 3}

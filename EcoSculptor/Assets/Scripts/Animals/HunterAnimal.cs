@@ -18,13 +18,19 @@ public class HunterAnimal : Agent
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotateSpeed = 6f;
     
+    [Header("Hunger")]
+    [SerializeField] private Hunger hunger;
+    [SerializeField] private float hungerAgainTimer = 60;
+    private bool _isHungry;
     
     private Rigidbody rb;
     private HandleEatingAnim hunterAnim;
     private bool isDead;
+    private bool _isEating;
 
     private Collider _collideWith;
 
+    [Header("OTHERS")]
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
     public AlphaHunterAnimal strongestHunterAnimal;
@@ -37,6 +43,11 @@ public class HunterAnimal : Agent
         isDead = false;
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        
+        hunger.enabled = true;
+        _isHungry = true;
+        hunger.OnAnimalDeathByHunger += AnimalDeathByHunger;
+        _isEating = false;
     }
 
     /*public override void OnEpisodeBegin()
@@ -86,12 +97,19 @@ public class HunterAnimal : Agent
     {
         if (other.gameObject.CompareTag("Agent"))
         {
+            if(!_isHungry) return;
+            if (_isEating)
+            {
+                return;
+            }
             var pah = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
             hunterAnim.preyParentAnimal = pah;
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("dog_test_wolf-attack");
+            pah.CloseColliders();
             pah.PreyDeath();
         }
         /*if (other.gameObject.CompareTag("RewardArea"))
@@ -106,6 +124,9 @@ public class HunterAnimal : Agent
             EndEpisode();
         }*/
     }
+    
+    [Header("Gain Elemental When Die")] 
+    [SerializeField] private int elementalResourceAmount = 100;
 
     public void EatAgent()
     {
@@ -113,6 +134,11 @@ public class HunterAnimal : Agent
         rotateSpeed = 6f;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.parent.gameObject);
+        
+        EconomyManager.Instance.IncreaseResource(elementalResourceAmount);
+        
+        RestoreHunger();
+        _isEating = false;
 
         /*AddReward(6f);
         weakestPreyAnimal.AddReward(-5f);
@@ -129,5 +155,30 @@ public class HunterAnimal : Agent
         rb.isKinematic = true;
         rotateSpeed = 0;
         animator.Play("dog_test_wolf-death");
+    }
+    
+    private void RestoreHunger()
+    {
+        //Hunger
+        hunger.ResetCurrentHunger();
+        hunger.enabled = false;
+        _isHungry = false;
+        Invoke(nameof(HungerAgain), hungerAgainTimer);
+    }
+
+    private void HungerAgain()
+    {
+        hunger.enabled = true;
+        _isHungry = true;
+    }
+
+    private void AnimalDeathByHunger(Hunger hunger)
+    {
+        HunterDeath();
+    }
+    
+    public void DestroyOnAnimEnds()
+    {
+        Destroy(gameObject);
     }
 }

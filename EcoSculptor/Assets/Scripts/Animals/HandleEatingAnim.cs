@@ -51,4 +51,19 @@ public class HandleEatingAnim : MonoBehaviour
     {
         //preyParentAnimal.PreyDeath();
     }
+
+    public void AlphaDeath()
+    {
+        alphaParentAnimal.HandleAlphaDeath();
+    }
+
+    public void DeerDeathByHunger()
+    {
+        preyParentAnimal.DestroyOnAnimEnds();
+    }
+
+    public void HunterDeathByHunger()
+    {
+        hunterParentAnimal.DestroyOnAnimEnds();
+    }
 }

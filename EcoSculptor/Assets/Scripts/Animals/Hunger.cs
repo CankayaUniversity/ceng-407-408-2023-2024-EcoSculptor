@@ -12,7 +12,7 @@ public class Hunger : MonoBehaviour
 
     private Coroutine depleteHungerRoutine;
 
-    public Action<bool> OnAnimalDeathByHunger;
+    public Action<Hunger> OnAnimalDeathByHunger;
 
     private void OnEnable()
     {
@@ -35,7 +35,7 @@ public class Hunger : MonoBehaviour
             if (currentHunger <= 0)
             {
                 currentHunger = 0;
-                OnAnimalDeathByHunger?.Invoke(true);
+                OnAnimalDeathByHunger?.Invoke(this);
                 this.enabled = false;
                 yield break;
             }

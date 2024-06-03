@@ -47,6 +47,8 @@ public class PreyAnimal : Agent
         _isEating = false;
         hunger.enabled = true;
         _isHungry = true;
+
+        hunger.OnAnimalDeathByHunger += PreyDeathByHunger;
     }
 
     /*public override void OnEpisodeBegin()
@@ -119,6 +121,15 @@ public class PreyAnimal : Agent
         }*/
     }
 
+    public void CloseColliders()
+    {
+        var componentList = GetComponentsInChildren<Collider>();
+        foreach (var collider in componentList)
+        {
+            collider.enabled = false;
+        }
+    }
+
     private void DeerEatsFood(Collider other)
     {
         _isEating = true;
@@ -131,6 +142,10 @@ public class PreyAnimal : Agent
         animator.Play("deer_deer_eat");
         animator.SetBool("EatingDone",false);
     }
+    
+    
+    [Header("Gain Elemental When Die")] 
+    [SerializeField] private int elementalResourceAmount = 100;
 
     public void RewardFood()
     {
@@ -146,6 +161,8 @@ public class PreyAnimal : Agent
             rb.isKinematic = false;
             _isEating = false;
             animator.SetBool("EatingDone", true);
+            
+            EconomyManager.Instance.IncreaseResource(elementalResourceAmount);
             
             RestoreHunger();
         }
@@ -180,6 +197,12 @@ public class PreyAnimal : Agent
         _isHungry = true;
     }
 
+    public void DestroyOnAnimEnds()
+    {
+        if (isPreyDeathByHunger)
+            Destroy(gameObject);
+    }
+    
     public void OnHunterEnter()
     {
         rb.isKinematic = false;
@@ -198,6 +221,11 @@ public class PreyAnimal : Agent
         rotateSpeed = 0;
         animator.Play("deer_deer_death");
     }
-    
-    
+
+    private bool isPreyDeathByHunger;
+    public void PreyDeathByHunger(Hunger hunger)
+    {
+        isPreyDeathByHunger = true;
+        PreyDeath();
+    }
 }
