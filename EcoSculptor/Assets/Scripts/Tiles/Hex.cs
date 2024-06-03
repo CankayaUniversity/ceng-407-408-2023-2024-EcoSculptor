@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
@@ -75,48 +76,11 @@ public class Hex : MonoBehaviour
         if (_newRoutine2 != null)
         {
             StopCoroutine(_newRoutine2);
+
         }
     }
 
-   
-
-    public void GrowFood(GameObject food) //Geyik otu yediğinde çağırılacak
-    {
-        if(food.activeInHierarchy) return;
-
-        var position = food.transform.position;
-        var endPosition = position;
-        var startPos = position;
-        
-        position = new Vector3(startPos.x, startPos.y - 10, startPos.z);
-        food.transform.position = position;
-
-        _newRoutine2 = StartCoroutine(WaitForSeconds(10f, () =>
-        {
-            if (!food) return;
-
-            food.SetActive(true);
-            food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
-        }));
-    }
-    public bool ControlNeighborIsRiver(GameObject food)
-    {
-        var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
-        var flag = false;
-        foreach (var neighborVector in neighborsList)
-        {
-            var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
-            if (neighborTile.tileMesh.gameObject.CompareTag("River"))
-            {
-                flag = true;
-                break;
-            }
-        }
-
-        return flag;
-
-    }
-    private void CreateFoodTile(Vector3Int neighborVector, Hex hex)
+    private void CreateFoodTile(Vector3Int neighborVector)
     {
         var neighborTile = HexGrid.Instance.GetTileAt(neighborVector);
         if (!neighborTile.tileMesh.gameObject.CompareTag("Grass") || neighborTile.FoodFlag) return;
@@ -133,16 +97,53 @@ public class Hex : MonoBehaviour
         _newRoutine = StartCoroutine(WaitForSeconds(10f, () =>
         {
             if (!neighborTile.FoodFlag) return;
-            if (!tileMesh.gameObject.CompareTag("River"))
+            if (!ControlNeighborIsRiver(neighborTile.Food))
             {
                 Destroy(neighborTile.Food);
                 neighborTile._foodFlag = false;
+                return;
             }
+
             neighborTile.Food.SetActive(true);
             neighborTile.Food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
         
     }
+
+    public void GrowFood(GameObject food) //Geyik otu yediğinde çağırılacak
+    {
+        if(food.activeInHierarchy) return;
+
+        var position = food.transform.position;
+        var endPosition = position;
+        var startPos = position;
+        
+        position = new Vector3(startPos.x, startPos.y - 10, startPos.z);
+        food.transform.position = position;
+
+        _newRoutine2 = StartCoroutine(WaitForSeconds(10f, () =>
+        {
+            if (!food) return;
+            if (!ControlNeighborIsRiver(food))
+            {
+                Destroy(food);
+                _foodFlag = false;
+                return;
+            }
+            food.SetActive(true);
+            _foodFlag = true;
+            food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
+        }));
+    }
+    private bool ControlNeighborIsRiver(GameObject food)
+    {
+        var foodHex = food.GetComponentInParent<Hex>();
+        var neighborsList = HexGrid.Instance.GetNeighboursFor(foodHex.HexCoords);
+        return neighborsList.Select(neighborVector => HexGrid.Instance.GetTileAt(neighborVector)).Any(neighborTile
+            => neighborTile.tileMesh.gameObject.CompareTag("River"));
+
+    }
+ 
     private IEnumerator WaitForSeconds(float sec, Action onWaitEnd)
     {
         yield return new WaitForSeconds(sec);
@@ -157,11 +158,9 @@ public class Hex : MonoBehaviour
             return;
         }
         var neighborsList = HexGrid.Instance.GetNeighboursFor(HexCoords);
-        foreach (var neighborVector in neighborsList)
-        {
-            if (tileMesh.gameObject.CompareTag("River"))
-                CreateFoodTile(neighborVector, this);
-        }
+        foreach (var neighborVector in neighborsList.Where(neighborVector => tileMesh.gameObject.CompareTag("River")))
+            CreateFoodTile(neighborVector);
+        
     }
 
     public void ChangeTileToWinter()
