@@ -119,6 +119,15 @@ public class PreyAnimal : Agent
         }*/
     }
 
+    public void CloseColliders()
+    {
+        var componentList = GetComponentsInChildren<Collider>();
+        foreach (var collider in componentList)
+        {
+            collider.enabled = false;
+        }
+    }
+
     private void DeerEatsFood(Collider other)
     {
         _isEating = true;
@@ -198,6 +207,7 @@ public class PreyAnimal : Agent
         rotateSpeed = 0;
         animator.Play("deer_deer_death");
     }
+    
     
     
 }

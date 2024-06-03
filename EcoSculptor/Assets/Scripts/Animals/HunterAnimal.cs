@@ -22,6 +22,7 @@ public class HunterAnimal : Agent
     private Rigidbody rb;
     private HandleEatingAnim hunterAnim;
     private bool isDead;
+    private bool _isEating;
 
     private Collider _collideWith;
 
@@ -37,6 +38,7 @@ public class HunterAnimal : Agent
         isDead = false;
         rb.isKinematic = false;
         rotateSpeed = 6f;
+        _isEating = false;
     }
 
     /*public override void OnEpisodeBegin()
@@ -86,12 +88,18 @@ public class HunterAnimal : Agent
     {
         if (other.gameObject.CompareTag("Agent"))
         {
+            if (_isEating)
+            {
+                return;
+            }
             var pah = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
             hunterAnim.preyParentAnimal = pah;
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("dog_test_wolf-attack");
+            pah.CloseColliders();
             pah.PreyDeath();
         }
         /*if (other.gameObject.CompareTag("RewardArea"))
@@ -113,6 +121,7 @@ public class HunterAnimal : Agent
         rotateSpeed = 6f;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.parent.gameObject);
+        _isEating = false;
 
         /*AddReward(6f);
         weakestPreyAnimal.AddReward(-5f);

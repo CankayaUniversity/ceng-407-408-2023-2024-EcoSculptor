@@ -25,6 +25,7 @@ public class AlphaHunterAnimal : Agent
 
     private Collider _collideWith;
     private Coroutine EatRoutine;
+    private bool _isEating;
 
     public GameObject prey;
     public PreyAnimal weakestPreyAnimal;
@@ -41,6 +42,7 @@ public class AlphaHunterAnimal : Agent
         rb = GetComponent<Rigidbody>();
         alphaAnim = GetComponentInChildren<HandleEatingAnim>();
         PlayAnimation("Movement");
+        _isEating = false;
     }
 
     protected override void OnDisable()
@@ -88,16 +90,20 @@ public class AlphaHunterAnimal : Agent
         
         if (other.gameObject.CompareTag("Agent"))
         {
-            
+            if (_isEating)
+            {
+                return;
+            }
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
             
             alphaAnim.preyParentAnimal = pa;
-            
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             isAgent = true;
             animator.Play("Bear_Attack1");
+            pa.CloseColliders();
             pa.PreyDeath();
         }
         /*if (other.gameObject.CompareTag("RewardArea"))
@@ -113,11 +119,15 @@ public class AlphaHunterAnimal : Agent
         }*/
         if (other.gameObject.CompareTag("Hunter"))
         {
+            if (!_isEating)
+            {
+                return;
+            }
             var pa = other.gameObject.GetComponentInParent<HunterAnimal>();
             _collideWith = other;
 
             alphaAnim.hunterParentAnimal = pa;
-            
+            _isEating = true;
             rb.isKinematic = true;
             rotateSpeed = 0;
             animator.Play("Bear_Attack1");
@@ -131,6 +141,7 @@ public class AlphaHunterAnimal : Agent
         rotateSpeed = 6f;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.gameObject);
+        _isEating = false;
 
 
         /*AddReward(5f);
@@ -147,6 +158,7 @@ public class AlphaHunterAnimal : Agent
         isAgent = false;
         if(_collideWith)
             Destroy(_collideWith.transform.parent.parent.gameObject);
+        _isEating = false;
 
 
 
