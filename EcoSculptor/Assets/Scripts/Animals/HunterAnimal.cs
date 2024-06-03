@@ -18,6 +18,7 @@ public class HunterAnimal : Agent
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotateSpeed = 6f;
     
+    
     private Rigidbody rb;
     private HandleEatingAnim hunterAnim;
     private bool isDead;
@@ -38,7 +39,7 @@ public class HunterAnimal : Agent
         rotateSpeed = 6f;
     }
 
-    public override void OnEpisodeBegin()
+    /*public override void OnEpisodeBegin()
     {
         //Hunter
         Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0.24f, Random.Range(-20f, 20f));
@@ -47,7 +48,7 @@ public class HunterAnimal : Agent
         rotateSpeed = 6f;
         PlayAnimation("Movement");
         isDead = false;
-    }
+    }*/
     
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -74,12 +75,12 @@ public class HunterAnimal : Agent
         
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut)
+    /*public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxisRaw("Horizontal");
         continuousActions[1] = Input.GetAxisRaw("Vertical");
-    }
+    }*/
     
     private void OnTriggerEnter(Collider other)
     {
@@ -93,7 +94,7 @@ public class HunterAnimal : Agent
             animator.Play("dog_test_wolf-attack");
             pah.PreyDeath();
         }
-        if (other.gameObject.CompareTag("RewardArea"))
+        /*if (other.gameObject.CompareTag("RewardArea"))
         {
             AddReward(3f);
         }
@@ -103,19 +104,21 @@ public class HunterAnimal : Agent
             weakestPreyAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }
+        }*/
     }
 
     public void EatAgent()
     {
         rb.isKinematic = false;
         rotateSpeed = 6f;
-        //Destroy(_collideWith.transform.parent.parent.gameObject);
-        AddReward(6f);
+        if(_collideWith)
+            Destroy(_collideWith.transform.parent.parent.gameObject);
+
+        /*AddReward(6f);
         weakestPreyAnimal.AddReward(-5f);
         weakestPreyAnimal.EndEpisode();
         strongestHunterAnimal.EndEpisode();
-        EndEpisode();
+        EndEpisode();*/
     }
 
     public void HunterDeath()

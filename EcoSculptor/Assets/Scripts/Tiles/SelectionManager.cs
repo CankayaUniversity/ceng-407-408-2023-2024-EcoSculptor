@@ -37,7 +37,6 @@ public class SelectionManager : MonoBehaviour
             {
                 var rotation = _selectedHex.transform.eulerAngles;
                 var targetRotation = new Vector3(rotation.x, (rotation.y + 60) % 360, rotation.z);
-                Debug.Log(targetRotation);
                 _selectedHex.transform.DORotate(targetRotation, 0.1f).SetEase(Ease.Linear);
             }
         }

@@ -40,16 +40,16 @@ public class TileChanger : SelectionManager
     private void ChangeTile()
     {
         if(!_tilePrefab || !isSafeToClick) return;
+        
         var tilePrice = EconomyManager.Instance.TilePriceCatalog.GetTilePrice(_selectedHex.tag);
         var playerPrice = EconomyManager.Instance.ElementalResource;
         
         if(playerPrice < tilePrice) return;
+        
         EconomyManager.Instance.DecreaseResource(tilePrice);
         
         var oldTile = SelectedHex.TileMesh;
-        
         Destroy(SelectedHex.TileMesh);
-
         var newTile = SelectedHex.TileMesh = Instantiate(_tilePrefab, SelectedHex.TileMeshParent);
         newTile.tag = _tilePrefab.tag;
         _selectedHex.tag = newTile.tag;
@@ -66,15 +66,12 @@ public class TileChanger : SelectionManager
             if(TimeManager.Instance.IsWinter)
                 _selectedHex.winterHandler.PutTileAsWinter();
         
-        
-        
         PutTile(newTile);
 
         TileManager.Instance.TileCountOnChangeHandler(newTile.tag, oldTile.tag);
         
         AnimalManager.Instance.SpawnAnimals();
         _selectedHex.ControlRiver();
-        
     }
 
     private void PutTile(GameObject newTile)

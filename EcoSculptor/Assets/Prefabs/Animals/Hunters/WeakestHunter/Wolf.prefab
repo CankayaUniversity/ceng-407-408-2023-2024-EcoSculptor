@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 4370438965027574132}
   - component: {fileID: 169474553274833917}
   - component: {fileID: 6458070498463507344}
+  - component: {fileID: 7447240240146640332}
   - component: {fileID: 4112302672909341778}
   - component: {fileID: 2304426136875221840}
   m_Layer: 0
@@ -244,7 +245,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 6fa5e0c0728d81043821e3a6b79b1f8b, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Hunteranimal
@@ -285,11 +286,28 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 6932661746761166009}
-  moveSpeed: 14
+  moveSpeed: 7
   rotateSpeed: 6
   prey: {fileID: 0}
   weakestPreyAnimal: {fileID: 0}
   strongestHunterAnimal: {fileID: 0}
+  handleHunger: {fileID: 7447240240146640332}
+  isHungry: 0
+  hungerTime: 90
+--- !u!114 &7447240240146640332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946642904570535460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce32c46e049d416081099ea559c26c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultHungerRate: 60
+  hungerRate: 60
 --- !u!114 &4112302672909341778
 MonoBehaviour:
   m_ObjectHideFlags: 0

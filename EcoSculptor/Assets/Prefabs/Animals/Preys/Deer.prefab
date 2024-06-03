@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1935190728060240603
 Transform:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_RayLength: 35
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294966731
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 6200467844142780432}
   - component: {fileID: 8048030994369116978}
   - component: {fileID: 3049691935140146444}
+  - component: {fileID: 2561871324873712150}
   - component: {fileID: 4952891902858988287}
   - component: {fileID: 841484123302025879}
   - component: {fileID: 7974084530820936639}
@@ -259,7 +260,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 12175df83faadee46bc962d4d9840b03, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 83d05cf1d9203114d88a10a1aa5cabd4, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Preyanimal
@@ -284,12 +285,28 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   animator: {fileID: 6928909256275896681}
-  moveSpeed: 16
+  moveSpeed: 8
   rotateSpeed: 6
+  hunger: {fileID: 2561871324873712150}
+  hungerAgainTimer: 60
   deerArea: {fileID: 3375085426832674540}
-  foodManager: {fileID: 0}
   strongestHunterAnimal: {fileID: 0}
   weakestHunterAnimal: {fileID: 0}
+--- !u!114 &2561871324873712150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6721530134298135210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76e49c7b9fa46e3902ac169c3dcade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHunger: 90
+  currentHunger: 0
+  hungerDepletionRate: 1
 --- !u!114 &4952891902858988287
 MonoBehaviour:
   m_ObjectHideFlags: 0

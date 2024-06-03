@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 [SelectionBase]
 public class PreyAnimal : Agent
@@ -16,14 +14,21 @@ public class PreyAnimal : Agent
 
     [Header("Speeds")] [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotateSpeed = 6f;
+    
+    [Header("Hunger")]
+    [SerializeField] private Hunger hunger;
+    [SerializeField] private float hungerAgainTimer = 60;
+    private bool _isHungry;
 
+    
+    [Header("Colliders")]
     [SerializeField] private Collider deerArea;
     private Rigidbody rb;
 
     private Collider collideWith;
 
     private int foodEaten = 0;
-    [SerializeField] private FoodManager foodManager;
+    //[SerializeField] private FoodManager foodManager;
     public AlphaHunterAnimal strongestHunterAnimal;
     public HunterAnimal weakestHunterAnimal;
 
@@ -40,9 +45,11 @@ public class PreyAnimal : Agent
         rotateSpeed = 6f;
         _isDead = false;
         _isEating = false;
+        hunger.enabled = true;
+        _isHungry = true;
     }
 
-    public override void OnEpisodeBegin()
+    /*public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.4f, Random.Range(-20f, 20f));
         rb.isKinematic = false;
@@ -53,14 +60,14 @@ public class PreyAnimal : Agent
         foodManager.EpisodeTimerNew();
         _isDead = false;
         _isEating = false;
-    }
+    }*/
 
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
     }
 
-    public void PlayAnimation(string stateName)
+    private void PlayAnimation(string stateName)
     {
         animator.CrossFadeInFixedTime(stateName, 0f, 0, 0f);
     }
@@ -94,14 +101,11 @@ public class PreyAnimal : Agent
     {
         if (other.gameObject.CompareTag("nectar"))
         {
-            _isEating = true;
-            rb.isKinematic = true;
-            rotateSpeed = 0;
-            collideWith = other;
-            animator.Play("deer_deer_eat");
-            animator.SetBool("EatingDone",false);
+            if(!_isHungry) return;
+            DeerEatsFood(other);
+            other.enabled = false;
         }
-        if (other.gameObject.CompareTag("GrassArea"))
+        /*if (other.gameObject.CompareTag("GrassArea"))
         {
             AddReward(5f);
         }
@@ -112,13 +116,42 @@ public class PreyAnimal : Agent
             weakestHunterAnimal.EndEpisode();
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }
+        }*/
+    }
+
+    private void DeerEatsFood(Collider other)
+    {
+        _isEating = true;
+        rb.isKinematic = true;
+        rotateSpeed = 0;
+        collideWith = other;
+        collideWith.enabled = false;
+        
+        //Animation
+        animator.Play("deer_deer_eat");
+        animator.SetBool("EatingDone",false);
     }
 
     public void RewardFood()
     {
-        Destroy(collideWith.gameObject);
-        AddReward(5f);
+        if (collideWith)
+        {
+            //Destroy(collideWith.gameObject);
+            
+            collideWith.gameObject.SetActive(false);
+            var hex = collideWith.GetComponentInParent<Hex>();
+            hex.GrowFood(collideWith.gameObject);
+            rotateSpeed = 6f;
+            collideWith.enabled = true;
+            rb.isKinematic = false;
+            _isEating = false;
+            animator.SetBool("EatingDone", true);
+            
+            RestoreHunger();
+        }
+            
+        
+        /*AddReward(5f);
         foodEaten++;
         if (foodEaten == foodManager.foodCount)
         {
@@ -128,11 +161,23 @@ public class PreyAnimal : Agent
             strongestHunterAnimal.AddReward(-5f);
             strongestHunterAnimal.EndEpisode();
             EndEpisode();
-        }
-        _isEating = false;
-        rb.isKinematic = false;
-        rotateSpeed = 6f;
-        animator.SetBool("EatingDone",true);
+        }*/
+        
+    }
+
+    private void RestoreHunger()
+    {
+        //Hunger
+        hunger.ResetCurrentHunger();
+        hunger.enabled = false;
+        _isHungry = false;
+        Invoke(nameof(HungerAgain), hungerAgainTimer);
+    }
+
+    private void HungerAgain()
+    {
+        hunger.enabled = true;
+        _isHungry = true;
     }
 
     public void OnHunterEnter()
@@ -140,6 +185,8 @@ public class PreyAnimal : Agent
         rb.isKinematic = false;
         rotateSpeed = 6f;
         _isEating = false;
+        if(collideWith)
+            collideWith.enabled = true;
     }
 
     public void PreyDeath()
@@ -151,4 +198,6 @@ public class PreyAnimal : Agent
         rotateSpeed = 0;
         animator.Play("deer_deer_death");
     }
+    
+    
 }

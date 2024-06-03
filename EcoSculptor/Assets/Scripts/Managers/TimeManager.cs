@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,6 +15,7 @@ public class TimeManager : MonoBehaviour
     public int seasonCount;
     private bool _isWinter;
     private Coroutine newRoutine;
+    private Coroutine winterRoutine;
     public static TimeManager Instance;
 
     public float CurrentTimeOfDay
@@ -46,8 +46,11 @@ public class TimeManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (NewRoutine == null)return;
-        StopCoroutine(nameof(LoseControl));
+        if (newRoutine != null)
+            StopCoroutine(newRoutine);
+        
+        if(winterRoutine != null)
+            StopCoroutine(winterRoutine);
         
     }
 
@@ -86,12 +89,12 @@ public class TimeManager : MonoBehaviour
         totalTimeInGame = seasonCount * seasonTime;
         if(seasonCount % 2 == 1)
         {
-            StartCoroutine(TileManager.Instance.HandleWinter(true));
+            winterRoutine = StartCoroutine(TileManager.Instance.HandleWinter(true));
             _isWinter = true;
         }
         else
         {
-            StartCoroutine(TileManager.Instance.HandleWinter(false));
+            winterRoutine = StartCoroutine(TileManager.Instance.HandleWinter(false));
             _isWinter = false;
         }
         

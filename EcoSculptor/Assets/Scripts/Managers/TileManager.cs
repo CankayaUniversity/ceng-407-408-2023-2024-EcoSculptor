@@ -57,9 +57,6 @@ public class TileManager : MonoBehaviour
         {
             _winterHandlersDict.Add(h.transform.position, h);
         }
-
-        Debug.Log(_winterHandlersDict.Count);
-
     }
 
     private void Update()
@@ -99,7 +96,6 @@ public class TileManager : MonoBehaviour
             _ => -1
         };
         TileDataManager.Instance.UpdateCount(oldTileTag, count);
-
     }
     
     

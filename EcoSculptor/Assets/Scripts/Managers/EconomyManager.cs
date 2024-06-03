@@ -52,7 +52,7 @@ public class EconomyManager : MonoBehaviour
 
     private void Start()
     {
-        ElementalResource = 50;     //PlayerPrefs
+        //ElementalResource = 50;     //PlayerPrefs
         resource.SetText(ElementalResource.ToString());
     }
 

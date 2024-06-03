@@ -104,15 +104,24 @@ public class Hex : MonoBehaviour
 
     public void GrowFood(GameObject food) //Geyik otu yediğinde çağırılacak
     {
-        if(food.activeInHierarchy)return;
-        var pos = food.transform.position;
-        var endPosition = new Vector3(pos.x, pos.y + 0.5f, pos.z);
+        if(food.activeInHierarchy) return;
+        
+        var distance = 0.5f;
+        
+        var beginPos = food.transform.position;
+        var endPosition = beginPos;
+        
+        beginPos.y -= distance * 2; 
+        endPosition.y += distance;
+        
+        food.transform.position = beginPos;
+        
         _newRoutine2 = StartCoroutine(WaitForSeconds(10f, () =>
         {
             if (!food) return;
-            pos.y -= 10;
-            food.transform.position = pos;
+
             food.SetActive(true);
+            
             food.transform.DOMove(endPosition, 5.0f).SetEase(Ease.OutSine);
         }));
     }
