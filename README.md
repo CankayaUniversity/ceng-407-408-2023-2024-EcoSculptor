@@ -22,3 +22,5 @@
 - ## [CENG 408 Project Report PDF](https://drive.google.com/file/d/1vmhWE1PIKqkHUMbkLg2V3F2hV7wpgzvG/view?usp=sharing)
 
 - ## [CENG 408 Poster PDF](https://drive.google.com/file/d/1-tJoPu29nWvhPoFJrHw3R0iqjtTinQ8T/view?usp=sharing)
+
+- ## [CENG 408 Demo Video Link](https://www.youtube.com/watch?v=ViMa-MOm5ZM&ab_channel=%C3%96zg%C3%BCnDo%C4%9Fan)
