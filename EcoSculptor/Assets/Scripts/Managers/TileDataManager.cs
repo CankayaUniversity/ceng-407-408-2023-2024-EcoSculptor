@@ -27,21 +27,6 @@ public class TileDataManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        InitilizeTexts();
-    }
-
-    private void InitilizeTexts()
-    {
-        _grassCountText.text = 0.ToString();
-        _waterCountText.text = 0.ToString();
-        _riverCountText.text = 0.ToString();
-        _sandCountText.text = 0.ToString();
-        _dirtCountText.text = 0.ToString();
-        _stoneCountText.text = 0.ToString();
-    }
-
     public void UpdateCount(string tileTag, int count)
     {
         switch (tileTag)
