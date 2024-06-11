@@ -53,6 +53,7 @@ public class AlphaHunterAnimal : Agent
         hunger.OnAnimalDeathByHunger += OnDeathByHunger;
         hunger.enabled = true;
         _isEating = false;
+        _isHungry = true;
     }
 
     protected override void OnDisable()
