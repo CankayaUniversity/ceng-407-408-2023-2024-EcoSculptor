@@ -761,6 +761,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 1423534240}
+  resources: {fileID: 0}
+  UiBox: {fileID: 0}
 --- !u!4 &1057545535
 Transform:
   m_ObjectHideFlags: 0
@@ -1987,6 +1989,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2327162837607022718, guid: ffe4a9e3f3e42f449927e584869fe1d8,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327162837607022718, guid: ffe4a9e3f3e42f449927e584869fe1d8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327162837607022718, guid: ffe4a9e3f3e42f449927e584869fe1d8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327162837607022718, guid: ffe4a9e3f3e42f449927e584869fe1d8,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2044,6 +2061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327162837607022718, guid: ffe4a9e3f3e42f449927e584869fe1d8,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffe4a9e3f3e42f449927e584869fe1d8, type: 3}
