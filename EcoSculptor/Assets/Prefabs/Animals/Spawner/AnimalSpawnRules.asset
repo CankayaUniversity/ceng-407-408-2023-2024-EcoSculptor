@@ -24,7 +24,7 @@ MonoBehaviour:
     type: 3}
   wolfPrefab: {fileID: 8946642904570535460, guid: d460bc36fd0561b4792fd7325cba6f39,
     type: 3}
-  tigerPrefab: {fileID: 5961884353508373188, guid: 99934b22b8fd11646a5c14db128555de,
+  tigerPrefab: {fileID: 6451312992965758197, guid: 99934b22b8fd11646a5c14db128555de,
     type: 3}
   bearPrefab: {fileID: 7304351751140140539, guid: e15c1898101396d4380835f0f4572edd,
     type: 3}
