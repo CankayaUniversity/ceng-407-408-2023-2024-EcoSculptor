@@ -2144,6 +2144,11 @@ PrefabInstance:
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.18431373
       objectReference: {fileID: 0}
+    - target: {fileID: 3661135155518107835, guid: 839bf413973469940ae21c44e91d470d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3661135155924229180, guid: 839bf413973469940ae21c44e91d470d,
         type: 3}
       propertyPath: BGM
@@ -2279,6 +2284,11 @@ PrefabInstance:
       propertyPath: m_text
       value: QUIT GAME
       objectReference: {fileID: 0}
+    - target: {fileID: 3661135156190493528, guid: 839bf413973469940ae21c44e91d470d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -165
+      objectReference: {fileID: 0}
     - target: {fileID: 3661135156190493535, guid: 839bf413973469940ae21c44e91d470d,
         type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
@@ -2313,6 +2323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661135156440838838, guid: 839bf413973469940ae21c44e91d470d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -285
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 839bf413973469940ae21c44e91d470d, type: 3}

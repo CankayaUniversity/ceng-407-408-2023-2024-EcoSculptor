@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -29,8 +30,8 @@ public class PreyAnimal : Agent
 
     private int foodEaten = 0;
     //[SerializeField] private FoodManager foodManager;
-    public AlphaHunterAnimal strongestHunterAnimal;
-    public HunterAnimal weakestHunterAnimal;
+    //public AlphaHunterAnimal strongestHunterAnimal;
+    //public HunterAnimal weakestHunterAnimal;
 
     private bool _isDead;
     private bool _isEating;
@@ -51,6 +52,10 @@ public class PreyAnimal : Agent
         hunger.OnAnimalDeathByHunger += PreyDeathByHunger;
     }
 
+    private void OnDestroy()
+    {
+        AnimalManager.Instance.RemoveAnimals(this.gameObject);
+    }
     /*public override void OnEpisodeBegin()
     {
         transform.localPosition = new Vector3(Random.Range(-20f, 20f), 0.4f, Random.Range(-20f, 20f));
