@@ -24,3 +24,5 @@
 - ## [CENG 408 Poster PDF](https://drive.google.com/file/d/1-tJoPu29nWvhPoFJrHw3R0iqjtTinQ8T/view?usp=sharing)
 
 - ## [CENG 408 Demo Video Link](https://www.youtube.com/watch?v=ViMa-MOm5ZM&ab_channel=%C3%96zg%C3%BCnDo%C4%9Fan)
+
+- ## [CEN 408 Presentation](https://docs.google.com/presentation/d/1gJ3fMlA9JIT7qWWbYphauD8j1ELKCKWg0Xly5eu7_Oo/edit?usp=sharing)
