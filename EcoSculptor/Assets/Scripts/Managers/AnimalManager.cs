@@ -60,7 +60,7 @@ public class AnimalManager : MonoBehaviour
         var stoneTile = TileManager.Instance.StoneTile;
         var totalAnimal = TotalAnimalCount();
 
-        if (stoneTile == 0 || totalAnimal == 0 || totalAnimal % 10 != 0) return;
+        if (stoneTile == 0 || totalAnimal == 0 || totalAnimal < 10) return;
 
         if (stoneTile % rules.stoneTileCountForBear != 0) return;
 
