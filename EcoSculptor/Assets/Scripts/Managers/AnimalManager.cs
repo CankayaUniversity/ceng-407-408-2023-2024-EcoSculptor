@@ -7,18 +7,19 @@ public class AnimalManager : MonoBehaviour
 {
     [SerializeField] private AnimalSpawnRules rules;
 
-    [Header("Animal Lists")]
-    [SerializeField] private List<GameObject> deers;
-    [SerializeField] private List<GameObject> horses;
-    [SerializeField] private List<GameObject> tigers;
-    [SerializeField] private List<GameObject> wolves;
-    [SerializeField] private List<GameObject> bears;
+    [Header("Animal Lists")] 
+    [SerializeField] private List<GameObject> deers = new List<GameObject>();
+    [SerializeField] private List<GameObject> horses = new List<GameObject>();
+    [SerializeField] private List<GameObject> tigers = new List<GameObject>();
+    [SerializeField] private List<GameObject> wolves = new List<GameObject>();
+    [SerializeField] private List<GameObject> bears = new List<GameObject>();
     
     [Header("Animals Spawn Location")] 
     [SerializeField] private List<Transform> spawnLocations;
-    
+
     public static AnimalManager Instance;
     private bool _flag;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -41,41 +42,133 @@ public class AnimalManager : MonoBehaviour
         return deers.Count + horses.Count + wolves.Count + tigers.Count + bears.Count;
     }
 
-    private void SpawnAnimalType(GameObject prefab, int tileCount, int spawnCount, List<GameObject> animalList)
+    private void SpawnAnimal(GameObject prefab, List<GameObject> animalList)
     {
-        if(tileCount == 0) return;
-        if (tileCount % spawnCount != 0) return;
         var newAnimal = Instantiate(prefab, transform);
         animalList.Add(newAnimal);
         newAnimal.transform.position = SpawnAtRandomPosition();
     }
-    
+
     private Vector3 SpawnAtRandomPosition()
     {
-        var spawnIndex = Random.Range(0, spawnLocations.Count);
-        return spawnLocations[spawnIndex].transform.position;
+        int spawnIndex = Random.Range(0, spawnLocations.Count);
+        return spawnLocations[spawnIndex].position;
     }
 
     private void SpawnBearIfNeeded()
     {
-        if (TileManager.Instance.StoneTile % rules.stoneTileCountForBear != 0) return;
-        
+        var stoneTile = TileManager.Instance.StoneTile;
         var totalAnimal = TotalAnimalCount();
-        
-        if(totalAnimal == 0) return;
-        if (totalAnimal % rules.animalCountForBear != 0) return;
-        
-        var newBear = Instantiate(rules.bearPrefab, transform);
-        bears.Add(newBear);
+
+        if (stoneTile == 0 || totalAnimal == 0 || totalAnimal % 10 != 0) return;
+
+        if (stoneTile % rules.stoneTileCountForBear != 0) return;
+
+        if (bears.Count > 0)
+        {
+            if (totalAnimal % (rules.animalCountForBear * bears.Count) != 0) return;
+
+            if (stoneTile / bears.Count > rules.stoneTileCountForBear)
+            {
+                SpawnAnimal(rules.bearPrefab, bears);
+            }
+        }
+        else
+        {
+            SpawnAnimal(rules.bearPrefab, bears);
+        }
     }
+
 
     public void SpawnAnimals()
     {
-        SpawnAnimalType(rules.deerPrefab, TileManager.Instance.RiverTile, rules.riverTileCountForDeer, deers);
-        SpawnAnimalType(rules.horsePrefab, TileManager.Instance.DirtTile, rules.dirtTileCountForHorse, horses);
-        SpawnAnimalType(rules.wolfPrefab, deers.Count, rules.deerCountForWolf, wolves);
-        SpawnAnimalType(rules.tigerPrefab, TileManager.Instance.SandTile, rules.sandTileForTiger, tigers);
+        SpawnDeer();
+        SpawnHorse();
+        //SpawnTiger();
+        SpawnWolf();
         SpawnBearIfNeeded();
+    }
+
+    private void SpawnHorse()
+    {
+        var dirtTile = TileManager.Instance.DirtTile;
+        
+        if(dirtTile % rules.dirtTileCountForHorse != 0 || dirtTile <= 0) return;
+
+        if (horses.Count == 0)
+        {
+            SpawnAnimal(rules.horsePrefab, horses);
+            return;
+        }
+
+        if (dirtTile / horses.Count > rules.dirtTileCountForHorse)
+        {
+            SpawnAnimal(rules.horsePrefab, horses);
+        }
+    }
+
+    private void SpawnDeer()
+    {
+        var riverTile = TileManager.Instance.RiverTile;
+        
+        if(riverTile % rules.riverTileCountForDeer != 0 || riverTile <= 0) return;
+
+        if (deers.Count == 0)
+        {
+            SpawnAnimal(rules.deerPrefab, deers);
+            return;
+        }
+        
+        if (riverTile / deers.Count > rules.riverTileCountForDeer)
+        {
+            SpawnAnimal(rules.deerPrefab, deers);
+        }
+    }
+    
+    private void SpawnTiger()
+    {
+        var sand = TileManager.Instance.SandTile;
+        
+        if(sand % rules.sandTileForTiger != 0 || sand <= 0) return;
+        
+        if (sand / tigers.Count > rules.sandTileForTiger)
+        {
+            SpawnAnimal(rules.tigerPrefab, tigers);
+        }
+    }
+    
+    private void SpawnWolf()
+    {
+        var deerCountForWolves = deers.Count;
+        
+        if(deerCountForWolves % rules.deerCountForWolf != 0 || deerCountForWolves <= 0) return;
+        
+        if (deerCountForWolves / wolves.Count > rules.deerCountForWolf)
+        {
+            SpawnAnimal(rules.wolfPrefab, wolves);
+        }
+    }
+
+    public void RemoveAnimals(GameObject go)
+    {
+        switch (go.tag)
+        {
+            case "DeerBase":
+                deers.Remove(go);
+                break;
+            case "HorseBase":
+                horses.Remove(go);
+                break;
+            case "WolfBase":
+                wolves.Remove(go);
+                break;
+            case "TigerBase":
+                tigers.Remove(go);
+                break;
+            case "BearBase":
+                bears.Remove(go);
+                break;
+        }
     }
 
     private void CheckAnimalCount()
@@ -86,5 +179,4 @@ public class AnimalManager : MonoBehaviour
             _flag = true;
         }
     }
-    
 }

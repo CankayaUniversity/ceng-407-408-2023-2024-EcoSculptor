@@ -12,18 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1628424f2d4b7a85ca8359e1a85a44, type: 3}
   m_Name: AnimalSpawnRules
   m_EditorClassIdentifier: 
-  economyCatalog:
-    _serializedList:
-    - Key: Deer
-      Value: 0
-    - Key: Horse
-      Value: 0
-    - Key: Wolf
-      Value: 0
-    - Key: Tiger
-      Value: 0
-    - Key: Bear
-      Value: 0
   riverTileCountForDeer: 2
   dirtTileCountForHorse: 4
   deerCountForWolf: 4
@@ -32,7 +20,7 @@ MonoBehaviour:
   animalCountForBear: 10
   deerPrefab: {fileID: 6721530134298135210, guid: 77827c1a32a6377458af0fa28ac20ce7,
     type: 3}
-  horsePrefab: {fileID: 6721530134298135210, guid: 5edc2ecd374b8e340a9d48f5fc70ab37,
+  horsePrefab: {fileID: 3754239847710925750, guid: 5edc2ecd374b8e340a9d48f5fc70ab37,
     type: 3}
   wolfPrefab: {fileID: 8946642904570535460, guid: d460bc36fd0561b4792fd7325cba6f39,
     type: 3}

@@ -181,4 +181,9 @@ public class HunterAnimal : Agent
     {
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        AnimalManager.Instance.RemoveAnimals(this.gameObject);
+    }
 }

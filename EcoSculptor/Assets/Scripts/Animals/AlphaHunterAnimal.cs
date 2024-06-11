@@ -60,6 +60,11 @@ public class AlphaHunterAnimal : Agent
         if(EatRoutine != null)
             StopCoroutine(EatRoutine);
     }
+
+    private void OnDestroy()
+    {
+        AnimalManager.Instance.RemoveAnimals(this.gameObject);
+    }
     /*public override void OnEpisodeBegin()
     {
         Vector3 spawnLocation = new Vector3(Random.Range(-20f, 20f), 0f, Random.Range(-20f, 20f));
@@ -100,10 +105,8 @@ public class AlphaHunterAnimal : Agent
         
         if (other.gameObject.CompareTag("Agent"))
         {
-            if (_isEating)
-            {
-                return;
-            }
+            if (_isEating) return;
+            
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
             
@@ -129,10 +132,8 @@ public class AlphaHunterAnimal : Agent
         }*/
         if (other.gameObject.CompareTag("Hunter"))
         {
-            if (!_isEating)
-            {
-                return;
-            }
+            if (_isEating) return;
+            
             var pa = other.gameObject.GetComponentInParent<HunterAnimal>();
             _collideWith = other;
 
