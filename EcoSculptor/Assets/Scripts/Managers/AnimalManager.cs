@@ -84,7 +84,7 @@ public class AnimalManager : MonoBehaviour
     {
         SpawnDeer();
         SpawnHorse();
-        //SpawnTiger();
+        SpawnTiger();
         SpawnWolf();
         SpawnBearIfNeeded();
     }
@@ -123,6 +123,7 @@ public class AnimalManager : MonoBehaviour
         {
             SpawnAnimal(rules.deerPrefab, deers);
         }
+        
     }
     
     private void SpawnTiger()
@@ -130,6 +131,12 @@ public class AnimalManager : MonoBehaviour
         var sand = TileManager.Instance.SandTile;
         
         if(sand % rules.sandTileForTiger != 0 || sand <= 0) return;
+
+        if (tigers.Count == 0)
+        {
+            SpawnAnimal(rules.tigerPrefab, tigers);
+            return;
+        }
         
         if (sand / tigers.Count > rules.sandTileForTiger)
         {
@@ -142,6 +149,12 @@ public class AnimalManager : MonoBehaviour
         var deerCountForWolves = deers.Count;
         
         if(deerCountForWolves % rules.deerCountForWolf != 0 || deerCountForWolves <= 0) return;
+        
+        if (wolves.Count == 0)
+        {
+            SpawnAnimal(rules.wolfPrefab, wolves);
+            return;
+        }
         
         if (deerCountForWolves / wolves.Count > rules.deerCountForWolf)
         {

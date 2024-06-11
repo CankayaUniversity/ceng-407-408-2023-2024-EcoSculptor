@@ -105,7 +105,7 @@ public class AlphaHunterAnimal : Agent
         
         if (other.gameObject.CompareTag("Agent"))
         {
-            if (_isEating) return;
+            if (_isEating || !_isHungry) return;
             
             var pa = other.gameObject.GetComponentInParent<PreyAnimal>();
             _collideWith = other;
@@ -132,7 +132,7 @@ public class AlphaHunterAnimal : Agent
         }*/
         if (other.gameObject.CompareTag("Hunter"))
         {
-            if (_isEating) return;
+            if (_isEating || !_isHungry) return;
             
             var pa = other.gameObject.GetComponentInParent<HunterAnimal>();
             _collideWith = other;
@@ -179,9 +179,9 @@ public class AlphaHunterAnimal : Agent
         RestoreHunger();
         
         EconomyManager.Instance.IncreaseResource(elementalResourceAmount);
+
+        RestoreHunger();
         _isEating = false;
-
-
 
         /*AddReward(5f);
         weakestPreyAnimal.AddReward(-5f);

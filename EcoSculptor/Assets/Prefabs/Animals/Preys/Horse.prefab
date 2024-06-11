@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4562830235927410956}
   - component: {fileID: 499416629247332910}
   - component: {fileID: 4831447484522251280}
+  - component: {fileID: 2888754488838153712}
   - component: {fileID: 3306246557729301475}
   - component: {fileID: 7130214234571273099}
   - component: {fileID: 574124197501295267}
@@ -93,7 +94,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: dd2c3ce97f4ae4d43b90fa5e903e1beb, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 83d05cf1d9203114d88a10a1aa5cabd4, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Preyanimal
@@ -120,12 +121,25 @@ MonoBehaviour:
   animator: {fileID: 368525872568503167}
   moveSpeed: 8
   rotateSpeed: 6
-  hunger: {fileID: 0}
+  hunger: {fileID: 2888754488838153712}
   hungerAgainTimer: 60
   deerArea: {fileID: 5154553512183736304}
-  strongestHunterAnimal: {fileID: 0}
-  weakestHunterAnimal: {fileID: 0}
   elementalResourceAmount: 100
+--- !u!114 &2888754488838153712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754239847710925750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76e49c7b9fa46e3902ac169c3dcade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHunger: 90
+  currentHunger: 0
+  hungerDepletionRate: 1
 --- !u!114 &3306246557729301475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6a8a31f53516040867400cae0c46c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preyParentAnimal: {fileID: 0}
+  preyParentAnimal: {fileID: 4831447484522251280}
   alphaParentAnimal: {fileID: 0}
   hunterParentAnimal: {fileID: 0}
