@@ -42,11 +42,13 @@ public class AnimalManager : MonoBehaviour
         return deers.Count + horses.Count + wolves.Count + tigers.Count + bears.Count;
     }
 
-    private void SpawnAnimal(GameObject prefab, List<GameObject> animalList)
+    private GameObject SpawnAnimal(GameObject prefab, List<GameObject> animalList)
     {
         var newAnimal = Instantiate(prefab, transform);
         animalList.Add(newAnimal);
         newAnimal.transform.position = SpawnAtRandomPosition();
+
+        return newAnimal;
     }
 
     private Vector3 SpawnAtRandomPosition()
@@ -95,16 +97,28 @@ public class AnimalManager : MonoBehaviour
         
         if(dirtTile % rules.dirtTileCountForHorse != 0 || dirtTile <= 0) return;
 
+        
         if (horses.Count == 0)
         {
-            SpawnAnimal(rules.horsePrefab, horses);
+            var horse = SpawnAnimal(rules.horsePrefab, horses);
+            
+            var position = horse.transform.position;
+            position = new Vector3(position.x, 0, position.z);
+            horse.transform.position = position;
+            
             return;
         }
 
         if (dirtTile / horses.Count > rules.dirtTileCountForHorse)
         {
-            SpawnAnimal(rules.horsePrefab, horses);
+            var horse = SpawnAnimal(rules.horsePrefab, horses);
+            
+            var position = horse.transform.position;
+            position = new Vector3(position.x, 0, position.z);
+            horse.transform.position = position;
         }
+        
+        
     }
 
     private void SpawnDeer()
@@ -134,13 +148,19 @@ public class AnimalManager : MonoBehaviour
 
         if (tigers.Count == 0)
         {
-            SpawnAnimal(rules.tigerPrefab, tigers);
+            var tiger = SpawnAnimal(rules.tigerPrefab, tigers);
+            var position = tiger.transform.position;
+            position = new Vector3(position.x, .2f, position.z);
+            tiger.transform.position = position;
             return;
         }
         
         if (sand / tigers.Count > rules.sandTileForTiger)
         {
-            SpawnAnimal(rules.tigerPrefab, tigers);
+            var tiger = SpawnAnimal(rules.tigerPrefab, tigers);
+            var position = tiger.transform.position;
+            position = new Vector3(position.x, .2f, position.z);
+            tiger.transform.position = position;
         }
     }
     
