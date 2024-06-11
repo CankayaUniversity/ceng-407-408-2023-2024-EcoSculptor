@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
@@ -110,7 +111,7 @@ public class TimeManager : MonoBehaviour
             if (totalAnimalCount == 0)
             {
                 Debug.Log("game over");
-                //game over scene will open
+                SceneManager.LoadScene(2);
                 break;
             }
         }

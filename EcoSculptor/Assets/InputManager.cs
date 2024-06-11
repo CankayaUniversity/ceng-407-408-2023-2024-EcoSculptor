@@ -8,6 +8,8 @@ public class InputManager : MonoBehaviour
 {
     // Reference to the settings GameObject
     public GameObject settingsMenu;
+    public GameObject resources;
+    public GameObject UiBox;
     private bool isActive;
     public static InputManager Instance;
     
@@ -21,11 +23,13 @@ public class InputManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        settingsMenu.SetActive(true);
+        settingsMenu.SetActive(false);
     }
     
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2)
         {
             // Toggle the settings menu visibility
             if (!settingsMenu) return;
@@ -45,6 +49,12 @@ public class InputManager : MonoBehaviour
         Time.timeScale = 1;
         if (!settingsMenu) return;
         settingsMenu.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            UiBox.SetActive(true);
+            resources.SetActive(true);
+        }
+        
     }
     
     
@@ -53,5 +63,11 @@ public class InputManager : MonoBehaviour
         Time.timeScale = 0;
         if (!settingsMenu) return;
         settingsMenu.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            UiBox.SetActive(false);
+            resources.SetActive(false);
+        }
+
     }
 }

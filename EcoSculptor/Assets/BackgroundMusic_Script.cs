@@ -35,6 +35,7 @@ public class BackgroundMusic_Script : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     private void Start()
