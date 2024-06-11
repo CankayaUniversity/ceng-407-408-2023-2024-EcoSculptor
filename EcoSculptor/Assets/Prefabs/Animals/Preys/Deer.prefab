@@ -292,6 +292,7 @@ MonoBehaviour:
   deerArea: {fileID: 3375085426832674540}
   strongestHunterAnimal: {fileID: 0}
   weakestHunterAnimal: {fileID: 0}
+  elementalResourceAmount: 100
 --- !u!114 &2561871324873712150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,9 +349,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.09786944
-  m_Height: 0.6760824
+  m_Height: 0.625034
   m_Direction: 2
-  m_Center: {x: -0.0014476776, y: 0.09251939, z: 0.053279757}
+  m_Center: {x: -0.0014476757, y: 0.09251939, z: 0.02775549}
 --- !u!1 &7858689123931311914
 GameObject:
   m_ObjectHideFlags: 0
