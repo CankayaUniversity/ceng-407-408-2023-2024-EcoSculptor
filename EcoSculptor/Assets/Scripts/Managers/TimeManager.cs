@@ -11,13 +11,14 @@ public class TimeManager : MonoBehaviour
     [SerializeField, Range(0, 1000f)] private float seasonTime = 900f;
     //[SerializeField, Range(0, 1000f)] private float LoseControlTime = 900f;
     
-    
+    public static TimeManager Instance;
+
+    public GameObject loseGameUI;
     public float totalTimeInGame;
     public int seasonCount;
     private bool _isWinter;
     private Coroutine newRoutine;
     private Coroutine winterRoutine;
-    public static TimeManager Instance;
 
     public float CurrentTimeOfDay
     {
@@ -43,6 +44,11 @@ public class TimeManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        loseGameUI.SetActive(false);
     }
 
     private void OnDisable()
@@ -111,7 +117,7 @@ public class TimeManager : MonoBehaviour
             if (totalAnimalCount == 0)
             {
                 Debug.Log("game over");
-                SceneManager.LoadScene(2);
+                loseGameUI.SetActive(true);
                 break;
             }
         }
